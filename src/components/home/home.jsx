@@ -12,16 +12,22 @@ import resourceIcon from "../../assets/media/resources_icon.webp"
 import consultingIcon from "../../assets/media/consulting_icon.webp"
 import coursesIcon from "../../assets/media/courses_icon.webp"
 
+import image from "../../assets/media/home_2000x1151px.webp"
+
 import HomeCard from "../HomeCard/homecard"
 import useNavigator from "../../hooks/useNavigator"
 import { resourcesPath } from "../../views/resources/urls"
 import { coursesPath } from "../../views/courses/urls"
 import { consultingPath } from "../../views/consulting/urls"
+import FullPageInfoCard from "../FullPageInfoCard/FullPageInfoCard"
 
 const useStyles = makeStyles(theme =>({
   grid: {
+    paddingTop: 200,
+    paddingBottom: 200,
     display: 'grid',
-    gridTemplateColumns: "0.25fr 1fr 1fr 1fr 0.25fr"
+    gridTemplateColumns: "0.25fr 1fr 1fr 1fr 0.25fr",
+    rowGap: 150
   },
   media: {
     minHeight: 100,
@@ -33,7 +39,6 @@ const useStyles = makeStyles(theme =>({
 const Home = () => {
   const user = useUser()
   const {addMessage} = useMessages()
-  console.log(user)
   const classes = useStyles()
   const navigator = useNavigator()
   return(
@@ -66,7 +71,13 @@ const Home = () => {
           gridColumn={4}
           image={consultingIcon}
           subtitleText={'Consulting'}
-          bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
+          bodyText={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
+          onClick={()=>navigator(consultingPath)}
+        />
+        <FullPageInfoCard
+          image={image}
+          subtitleText="Are you a homeschooling parent who is frustrated as you search for curriculum?"
+          bodyText="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed."
           onClick={()=>navigator(consultingPath)}
         />
       </Grid>

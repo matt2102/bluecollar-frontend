@@ -24,6 +24,7 @@ import { coursePath } from "./views/course/urls"
 import { consultingPath } from "./views/consulting/urls"
 import Baseline from "./Baseline"
 import Messages from "./components/messages"
+import Footer from "./components/Footer"
 
 
 
@@ -43,6 +44,7 @@ export const Routes = () => {
       <CoursesView path={coursesPath}/>
       <CourseView path={coursePath}/>
     </Switch>
+    <Footer/>
     </>
   )
 }

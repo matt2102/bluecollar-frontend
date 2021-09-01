@@ -5,7 +5,7 @@ import { Card, Typography } from "@material-ui/core"
 const useStyles = makeStyles(theme => ({
   infoCard: {
     background: theme.palette.secondary.main,
-    height: '50vh',
+    height: '80vh',
     minHeight: 400,
     maxHeight: 900,
     display: "flex"

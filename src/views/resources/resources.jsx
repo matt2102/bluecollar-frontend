@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
 import Resources from "../../components/Resources"
 import usePaginator, { createPaginationState } from "../../hooks/usePaginator"
-import { maybe } from "../../misc"
+import { isEmpty, maybe } from "../../misc"
 import { usePublishersQuery, useResourcesQuery, useSubjectsQuery } from "./queries"
 import { parse as parseQs } from "qs";
 import ResourcesSort from "../../components/resourcessort/resourcessort"
@@ -64,7 +64,7 @@ export const ResourcesView = ({location}) => {
   const {data:subjectData} = useSubjectsQuery({
     variables: {first:99}
   })
-  if(loading)return Loading()
+  if(loading)return(<Loading/>)
 
   const resources = maybe(()=>
     data.resources.edges.map(edge => edge.node), [])
@@ -72,11 +72,13 @@ export const ResourcesView = ({location}) => {
     publishersData.publishers.edges.map(edge => edge.node), [])
   const subjects = maybe(()=>
     subjectData.subjects.edges.map(edge => edge.node), [])
+  const renderInfoCard = isEmpty(qs)
   return(
     <>
+    {renderInfoCard?
     <InfoCard
       heading1='Resources for every level'
-      />
+      />:null}
     <Grid className={classes.root}>
       <div className={classes.sort}>
       <ResourcesSort

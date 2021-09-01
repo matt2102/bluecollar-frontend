@@ -16,30 +16,39 @@ import { createMuiTheme } from "@material-ui/core/styles";
 //   "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF UTF-8",
 // };
 
+const mainBlue = "#3bb7c7"
+const mainPurple = "#5a519c"
+const accountPurple = "#F3F2F8"
+const mainGreen = "#A5C854"
+const accentYellow = "#f3cc17"
+const accentRed = "#d23939"
+const text = "#707070"
+
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#3bb7c7',
+      main: mainBlue,
       // dark: "#311980",
       // light: "#50b043"
     },
     secondary: {
-      main: '#5A519C',
-      light: '#F3F2F8'
+      main: mainPurple,
+      light: accountPurple
     },
-    green: '#A5C854',
+    green: mainGreen,
     accent: {
-      yellow: '#f3cc17',
-      red: '#d23939'
+      yellow: accentYellow,
+      red: accentRed
     },
     text: {
-      main: '#707070'
+      main: text,
+      secondary: '#FFF'
     }
   },
   typography: {
     allVariants:{
-      color: '#707070'
+      color: text
     },
     fontFamily: [
       // 'Lobster',
@@ -83,18 +92,40 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       containedPrimary: {
-        height: '50px',
+        height: 50,
         borderRadius: '50px',
         width: '200px',
-        background: "#3bb7c7",
+        fontWeight: 300,
+        fontSize: 18,
+        background: mainBlue,
         color: "#fafafa",
         textTransform: "none",
         boxShadow: 'none',
         '&&:hover': {
-          background: '#A5C854',
+          background: mainGreen,
           boxShadow: 'none',
         },
 
+      },
+      containedSecondary: {
+        background: mainBlue,
+        height: 50,
+        color: '#FFF',
+        fontWeight: 300,
+        fontSize: 18,
+        textTransform: "none",
+        borderRadius: 25,
+        maxWidth: '50%',
+        // margin: 'auto'
+        marginLeft: '25%',
+        '&:hover':{
+          background: '#A5C854',
+          color: text
+        },
+        '&:disabled':{
+          background: "#311980",
+          // cursor: 'not-allowed'
+        }
       }
     },
     MuiInput: {
