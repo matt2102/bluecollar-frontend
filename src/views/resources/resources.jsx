@@ -8,9 +8,10 @@ import ResourcesSort from "../../components/resourcessort/resourcessort"
 import useSort from "../../hooks/useSort"
 import useFilter from "../../hooks/useFilter"
 import GenericFilter from "../../components/GenericFilter/GenericFilter"
-import {Grid, makeStyles, Typography} from "@material-ui/core"
+import {Grid, makeStyles} from "@material-ui/core"
 import Loading from "../../components/Loading"
 import InfoCard from "../../components/InfoCard"
+import SearchFilter from "../../components/SearchFilter/SearchFilter"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,7 +46,7 @@ export const ResourcesView = ({location}) => {
   const paginate = usePaginator()
   const classes = useStyles()
   const {sortVariables, handleSortChange, currentValue} = useSort(qs, ['GRADE'])
-  const {filters, updateFilters, reset} = useFilter(qs, ["publishers", "gradeLevel"])
+  const {filters, updateFilters, reset, updateSearchFilter} = useFilter(qs, ["publishers", "gradeLevel","search"])
   const [numProducts, setNumProducts] = useState(50)
   const paginationState = createPaginationState(numProducts, qs)
   const queryVariables = useMemo(() => ({
@@ -80,6 +81,11 @@ export const ResourcesView = ({location}) => {
       heading1='Resources for every level'
       />:null}
     <Grid className={classes.root}>
+      <SearchFilter
+      prevSearchString={maybe(()=>filters.search, "")}
+      updateSearchFilter={updateSearchFilter}
+      refetch={refetch}
+      />
       <div className={classes.sort}>
       <ResourcesSort
         handleSortChange ={handleSortChange}
@@ -102,16 +108,6 @@ export const ResourcesView = ({location}) => {
         refetch={refetch}
         title={'Filter by Publisher'}
       />
-     {/* <GenericFilter
-        key={'gradeLevel'}
-        filterItems={gradeLevel}
-        filters={filters}
-        filterName={"gradeLevel"}
-        updateFilters={updateFilters}
-        reset={reset}
-        refetch={refetch}
-        title={'Filter by Level'}
-      /> */}
      <GenericFilter
         key={'subject'}
         filterItems={subjects}

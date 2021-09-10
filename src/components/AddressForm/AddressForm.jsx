@@ -1,7 +1,6 @@
-import {Button, Grid, makeStyles, Typography} from "@material-ui/core"
+import {Button, Grid, makeStyles} from "@material-ui/core"
 import useAddress from "../../hooks/useAddress"
 import { maybe } from "../../misc"
-import Form from "../Form/Form"
 import React from "react"
 import AccountButton from "../AccountButton/AccountButton"
 import StateSelector from "../StateSelector/StateSelector"

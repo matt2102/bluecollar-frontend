@@ -8,7 +8,7 @@ const buildFilters = (qs, fields) => {
     if(qs.hasOwnProperty(field)){
       const key = field.toLocaleLowerCase()
       const value = qs[field]
-      if(typeof value === "string"){
+      if((typeof value === "string") && (key !== "search")){
         filters[key] = [value]
       }else{
         // value is already array
@@ -21,6 +21,9 @@ const buildFilters = (qs, fields) => {
 }
 
 export function useFilter(qs, filterFields){
+  /*
+  transforms filters in obj to stringified url
+  */
   const navigate = useNavigator()
   const [filters, setFilters] = useState(
     buildFilters(qs, filterFields)
@@ -73,8 +76,17 @@ export function useFilter(qs, filterFields){
     }
     setFilters(newFilters)
     refreshFilterState()
-
   }
+  function updateSearchFilter(searchString){
+    /*
+    Special function to handle search queries
+    */
+    let newFilters = filters
+    newFilters["search"] = searchString
+    setFilters(newFilters)
+    refreshFilterState()
+  }
+
   function reset(){
     let newQs = qs
 
