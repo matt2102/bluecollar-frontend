@@ -1,23 +1,24 @@
 import React from "react"
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
-import { CardContent, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
-// import {}
-// import { Icon } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     root: {
-      width: '200px',
-      backgroundColor: "rgba(213, 227, 227, 0.8)"
+      width: '100%',
+      backgroundColor: theme.palette.primary.main,
+      display: 'grid',
+      height: '100%',
+      minHeight: 80,
+      gridTemplateColumns: '1fr 30px',
+      gridTemplateRows: "30px auto",
+      borderLeft: `8px solid ${theme.palette.green}`,
+      borderRadius: 8,
     },
-    messageHeader: {
-      display: 'flex',
-      flexFlow: "row nowrap",
-      width: 180,
-      justifyContent: "space-between",
-      margin: "auto",
-      borderBottom: "1px solid gray"
+    iconButton: {
+      gridColumn: 2,
+      gridRow: 1,
     },
     closeIcon: {
       marginRight: '0',
@@ -25,12 +26,14 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '16px',
       padding: '0'
     },
-    title: {
-      width: "100%",
-      margin: 'auto',
-      marginLeft: "0",
-      marginBottom: "0",
-      fontSize: '18px'
+    message: {
+      gridColumn: '1 / -1',
+      gridRow: 2,
+      marginTop: 0,
+      paddingTop: 0,
+      marginLeft: 10,
+      paddingBottom: 10,
+      fontSize: 16,
     }
   }),
   {name: "Message"}
@@ -57,23 +60,14 @@ export const Message = (props) => {
     }
   })
   return(
-    <div key={message.id} className={classes.root}>
-      <div className={classes.messageHeader}>
-      <Typography
-      variant="subtitle2"
-      color="textPrimary"
-      component="p"
-      className={classes.title}
-      >{message.messageType}</Typography>
-      <IconButton onClick={()=>onClick(message.id)} >
+    <Grid key={message.id} className={classes.root}>
+      <IconButton onClick={()=>onClick(message.id)} className={classes.iconButton}>
           <CloseIcon className={classes.closeIcon}/>
       </IconButton>
-      </div>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" color="textSecondary" component="p"
+        className={classes.message}>
           {message.text}
         </Typography>
-      </CardContent>
-    </div>
+    </Grid>
   )
 }

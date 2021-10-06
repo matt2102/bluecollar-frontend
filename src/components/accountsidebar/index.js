@@ -1,2 +1,2 @@
-export {default} from "./accountsidebar"
-export * from "./accountsidebar"
+export {default} from "./AccountSidebar"
+export * from "./AccountSidebar"

@@ -1,32 +1,41 @@
-import { Button, Grid, IconButton, makeStyles } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import {
+  Button,
+  Grid,
+  makeStyles,
+  Card,
+  CardMedia,
+  CardHeader,
+  CardActionArea,
+  Typography
+} from '@material-ui/core';
 import useUser from "../../hooks/useUser"
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountIcon from "../../assets/icons/account_icon_300x300.webp"
 import useNavigator from '../../hooks/useNavigator';
-import { accountAddressPath, accountBillingPath, accountInfo, accountPath, accountPurchasedCourses } from '../../views/account/urls';
+import { accountAddressPath, accountBillingPath, accountInfo, accountPath, accountPurchasedCourses } from '../../views/Account/urls';
 import { useLocation } from 'react-router';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: "grid",
     gridTemplateColumns: "300px",
-    gridTemplateRows: "80px 75px auto",
+    gridTemplateRows: "220px auto",
     width: "300px",
     maxWidth: "300px",
     height: "100vh",
     backgroundColor: theme.palette.secondary.light
   },
-  name: {
-    width: "100%",
+  accountIconContainer: {
+    width: 110,
+    height: 110,
     margin: "auto",
-    textAlign: "center"
+    '&:hover': {
+      background: theme.palette.green,
+      borderRadius: `55px`,
+    }
   },
-  avatarBtn: {
-    padding: 0,
-    margin: 0,
-  },
-  avatar: {
-    fontSize: "75px"
+  accountIcon: {
+    width: 100,
+    margin: 'auto'
   },
   buttonGrid: {
     display: "grid",
@@ -35,7 +44,6 @@ const useStyles = makeStyles(theme => ({
     gridTemplateRows: "repeat(4, 40px)",
   },
   button: {
-    // marginLeft: 20,
     textTransform: 'none',
     fontSize: 16,
     color: theme.palette.text.main,
@@ -61,11 +69,8 @@ const useStyles = makeStyles(theme => ({
     minWidth: 150,
     margin: 0,
     marginLeft: 60,
-    // marginRight: 'auto',
     padding: 0,
     textAlign: 'left',
-    // background: theme.palette.accent.red
-
   }
 }),
 {
@@ -97,7 +102,6 @@ export const AccountSideBar = () => {
   const navigate = useNavigator()
   const classes = useStyles("")
   const location = useLocation()
-  console.log(location)
   const selected = getSelected(location)
   const btns = [
     [accountInfo, 'Account Info', INFO],
@@ -105,14 +109,21 @@ export const AccountSideBar = () => {
     [accountBillingPath, 'Billing Info', BILLING],
     [accountAddressPath, 'Addresses', ADDRESS]
   ]
+  const fullName = `${user.firstName} ${user.lastName}`
   return(
     <Grid className = {classes.root}>
-      <Typography variant="subtitle2" className={classes.name}>
-        {user.firstName} {user.lastName}
-      </Typography>
-      <IconButton onClick = {()=>navigate(accountPath)} className={classes.avatarBtn}>
-        <AccountCircleIcon className={classes.avatar}/>
-      </IconButton>
+        <Card elevation={0}>
+          <CardHeader title={fullName} titleTypographyProps={{variant: "subtitle2", align: "center"}}/>
+          <CardActionArea
+          className={classes.accountIconContainer}
+          onClick = {()=>navigate(accountPath)}
+          >
+            <CardMedia
+              component="img"
+              className={classes.accountIcon}
+              image={AccountIcon}/>
+          </CardActionArea>
+        </Card>
       <Grid className={classes.buttonGrid}>
         {btns.map(btnInfo => {
           const [path, text, _type] = btnInfo

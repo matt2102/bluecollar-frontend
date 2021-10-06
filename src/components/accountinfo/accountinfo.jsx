@@ -1,11 +1,18 @@
 import { useMutation } from "@apollo/client"
-import { Button, makeStyles, Typography } from "@material-ui/core"
-import { useState } from "react"
 import useMessages from "../../hooks/useMessages"
 import useUser from "../../hooks/useUser"
+
+import {
+  Button,
+  makeStyles,
+  Typography
+} from "@material-ui/core"
+
 import { maybe } from "../../misc"
+
 import AccountButton from "../AccountButton/AccountButton"
 import Form from "../Form/Form"
+
 import { customerUpdate } from "./mutations"
 import { useUserQuery } from "./queries"
 
@@ -53,11 +60,7 @@ export const AccountInfo = () => {
   const handleComplete = () => {
     addMessage({messageType: "success", text: "Account Information Updated"})
   }
-  const [updateCustomer, {
-    data:mutationData,
-    error:mutationError,
-    loading:mutationLoading
-  }] = useMutation(customerUpdate, {onCompleted: handleComplete})
+  const [updateCustomer] = useMutation(customerUpdate, {onCompleted: handleComplete})
 
   const initialData = maybe(() => data.me, {})
   const onSubmit = (submitData) => {

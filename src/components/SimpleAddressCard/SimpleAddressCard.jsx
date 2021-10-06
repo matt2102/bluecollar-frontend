@@ -1,6 +1,5 @@
-import { TextField,Typography } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { maybe } from "../../misc"
-// import Typography from "material-ui/styles/typography"
 
 export const SimpleAddressCard=({address})=>{
   const addr = {

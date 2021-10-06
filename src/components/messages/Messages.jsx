@@ -7,14 +7,16 @@ import {Message} from "./Message"
 
 let screenWidth = 0;
 
+const messageWidth = 250
+const messagePadding = 30
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'grid',
-    gridTemplateColumns: '200px',
+    gridTemplateColumns: messageWidth,
     rowGap: '10px',
     position: 'fixed',
-    top: 10,
-    left: screenWidth - 210,
+    top: messagePadding,
+    left: screenWidth - (messageWidth + messagePadding),
     zIndex: 50
 
   }

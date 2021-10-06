@@ -1,8 +1,12 @@
-import { makeStyles, Modal,Dialog, DialogTitle, DialogContent,Typography } from "@material-ui/core"
-import { IconButton } from "@material-ui/core"
-import { SignInForm } from "./signinform"
+import {
+  makeStyles,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Typography,
+  IconButton } from "@material-ui/core"
+import { SignInForm } from "./SignInForm"
 import {Close} from "@material-ui/icons"
-// import Typography from "@material-ui/core/Typography"
 
 const useStyles = makeStyles(theme => ({
   root: {

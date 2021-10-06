@@ -1,3 +1,5 @@
+import { useState } from "react"
+import useNavigator from "../../hooks/useNavigator"
 import {
   Typography,
   makeStyles,
@@ -5,12 +7,16 @@ import {
   Container,
   ButtonBase
 } from "@material-ui/core"
+
 import LogoWhite from "../../assets/icons/logo-white"
-import useNavigator from "../../hooks/useNavigator"
-import { aboutPath } from "../../views/about/urls"
-import { consultingPath } from "../../views/consulting/urls"
-import { coursesPath } from "../../views/courses/urls"
-import { resourcesPath } from "../../views/resources/urls"
+
+import NewsletterDialog from "../NewsletterDialog/NewsletterDialog"
+
+import { aboutPath } from "../../views/About/urls"
+import { consultingPath } from "../../views/Consulting/urls"
+import { coursesPath } from "../../views/Courses/urls"
+import { resourcesPath } from "../../views/Resources/urls"
+
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -51,14 +57,23 @@ const useStyles = makeStyles(theme => ({
   // },
   newsletter:{
     gridColumn: '2 / -1',
-    gridRow: 2
+    gridRow: 2,
+    '&:hover': {
+      cursor: "pointer",
+      textDecoration: 'underline'
+    }
   }
 }))
 
 export default function Footer(){
   const classes = useStyles()
   const navigator = useNavigator()
+  const [open, setModal] = useState(false)
+  const data = {
+    emailOptIn: true
+  }
   return(
+    <>
     <Grid container className={classes.footer}>
       <Container className={classes.logoContainer}>
         <LogoWhite className={classes.logo}/>
@@ -75,9 +90,19 @@ export default function Footer(){
       <ButtonBase className={classes.btn}>
         <Typography onClick={()=>navigator(aboutPath)} variant="body1" color="textSecondary">About</Typography>
       </ButtonBase>
+      <Typography className={classes.newsletter} variant="body1" color="textSecondary"
+      onClick={()=>setModal(true)}
+      >Subscribe to our Quarterly Newsletter</Typography>
 
-      {/* <Typography className={classes.contact} variant="body1" color="textSecondary">info@bluecollarhomeschool.com</Typography> */}
-      <Typography className={classes.newsletter} variant="body1" color="textSecondary">Sign up for our Quarterly Newsletter</Typography>
     </Grid>
+    <NewsletterDialog
+        className={classes.newsletter}
+        data = {data}
+        title= "Newsletter Sign Up"
+        open={open}
+        onClose = {()=>setModal(false)}
+        disabled={false}
+      />
+    </>
   )
 }

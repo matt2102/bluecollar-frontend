@@ -5,8 +5,7 @@ import reducer from "./reducers"
 import {createStore} from "redux"
 import {loadState, saveState} from "./localstorage"
 import {setContext} from "apollo-link-context"
-
-import Messages from './components/messages';
+import * as serviceWorker from './serviceWorker';
 import theme from "./theme"
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
@@ -89,3 +88,4 @@ ReactDOM.render(
   document.getElementById('blue-collar-homeschool')
 );
 
+serviceWorker.register();

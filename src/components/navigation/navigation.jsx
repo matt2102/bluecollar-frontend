@@ -1,17 +1,30 @@
 import {useState} from "react"
-import { AppBar, Button, Icon, makeStyles } from "@material-ui/core"
-import IconButton from '@material-ui/core/IconButton';
-import Toolbar from '@material-ui/core/Toolbar';
-import {Menu} from "@material-ui/icons"
-import { SignInModal } from "../auth/signinmodal"
 import useUser from "../../hooks/useUser"
 import useNavigator from "../../hooks/useNavigator"
-import { accountPath } from "../../views/account/urls"
-import { homePath } from "../../views/home/urls"
-import { resourcesPath } from "../../views/resources/urls"
-import { coursesPath } from "../../views/courses/urls"
-import { consultingPath } from "../../views/consulting/urls"
+
+import {
+  AppBar,
+  Button,
+  makeStyles,
+  Card,
+  CardActionArea,
+  CardMedia,
+  Grid,
+  Toolbar,
+  IconButton
+} from "@material-ui/core"
+
+
 import Logo from "../../assets/icons/Logo"
+import LogoutIcon from "../../assets/icons/Logout_300x300.webp"
+
+import { SignInModal } from "../Auth/SignInModal"
+
+import { blogPath } from "../../views/Blog/urls";
+import { accountPath } from "../../views/Account/urls"
+import { homePath } from "../../views/Home/urls"
+import { resourcesPath } from "../../views/Resources/urls"
+import { consultingPath } from "../../views/Consulting/urls"
 
 const useStyles = makeStyles(
   theme => ({
@@ -24,7 +37,6 @@ const useStyles = makeStyles(
       elevation: 0
     },
     logo: {
-      width: 50,
       height: 'auto',
       width: '100%',
       maxWidth: 'auto'
@@ -33,31 +45,34 @@ const useStyles = makeStyles(
       width: 300,
       height: "auto"
     },
-    grid: {
-      display: "grid",
-      gridTemplateColumns: '1fr 800px 1fr 100px'
+    toolbar: {
+      maxWidth: '100%',
+      display: "flex",
+      justifyContent: "space-between"
     },
     btnContainer: {
       width: '100%',
+      maxWidth: 800,
       display: 'flex',
-      flexFlow: "row no-wrap",
+      flexFlow: "row nowrap",
       justifyContent: "space-evenly",
       margin: 'auto',
-      // fontFamily: "Lobster"
-      // background: theme.palette.primary.main
     },
     navButton: {
       color: theme.palette.secondary.main,
-      padding: '2px',
+      padding: 2,
       margin: 'auto',
-      height: '40px',
+      height: 40,
+      width: 120,
       fontFamily: theme.typography.h2,
-      margin: '0',
       '&:hover': {
         background: 'none',
         color: theme.palette.green,
         'text-decoration': 'underline'
       }
+    },
+    accountContainer: {
+      maxWidth: 260
     },
     accountBtn: {
       height: '50px',
@@ -68,37 +83,44 @@ const useStyles = makeStyles(
       '&:hover': {
         background: theme.palette.green
       }
+    },
+    logoutCard: {
+      width: 40,
+      margin: 'auto',
+      marginLeft: 20
+    },
+    logoutIcon: {
+      width: 40,
     }
   })
 )
 
 export const Navigation = () => {
   const [modal, setModal] = useState(false)
-  const {user} = useUser()
+  const {user, signOut} = useUser()
   const navigate = useNavigator()
   const classes = useStyles()
   return(
     <>
     <AppBar position="static" elevation={0} className={classes.root}>
-      <Toolbar className={classes.grid}>
+      <Toolbar className={classes.toolbar}>
         <IconButton onClick={()=>navigate(homePath) }className={classes.logoContainer}>
           <Logo/>
         </IconButton>
-        <div className={classes.btnContainer}>
+        <Grid className={classes.btnContainer}>
         <Button className={classes.navButton} fullWidth={true}
           onClick={()=>navigate(resourcesPath)}>
           Resources
-        </Button>
-
-        <Button  className={classes.navButton} fullWidth={true}
-          onClick={()=>navigate(coursesPath)}>
-          Courses and Curricula
         </Button>
         <Button className={classes.navButton} fullWidth={true}
           onClick={()=>navigate(consultingPath)}>
           Consulting
         </Button>
-        </div>
+        <Button className={classes.navButton} fullWidth={true}
+          onClick={()=>navigate(blogPath)}>
+          Blog
+        </Button>
+        </Grid>
 
         {user.isGuest?
         <Button className={classes.accountBtn}
@@ -106,18 +128,28 @@ export const Navigation = () => {
           Login / Create Account
         </Button>
         :
+        <Grid container className={classes.accountContainer}>
         <Button className={classes.accountBtn}
           onClick={()=>navigate(accountPath)}>
           My Account
         </Button>
+        <Card elevation={0} className={classes.logoutCard}>
+          <CardActionArea onClick = {() => signOut()}>
+            <CardMedia
+            component={"img"}
+            className={classes.logoutIcon}
+            src={LogoutIcon}/>
+          </CardActionArea>
+        </Card>
+        </Grid>
         }
         </Toolbar>
     </AppBar>
 
-  <SignInModal
-      open={modal}
-      disabled={false}
-      onClose={()=>setModal(false)}
+    <SignInModal
+        open={modal}
+        disabled={false}
+        onClose={()=>setModal(false)}
     />
     </>
   )

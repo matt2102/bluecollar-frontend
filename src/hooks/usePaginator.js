@@ -5,21 +5,20 @@ export function createPaginationState(
   paginateBy,
   queryString
 ){
-  switch(queryString){
-    case queryString.after:
-      return {
-          after: queryString.after,
-          first: paginateBy
-        }
-    case queryString.before:
-      return {
-        before: queryString.before,
-        last: paginateBy
-      }
-    default:
-      return{
-        first: paginateBy
-      }
+  if(queryString.after){
+    return {
+      after: queryString.after,
+      first: paginateBy
+    }
+  }
+  if(queryString.before){
+    return {
+      before: queryString.before,
+      last: paginateBy
+    }
+  }
+  return{
+    first: paginateBy
   }
 }
 

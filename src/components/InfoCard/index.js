@@ -1,2 +1,2 @@
-export {default} from "./infocard"
-export * from "./infocard"
+export {default} from "./InfoCard"
+export * from "./InfoCard"

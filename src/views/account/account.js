@@ -1,8 +1,8 @@
 import { Grid, makeStyles } from "@material-ui/core"
 import { Switch } from "react-router"
 import { Billing } from "../../components/Billing"
-import AccountInfo from "../../components/accountinfo"
-import AccountSideBar from "../../components/accountsidebar"
+import AccountInfo from "../../components/AccountInfo"
+import AccountSideBar from "../../components/AccountSidebar"
 import { accountAddressPath, accountBillingPath } from "./urls"
 import Addresses from "../../components/Addresses"
 

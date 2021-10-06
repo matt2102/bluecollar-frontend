@@ -39,7 +39,9 @@ export function useSort(qs, extraSortFields = []){
     direction: getSortDirection(qs),
     field: getSortField(qs, fields)
   })
-
+  const [currentValue, setCurrentValue] = useState(
+    `${sortVariables.field}_${sortVariables.direction}`
+  )
   const splitSortString = (sortString) => {
     const [field, dir] = sortString.split("_")
     const fieldsSet = new Set(fields)
@@ -74,9 +76,8 @@ export function useSort(qs, extraSortFields = []){
     )
     setSortVariables(newSortState)
   }
-  let currentValue = `${sortVariables.field}_${sortVariables.direction}`
   useEffect(()=>{
-    currentValue = `${sortVariables.field}_${sortVariables.direction}`
+    setCurrentValue(`${sortVariables.field}_${sortVariables.direction}`)
   },[sortVariables])
   return{
     sortVariables,

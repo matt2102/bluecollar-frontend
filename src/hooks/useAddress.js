@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/client";
-import gql from "graphql-tag";
 import { useEffect, useState } from "react";
 import { maybe } from "../misc";
 import {
@@ -16,36 +15,19 @@ const SHIPPING = "SHIPPING"
 const BILLING = "BILLING"
 export function useAddress(){
   const {data, loading, refetch} = useUserAddresses({})
-  console.log("address data", data)
   const {addMessage} = useMessages()
   const {user} = useUser()
   const [defaults, setDefaults] = useState({})
   function handleComplete(){
     addMessage({messageType: "success", text: "Address Updated"})
   }
-  const [createAccountAddress,{
-    data: accountAddressCreateData,
-    error: accountAddressCreateError,
-    loading: accountAddressCreateLoading
-  }] = useMutation(accountAddAddress, {onCompleted:handleComplete})
+  const [createAccountAddress] = useMutation(accountAddAddress, {onCompleted:handleComplete})
 
-    const [deleteAccountAddress,{
-      data: accountAddressDeleteData,
-      error: accountAddressDeleteError,
-      loading: accountAddressDeleteLoading
-    }] = useMutation(accountAddressDelete, {onCompleted:handleComplete})
+    const [deleteAccountAddress] = useMutation(accountAddressDelete, {onCompleted:handleComplete})
 
-    const [setDefaultAddress,{
-      data: accountAddressSetDefaultData,
-      error: accountAddressSetDefaultError,
-      loading: accountAddressSetDefaultLoading
-    }] = useMutation(accountSetDefault, {onCompleted:handleComplete})
+    const [setDefaultAddress] = useMutation(accountSetDefault, {onCompleted:handleComplete})
 
-    const [updateAddress,{
-      data: addressUpdateData,
-      error: addressUpdateError,
-      loading: addressUpdateLoading
-    }] = useMutation(updateAddressMutation, {onCompleted:handleComplete})
+    const [updateAddress] = useMutation(updateAddressMutation, {onCompleted:handleComplete})
 
   function verifyAddress(addr){
     // use SmartyStreets API to verify address exists
@@ -76,7 +58,6 @@ export function useAddress(){
     }
   }
   function update(id, addr){
-    console.log("cleaned: ", cleanAddress(addr))
     if(verifyAddress(addr)){
       updateAddress({
         variables: {
@@ -105,23 +86,16 @@ export function useAddress(){
   function setDefaultBilling(id){
     setDefault(id, BILLING)
   }
-  function getDefaultAddresses(){
-    const defaultShipping = maybe(()=> data.me.addresses.filter(node => node.isDefaultShippingAddress)[0], {})
-    const defaultBilling = maybe(()=> data.me.addresses.filter(node => node.isDefaultBillingAddress)[0], {})
-    return{defaultShipping, defaultBilling}
-  }
-  // let defaults = getDefaultAddresses()
   useEffect(() => {
-    console.log("recomputed defaults", data)
     if(data?.me?.addresses?.length >= 0){
-    setDefaults(getDefaultAddresses())
+      function getDefaultAddresses(){
+        const defaultShipping = maybe(()=> data.me.addresses.filter(node => node.isDefaultShippingAddress)[0], {})
+        const defaultBilling = maybe(()=> data.me.addresses.filter(node => node.isDefaultBillingAddress)[0], {})
+        return{defaultShipping, defaultBilling}
+      }
+      setDefaults(getDefaultAddresses())
     }
   }, [data, loading, refetch])
-  // const
-  // useEffect(()=> {
-  //   defaults = getDefaultAddresses()
-  // }, [data, defaults])
-  console.log("address defaults", defaults)
   return{
     data,
     loading,

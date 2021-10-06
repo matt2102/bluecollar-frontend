@@ -1,13 +1,14 @@
-import  Button from "@material-ui/core/Button"
-import  CardActionArea  from "@material-ui/core/CardActionArea"
-import  Grid  from "@material-ui/core/Grid"
-import  makeStyles  from "@material-ui/styles/makeStyles"
-import  Typography  from "@material-ui/core/Typography"
-import Card from "@material-ui/core/Card"
+import {
+  Grid,
+  makeStyles,
+  Container
+} from "@material-ui/core"
 import ResourceCard from "../ResourceCard/ResourceCard"
+import Paginate from "../Paginate"
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
+    marginTop: 50,
     display: "grid",
     width: "100%",
     maxWidth: "1200px",
@@ -15,11 +16,18 @@ const useStyles = makeStyles(theme => ({
     gridTemplateRows: "auto",
     columnGap: "10px",
     rowGap: "10px"
-
+  },
+  page: {
+    gridColumn: "1/-1",
+    gridRowStart: "0",
+    display: "flex",
+    flexFlow: "row",
+    justifyContent: "center",
+    marginBottom: 50
   }
-}))
+})
 
-export const Resources = ({resources}) => {
+export const Resources = ({resources, loadPreviousPage, loadNextPage, pageInfo}) => {
   const classes = useStyles()
   if(resources.length === 0)return<p>No Resources</p>
   return(
@@ -29,6 +37,12 @@ export const Resources = ({resources}) => {
         <ResourceCard resource={resource}/>
         )
       })}
+      <Container className={classes.page}>
+        <Paginate
+        pageInfo={pageInfo}
+        loadPreviousPage={loadPreviousPage}
+        loadNextPage={loadNextPage}/>
+      </Container>
     </Grid>
   )
 }

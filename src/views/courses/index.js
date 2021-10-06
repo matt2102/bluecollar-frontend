@@ -1,2 +1,2 @@
-export {default} from "./courses"
-export * from "./courses"
+export {default} from "./Courses"
+export * from "./Courses"

@@ -1,10 +1,16 @@
-import { Button, FormControlLabel, FormGroup, makeStyles, Typography } from "@material-ui/core"
-import Checkbox from "@material-ui/core/Checkbox"
+import {
+  Checkbox,
+  Container,
+  FormControlLabel,
+  FormGroup,
+  makeStyles,
+  Typography
+} from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   root: {
     margin: 10,
-    borderBottom: `4px solid ${theme.palette.primary.main}`
+    marginBottom: 50,
   },
   title: {
     fontWeight: 400,
@@ -13,6 +19,13 @@ const useStyles = makeStyles(theme => ({
   label: {
     fontSize: 16,
     fontWeight: 300
+  },
+  container: {
+    overflowY: "scroll",
+    maxHeight: 400,
+  },
+  checkbox: {
+    color: theme.palette.text.main
   }
 }))
 
@@ -23,7 +36,6 @@ export const GenericFilter = (props) => {
     filterName,
     updateFilters,
     refetch,
-    reset,
     title
     } = props
   const checkedItems = new Set(filters[filterName] || [])
@@ -37,7 +49,9 @@ export const GenericFilter = (props) => {
     <Typography variant="subtitle1"
     className={classes.title}
     >{title?title:"Filter"}</Typography>
+    <Container className={classes.container}>
     <FormGroup>
+
       {
       filterItems.map(item => {
         const isChecked = checkedItems.has(item.id)
@@ -47,6 +61,7 @@ export const GenericFilter = (props) => {
           key={item.id}
           control={
           <Checkbox
+            className={classes.checkbox}
             onClick={()=>onClick(filterName, item.id, !isChecked)}
             name={item.name}
             checked={isChecked}
@@ -56,8 +71,10 @@ export const GenericFilter = (props) => {
         />
         )
         })}
-      <Button onClick={reset}>Reset</Button>
+
+
     </FormGroup>
+     </Container>
     </div>
   )
 }

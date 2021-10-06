@@ -1,2 +1,2 @@
-export {default} from "./consulting"
-export * from "./consulting"
+export {default} from "./Consulting"
+export * from "./Consulting"

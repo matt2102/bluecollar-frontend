@@ -23,7 +23,7 @@ const mainGreen = "#A5C854"
 const accentYellow = "#f3cc17"
 const accentRed = "#d23939"
 const text = "#707070"
-
+const background = "#fafafa"
 
 const theme = createMuiTheme({
   palette: {
@@ -44,6 +44,9 @@ const theme = createMuiTheme({
     text: {
       main: text,
       secondary: '#FFF'
+    },
+    background: {
+      main: background
     }
   },
   typography: {
@@ -63,6 +66,13 @@ const theme = createMuiTheme({
     h3: {
       fontFamily: 'Roboto',
       fontWeight: 'light'
+    },
+    h5: {
+      fontFamily: 'Roboto',
+      fontWeight: 700,
+      fontSize: 20,
+      // marginBottom: 5,
+      // margin: 'auto',
     },
     body2: {
       fontFamily: 'Roboto',
@@ -90,6 +100,24 @@ const theme = createMuiTheme({
         '@font-face': ['Lobster']
       }
     },
+    // MuiTextField: {
+    //   bchInput: {
+    //     width: '100%',
+    //     textIndent: '5ch',
+    //     paddingLeft: '20px',
+    //     background: accountPurple,
+    //     height: '50px',
+    //     borderRadius: 25,
+    //     position: 'relative',
+    //     'label + &': {
+    //       marginTop: '4em',
+    //     },
+    //     '&.Mui-focused': {
+    //       borderColor: mainBlue,
+    //       border: '2px solid',
+    //     },
+    //   }
+    // },
     MuiButton: {
       containedPrimary: {
         height: 50,

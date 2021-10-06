@@ -8,7 +8,7 @@ function isSelected(data, list, compare){
 }
 
 function add(data, list){
-  return [... list, data]
+  return [...list, data]
 }
 function remove(data, list, compare){
   return list.filter(listElement => !compare(listElement, data));

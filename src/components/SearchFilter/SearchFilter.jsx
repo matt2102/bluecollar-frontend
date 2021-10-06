@@ -1,13 +1,41 @@
-import { Container,
+import {
+  FormControl,
+  Input,
   makeStyles,
-  TextField } from "@material-ui/core";
+  IconButton
+} from "@material-ui/core";
 import { useState } from "react";
-
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
-  container: {
-
-  }
+  formControl: {
+    gridColumn: 2,
+    display: "grid",
+    gridTemplateColumns: "1fr 100px",
+    maxWidth: 600,
+    margin: "auto",
+    marginTop: 20,
+  },
+  formInputLabel: {
+    fontSize: 28,
+  },
+  formInput: {
+    width: '100%',
+    textIndent: '5ch',
+    paddingLeft: '20px',
+    // background: theme.palette.secondary.light,
+    height: '50px',
+    position: 'relative',
+    background: theme.palette.secondary.light,
+    borderRadius: 25,
+    'label + &': {
+      marginTop: theme.spacing(4),
+    },
+    '&.Mui-focused': {
+      borderColor: theme.palette.primary.main,
+      border: '2px solid',
+    },
+  },
 }))
 
 export default function SearchFilter(props){
@@ -20,30 +48,35 @@ export default function SearchFilter(props){
   const initialSearch = {
     search: prevSearchString
   }
-  // console.log('pState', prevSearchString[0])
-  const onSubmit = (searchString) => {
-    updateSearchFilter(searchString)
+  const classes = useStyles()
+  const [searchState, setSearch]  = useState(initialSearch)
+  const submit = () => {
+    updateSearchFilter(searchState.search)
     refetch()
   }
-  const [searchState, setSearch]  = useState(initialSearch)
   const onChange = e => {
     const {name, value} = e.target
     setSearch(searchState => ({
       ...searchState,
       [name]: value
     }))
+
   }
   return(
-    <Container>
-      <form onSubmit={()=>onSubmit(searchState.search)}>
-      <TextField
-        label="Search"
-        variant="filled"
+    <form onSubmit={submit}>
+    <FormControl className={classes.formControl} key="search">
+      <Input
+        className={classes.formInput}
+        value={searchState.search}
+        placeholder={"Search"}
         onChange={e=>onChange(e)}
         name="search"
-        value={searchState.search}
-        ></TextField>
-      </form>
-    </Container>
+        fullWidth
+      />
+        <IconButton onClick={submit}>
+          <SearchIcon/>
+        </IconButton>
+    </FormControl>
+    </form>
   )
 }

@@ -1,4 +1,10 @@
-import { FormControl, Input, InputLabel, makeStyles, MenuItem, Select, TextField } from "@material-ui/core"
+import {
+  FormControl,
+  InputLabel,
+  makeStyles,
+  MenuItem,
+  Select
+} from "@material-ui/core"
 import {states} from "./data"
 
 const useStyles = makeStyles(theme => ({
@@ -10,7 +16,6 @@ const useStyles = makeStyles(theme => ({
   },
   formSelect: {
     width: '100%',
-    // textIndent: '5ch',
     paddingLeft: '20px',
     background: theme.palette.secondary.light,
     height: '50px',

@@ -6,3 +6,11 @@ export const accountErrorFragment = gql`
     field
   }
 `;
+
+
+export const marketingErrorFragment = gql`
+  fragment MarketingErrorFragment on MarketingError {
+    message
+    field
+  }
+`;

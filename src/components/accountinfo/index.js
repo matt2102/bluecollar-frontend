@@ -1,2 +1,2 @@
-export {default} from "./accountinfo"
-export * from "./accountinfo"
+export {default} from "./AccountInfo"
+export * from "./AccountInfo"

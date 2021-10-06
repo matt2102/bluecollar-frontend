@@ -1,12 +1,10 @@
 import { Grid, makeStyles, Typography } from "@material-ui/core"
-import useAddress from "../../hooks/useAddress"
 import { maybe } from "../../misc"
 import Orders from "../Orders"
 import SimpleAddressCard from "../SimpleAddressCard"
 import { useUserOrdersDetails } from "./queries"
 
-const useStyles = makeStyles(theme => ({
-  root: {},
+const useStyles = makeStyles({
   title: {
 
   },
@@ -22,11 +20,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: 20
   }
 
-}))
+})
 
 export const Billing = () => {
   const classes = useStyles()
-  const {data, loading} = useUserOrdersDetails({variables: {
+  const {data} = useUserOrdersDetails({variables: {
     first: 99,
   }})
   const orders = maybe(() => data.me.orders.edges.map(edge => edge.node), [])
@@ -34,7 +32,7 @@ export const Billing = () => {
   const defaultShipping = data?.me.defaultBillingAddress
   console.log("order", defaultBilling, defaultShipping)
   return(
-    <Grid className={classes.root}>
+    <Grid>
       <Typography variant="subtitle1">Billing</Typography>
       <div className={classes.addressContainer}>
       <Typography className = {classes.addressTitle}>Default Billing Address</Typography>

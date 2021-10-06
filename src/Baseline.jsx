@@ -4,8 +4,7 @@ import React from "react";
 
 const styles = createStyles({
   "@global": {
-    "@import": "url('https://rsms.me/inter/inter.css')",
-    "@import": "url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap')"
+    "@import": ["url('https://rsms.me/inter/inter.css')", "url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap')"],
   }
 });
 

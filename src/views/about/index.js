@@ -1,2 +1,2 @@
-export {default} from "./about"
-export * from "./about"
+export {default} from "./About"
+export * from "./About"

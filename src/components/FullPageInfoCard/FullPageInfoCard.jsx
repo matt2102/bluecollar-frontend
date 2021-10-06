@@ -42,12 +42,13 @@ export default function FullPageInfoCard(props){
     image,
     subtitleText,
     bodyText,
-    onClick
+    onClick,
+    imageAlt
   } = props
   const classes = useStyles()
   return(
     <Grid className={classes.grid}>
-      <img className={classes.img} src={image}/>
+      <img className={classes.img} src={image} alt={imageAlt || "No Alt Text Available"}/>
       <Card elevation={0} className={classes.card} >
         <Typography className={classes.subtitle} variant="subtitle2" color="secondary">{subtitleText}</Typography>
         <Typography className={classes.body}  variant="body1">{bodyText}</Typography>

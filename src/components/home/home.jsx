@@ -1,9 +1,7 @@
-import useUser from "../../hooks/useUser"
 import useMessages from "../../hooks/useMessages"
-import { SignIn } from "../auth/views/signin"
+import { SignIn } from "../Auth/views/SignIn/SignIn"
 import InfoCard from "../InfoCard"
 import {
-  Container,
   Grid,
   makeStyles,
 } from "@material-ui/core"
@@ -16,12 +14,12 @@ import image from "../../assets/media/home_2000x1151px.webp"
 
 import HomeCard from "../HomeCard/homecard"
 import useNavigator from "../../hooks/useNavigator"
-import { resourcesPath } from "../../views/resources/urls"
-import { coursesPath } from "../../views/courses/urls"
-import { consultingPath } from "../../views/consulting/urls"
+import { resourcesPath } from "../../views/Resources/urls"
+import { coursesPath } from "../../views/Courses/urls"
+import { consultingPath } from "../../views/Consulting/urls"
 import FullPageInfoCard from "../FullPageInfoCard/FullPageInfoCard"
 
-const useStyles = makeStyles(theme =>({
+const useStyles = makeStyles({
   grid: {
     paddingTop: 200,
     paddingBottom: 200,
@@ -34,10 +32,9 @@ const useStyles = makeStyles(theme =>({
     maxHeight: 400,
     width: 200,
   }
-}))
+})
 
 const Home = () => {
-  const user = useUser()
   const {addMessage} = useMessages()
   const classes = useStyles()
   const navigator = useNavigator()

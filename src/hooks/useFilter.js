@@ -1,9 +1,10 @@
 import { useState } from "react";
 import useNavigator from "./useNavigator";
 import {stringify as stringifyQs} from "qs"
+import { useLocation } from "react-router";
 
 const buildFilters = (qs, fields) => {
-  let filters = new Object()
+  let filters = {}
   fields.forEach(field => {
     if(qs.hasOwnProperty(field)){
       const key = field.toLocaleLowerCase()
@@ -25,6 +26,7 @@ export function useFilter(qs, filterFields){
   transforms filters in obj to stringified url
   */
   const navigate = useNavigator()
+  const location = useLocation()
   const [filters, setFilters] = useState(
     buildFilters(qs, filterFields)
   )
@@ -88,22 +90,16 @@ export function useFilter(qs, filterFields){
   }
 
   function reset(){
-    let newQs = qs
-
-    filterFields.forEach(field => {
-      if(newQs.hasOwnProperty(field)){
-        delete newQs[field]
-      }
-    })
     setFilters({})
     navigate(
-      "?" + stringifyQs(newQs),
+      location.pathname,
       true
     )
   }
   return{
     filters,
     updateFilters,
+    updateSearchFilter,
     reset
   }
 }

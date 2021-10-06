@@ -1,4 +1,4 @@
-import { FormControl, Select,MenuItem, InputLabel, makeStyles } from "@material-ui/core"
+import { FormControl, Select,MenuItem, InputLabel, makeStyles, Typography } from "@material-ui/core"
 
 const NAME_ASC = "NAME_ASC"
 const NAME_DESC = "NAME_DESC"
@@ -7,26 +7,25 @@ const GRADE_DESC = "GRADE_DESC"
 const useStyles = makeStyles(theme => ({
     formControl: {
       display: 'grid',
-      gridTemplateColumns: "8ch 50px",
-      // color: theme.palette.text.main
-    },
-    '.MuiInputLabel-formControl':{
-      position: 'relative'
+      gridTemplateColumns: "100px 50px",
+      height: 50,
+      margin: "auto"
     },
     label: {
       position: 'relative',
-      margin: 'auto',
-      fontWeight: 700,
-      fontSize: 18,
-      marginBottom: 5
+      margin: "auto",
+      marginBottom: 0,
+      marginRight: 0,
+      padding: 0,
     },
     select: {
       gridColumn: 2,
-      color: theme.palette.text.main
+      color: theme.palette.text.main,
+      // marginBottom: 0
     }
 }))
 
-export const ResourcesSort = ({currentValue, handleSortChange, refetch}) => {
+export const SortResources = ({currentValue, handleSortChange, refetch}) => {
   const onChange = (e) => {
     // e.preventDefault()
     handleSortChange(e.target.value)
@@ -39,7 +38,10 @@ export const ResourcesSort = ({currentValue, handleSortChange, refetch}) => {
     >
       <InputLabel id={"sortLabel"}
       className={classes.label}
-      >Sort By:</InputLabel>
+      ><Typography variant="h5">
+        Sort By:
+        </Typography>
+        </InputLabel>
       <Select
       className={classes.select}
       onChange = {(e)=>onChange(e)}
@@ -55,4 +57,4 @@ export const ResourcesSort = ({currentValue, handleSortChange, refetch}) => {
   )
 }
 
-export default ResourcesSort
+export default SortResources

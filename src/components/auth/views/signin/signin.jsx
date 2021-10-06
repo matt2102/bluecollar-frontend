@@ -3,10 +3,7 @@ import useUser from "../../../../hooks/useUser"
 
 
 export const SignIn = () => {
-  const {user, signIn, signOut} = useUser()
-  console.log(user)
-
-
+  const {signIn, signOut} = useUser()
   return(
     <div>
       <Button onClick={()=>{

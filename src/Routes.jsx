@@ -1,48 +1,44 @@
 
 import { Switch } from "react-router"
-import Navigation from "./components/navigation"
-import AccountView from "./views/account"
-import HomeView from "./views/home"
 
-
-import AboutView from "./views/about"
-import ResourceView from "./views/resource"
-import ResourcesView from "./views/resources"
-import CoursesView from "./views/courses"
-import CourseView from "./views/course"
-import ConsultingView from "./views/consulting"
-
-
-
-import {homePath} from "./views/home/urls"
-import {accountPath} from "./views/account/urls"
-import {aboutPath} from "./views/about/urls"
-import {resourcesPath} from "./views/resources/urls"
-import {resourcePath} from "./views/resource/urls"
-import { coursesPath } from "./views/courses/urls"
-import { coursePath } from "./views/course/urls"
-import { consultingPath } from "./views/consulting/urls"
-import Baseline from "./Baseline"
-import Messages from "./components/messages"
+// Components
+import Navigation from "./components/Navigation"
+import Messages from "./components/Messages"
 import Footer from "./components/Footer"
 
+// Views
+import AccountView from "./views/Account"
+import HomeView from "./views/Home"
+import AboutView from "./views/About"
+import ResourceView from "./views/Resource"
+import ResourcesView from "./views/Resources"
+import ConsultingView from "./views/Consulting"
+import BlogView from "./views/Blog"
+
+
+// Paths
+import { blogPath } from "./views/Blog/urls"
+import {homePath} from "./views/Home/urls"
+import {accountPath} from "./views/Account/urls"
+import {aboutPath} from "./views/About/urls"
+import {resourcesPath} from "./views/Resources/urls"
+import {resourcePath} from "./views/Resource/urls"
+import { consultingPath } from "./views/Consulting/urls"
 
 
 export const Routes = () => {
   return(
     <>
-    {/* <Baseline/> */}
     <Messages/>
     <Navigation/>
     <Switch>
       <HomeView exact path={homePath}/>
       <AccountView path={accountPath}/>
       <AboutView path={aboutPath}/>
+      <BlogView path = {blogPath}/>
       <ConsultingView path={consultingPath}/>
       <ResourcesView path={resourcesPath}/>
       <ResourceView path={resourcePath}/>
-      <CoursesView path={coursesPath}/>
-      <CourseView path={coursePath}/>
     </Switch>
     <Footer/>
     </>

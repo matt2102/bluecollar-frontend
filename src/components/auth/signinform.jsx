@@ -1,6 +1,5 @@
 import React from "react"
 import { Button, TextField } from "@material-ui/core"
-import Typography from '@material-ui/core/Typography';
 import useUser from "../../hooks/useUser"
 import { makeStyles } from "@material-ui/core";
 

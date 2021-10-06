@@ -1,11 +1,13 @@
-import { Button, Grid, makeStyles } from "@material-ui/core"
+import {
+   Grid,
+   makeStyles
+} from "@material-ui/core"
 import useAddress from "../../hooks/useAddress"
 import { maybe } from "../../misc"
 import AddressActionBar from "../AddressActionBar/AddressActionBar"
 import AddressCard from "../AddressCard"
-import { AddressForm } from "../AddressForm/AddressForm"
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)",
@@ -15,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     columnGap: 50,
     rowGap: 50
   }
-}))
+})
 
 export const Addresses = () => {
   const{data, loading} = useAddress()

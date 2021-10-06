@@ -9,12 +9,12 @@ import {
 } from "@material-ui/core"
 import useNavigator from "../../hooks/useNavigator"
 import { maybe } from "../../misc"
-import { resourceUrl } from "../../views/resource/urls"
+import { resourceUrl } from "../../views/Resource/urls"
 import { ResourceDefaultImage } from "../ResourceDefaultImage/ResourceDefaultImage"
-// import { CardMedia } from "material-ui"
 
 const useStyles = makeStyles(theme => ({
   root: {
+    margin: "auto",
     display: 'grid',
     width: 300,
     gridTemplateColumns: '1fr',

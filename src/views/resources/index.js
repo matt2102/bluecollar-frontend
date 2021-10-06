@@ -1,2 +1,2 @@
-export {default} from "./resources"
-export * from "./resources"
+export {default} from "./Resources"
+export * from "./Resources"

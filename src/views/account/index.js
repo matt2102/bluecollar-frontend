@@ -1,2 +1,2 @@
-export {default} from "./account"
-export * from "./account"
+export {default} from "./Account"
+export * from "./Account"

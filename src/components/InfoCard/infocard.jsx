@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core"
-import { Card, Typography } from "@material-ui/core"
-// import Typography from "material-ui/styles/typography"
+import { Typography } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   infoCard: {
@@ -15,13 +14,11 @@ const useStyles = makeStyles(theme => ({
   },
   heading3: {
     color: theme.palette.secondary.light,
-    // fontWeight: '300',
   },
   textCard: {
     width: '70vw',
     minWidth: '400',
     margin: 'auto',
-    // display: "flex"
   }
 }))
 
@@ -29,8 +26,6 @@ export default function InfoCard(props){
   const {
     heading1,
     heading3,
-    imgUrl,
-    fullWidth
   } = props
   const classes = useStyles()
   return(
