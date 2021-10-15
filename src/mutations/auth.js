@@ -13,7 +13,30 @@ export const createTokenMutation = gql`
     refreshToken
     token
     user {
-      ...User
+      ...AuthUser
+    }
+  }
+}
+`
+
+export const registerAccountMutation = gql`
+  ${fragmentUser}
+  ${accountErrorFragment}
+  mutation accountRegister(
+    $email:String!,
+    $password:String!,
+    $redirectUrl:String){
+    accountRegister(input: {
+      email: $email,
+      password: $password,
+      redirectUrl: $redirectUrl
+    }){
+    requiresConfirmation
+    user {
+      ...AuthUser
+    }
+    errors: accountErrors{
+      ...AccountErrorFragment
     }
   }
 }

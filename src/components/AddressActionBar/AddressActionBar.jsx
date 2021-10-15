@@ -1,6 +1,7 @@
 import { Button, makeStyles,Typography } from "@material-ui/core"
 import AddressDialog from "../AddressDialog/AddressDialog"
 import React from "react"
+import useAddress from "../../hooks/useAddress"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,7 +32,12 @@ const useStyles = makeStyles(theme => ({
 
 export const AddressActionBar = () => {
   const classes = useStyles()
+  const {addAccountAddress} = useAddress()
   const [open, setModal] = React.useState(false)
+  const onSubmit = (data) => {
+    addAccountAddress(data)
+    setModal(false)
+  }
   return(
     <>
     <div className={classes.root}>
@@ -45,6 +51,7 @@ export const AddressActionBar = () => {
       open={open}
       onClose={()=>setModal(false)}
       disabled={false}
+      onSubmit={onSubmit}
     />
     </>
   )

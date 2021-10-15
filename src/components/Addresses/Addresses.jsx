@@ -20,9 +20,11 @@ const useStyles = makeStyles({
 })
 
 export const Addresses = () => {
-  const{data, loading} = useAddress()
+  const{data, loading, deleteAddress, update} = useAddress()
   const classes = useStyles()
-
+  const onSubmit = (data) => {
+    update(data.id, data)
+  }
   if(loading)return null
   const addresses = maybe(() => data.me.addresses, [])
   let addressCount = 0
@@ -33,7 +35,15 @@ export const Addresses = () => {
         address => {
           addressCount += 1
           return(
-            <AddressCard address={address} num={addressCount}/>
+            <AddressCard
+              address={address}
+              num={addressCount}
+              key={address.id}
+              onDelete={deleteAddress}
+              isChildOfCheckout={false}
+              onSubmit={onSubmit}
+              // checkoutAddressEnum={}
+              />
           )
         }
       )}

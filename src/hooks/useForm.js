@@ -53,7 +53,7 @@ function useForm(
   const [hasChanged, setChanged] = useState(false);
   const [data, setData] = useStateFromProps(initial, {
     mergeFunc: merge,
-    onRefresh: newData => handleRefresh(data, newData, setChanged)
+    // onRefresh: newData => handleRefresh(data, newData, setChanged)
   });
 
   function toggleValue(event, cb) {

@@ -48,8 +48,10 @@ export const SignInForm = (props) => {
       <TextField
         className={classes.formField}
         variant="outlined"
+        autoComplete="email"
         label="email"
         placeholder="Email"
+        type="email"
         onChange={onChange("email")}
         disabled={disabled}
         fullWidth={true}
@@ -59,6 +61,8 @@ export const SignInForm = (props) => {
         label="password"
         variant="outlined"
         placeholder="Password"
+        autoComplete="password"
+        type="password"
         onChange={onChange("password")}
         disabled={disabled}
         fullWidth={true}

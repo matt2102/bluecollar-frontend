@@ -30,3 +30,17 @@ export const orderDetailsFragment = gql`
     }
   }
 `
+
+export const OrderFragment = gql`
+  fragment OrderFragment on Order{
+    token
+    id
+    isPaid
+    payments{
+      id
+      capturedAmount{
+        amount
+      }
+    }
+  }
+`

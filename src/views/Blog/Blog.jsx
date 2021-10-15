@@ -1,4 +1,5 @@
 import InfoCard from "../../components/InfoCard"
+import Loading from "../../components/Loading"
 
 export const BlogView = () => {
   return (

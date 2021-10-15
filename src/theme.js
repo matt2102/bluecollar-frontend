@@ -16,14 +16,14 @@ import { createMuiTheme } from "@material-ui/core/styles";
 //   "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF UTF-8",
 // };
 
-const mainBlue = "#3bb7c7"
-const mainPurple = "#5a519c"
-const accountPurple = "#F3F2F8"
-const mainGreen = "#A5C854"
-const accentYellow = "#f3cc17"
-const accentRed = "#d23939"
-const text = "#707070"
-const background = "#fafafa"
+export const mainBlue = "#3bb7c7"
+export const mainPurple = "#5a519c"
+export const accountPurple = "#F3F2F8"
+export const mainGreen = "#A5C854"
+export const accentYellow = "#f3cc17"
+export const accentRed = "#d23939"
+export const text = "#707070"
+export const background = "#fafafa"
 
 const theme = createMuiTheme({
   palette: {
@@ -85,7 +85,6 @@ const theme = createMuiTheme({
       fontFamily: 'Lobster',
       fontSize: 32
     }
-
   },
   props: {
     // Name of the component ⚛️
@@ -119,6 +118,7 @@ const theme = createMuiTheme({
     //   }
     // },
     MuiButton: {
+      // These work but the console yells at for for using them
       containedPrimary: {
         height: 50,
         borderRadius: '50px',
@@ -133,7 +133,7 @@ const theme = createMuiTheme({
           background: mainGreen,
           boxShadow: 'none',
         },
-
+        margin: 10,
       },
       containedSecondary: {
         background: mainBlue,

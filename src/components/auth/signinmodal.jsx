@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  Typography,
   IconButton } from "@material-ui/core"
 import { SignInForm } from "./SignInForm"
 import {Close} from "@material-ui/icons"
@@ -40,8 +39,8 @@ export const SignInModal = (props) => {
       onClose={onClose}
       className={classes.root}
       >
-      <DialogTitle id="sign-form-dialog-title">
-        <Typography variant="h3"  className={classes.title}>Sign In</Typography>
+      <DialogTitle id="sign-form-dialog-title" className={classes.title}>
+      Sign In
         <IconButton onClick={onClose} className={classes.closeBtn}>
           <Close/>
         </IconButton>

@@ -1,49 +1,54 @@
-import { Typography, Card, CardHeader, IconButton, CardContent,CardActions, makeStyles } from "@material-ui/core"
-import EditIcon from '@material-ui/icons/Edit';
-import LocalShippingIcon from '@material-ui/icons/LocalShipping';
-import ReceiptIcon from '@material-ui/icons/Receipt';
+import { Typography, Card, CardHeader, IconButton, CardContent,CardActions, makeStyles, Collapse, styled } from "@material-ui/core"
 import DeleteIcon from '@material-ui/icons/Delete';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { maybe } from "../../misc"
 import useAddress from "../../hooks/useAddress";
 import { useState } from "react";
 import AddressDialog from "../AddressDialog/AddressDialog";
+import { CardDetails } from "./CardDetails";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    boxSizing: "content-box",
-    borderWidth: 4,
-    borderStyle: "solid",
-    borderImage: "linear-gradient(135deg, rgba(59,183,199,1) 35%, rgba(165,200,84,1) 86%, rgba(243,204,23,1) 100%)",
-    borderImageSlice: 1,
-    // borderRadius: 8
+    background: theme.palette.secondary.light,
+    maxWidth: 400,
+    margin: 'auto'
   },
-  tagContainer: {
-    display: "flex",
-    flexFlow: "row nowrap",
-    justifyContent: "flex-start",
-  },
-  shipping: {
-    background: theme.palette.primary.main,
-    color: theme.palette.background.default,
-    fontFamily: theme.typography.caption,
-    padding: 6,
-    borderRadius: 15,
-    margin: 1
-  },
-  billing: {
+  header: {
     background: theme.palette.secondary.main,
-    color: theme.palette.background.default,
-    fontFamily: theme.typography.caption,
-    padding: 6,
-    borderRadius: 15,
-    margin: 1
+  },
+  title: {
+    color: theme.palette.text.secondary
+  },
+  text: {
+    fontSize: 18
+  },
+  expand: {
+    margin: 'auto',
+    fontSize: 40,
+    fill: theme.palette.accent.yellow
   }
 }))
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  margin:'auto',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 export const AddressCard=(props)=>{
   const {
     address,
-    num
+    num,
+    title,
+    onDelete,
+    onSubmit,
+    isChildOfCheckout
   } = props
   const addr = {
     id: maybe(()=>address.id, ""),
@@ -54,73 +59,98 @@ export const AddressCard=(props)=>{
     city: maybe(()=>address.city, ""),
     countryArea: maybe(()=>address.countryArea, ""),
     postalCode: maybe(()=>address.postalCode, ""),
+    isDefaultShippingAddress: maybe(() => address?.isDefaultShippingAddress, false),
+    isDefaultBillingAddress: maybe(() => address?.isDefaultBillingAddress, false),
   }
   const classes = useStyles()
   const [open, setModal] = useState(false)
-  const {deleteAddress, setDefaultBilling, setDefaultShipping} = useAddress()
-  const isDefaultShipping = address.isDefaultShippingAddress || false
-  const isDefaultBilling = address.isDefaultBillingAddress || false
+  const isExpanding = isChildOfCheckout
+  const [expanded, setExpanded] = useState(false);
+
+  const {setDefaultBilling, setDefaultShipping} = useAddress()
+  const isDefaultShipping = address.isDefaultShippingAddress
+  const isDefaultBilling = address.isDefaultBillingAddress
+  function getTitle(){
+    if(num){
+      return `Address ${num}`
+    }
+    if(title){
+      return title
+    }
+    return 'Address'
+  }
+  const addressTitle = getTitle()
+  function submitWrapper(data){
+    onSubmit(data)
+    setModal(false)
+  }
   return(
     <>
     <Card key={addr.id} className={classes.card} elevation={0}>
       <CardHeader
-        title={'Address ' + num}
+        className={classes.header}
+        title={
+          <div>
+          <Typography variant="subtitle1" color="textSecondary">{addressTitle}</Typography>
+          {isDefaultBilling?
+            <Typography variant="body1" color="textSecondary">Default Billing Address</Typography>:null
+          }
+          {isDefaultShipping?
+            <Typography variant="body1" color="textSecondary">Default Shipping Address</Typography>:null
+          }
+          </div>
+        }
         action={
-          <IconButton onClick={()=>deleteAddress(addr.id)}>
+          <>
+          {isChildOfCheckout?
+          <ExpandMore
+            expand={expanded}
+            onClick={()=>setExpanded(!expanded)}
+            aria-expanded={expanded}
+            aria-label="show more"
+           >
+            <ExpandMoreIcon
+             className={classes.expand}
+            />
+          </ExpandMore>
+          :
+          <IconButton onClick={()=>onDelete(addr.id)}>
             <DeleteIcon/>
           </IconButton>
+          }
+          </>
         }
       />
-      <CardContent>
-      {isDefaultBilling || isDefaultShipping?
-        <div className={classes.tagContainer}>
-          {isDefaultShipping?<div className={classes.shipping}>
-            <Typography variant="body1">
-            Shipping
-            </Typography></div>:null}
-          {isDefaultBilling?<div className={classes.billing}><Typography variant="body1">
-            Billing
-            </Typography></div>:null}
-        </div>
-        :
-        null
+      {isExpanding?
+
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardDetails
+            addr={addr}
+            isDefaultBilling={isDefaultBilling}
+            setDefaultBilling={setDefaultBilling}
+            isDefaultShipping={isDefaultShipping}
+            setDefaultShipping={setDefaultShipping}
+            setModal={setModal}
+        />
+      </Collapse>
+      :
+      <CardDetails
+        addr={addr}
+        isDefaultBilling={isDefaultBilling}
+        setDefaultBilling={setDefaultBilling}
+        isDefaultShipping={isDefaultShipping}
+        setDefaultShipping={setDefaultShipping}
+        setModal={setModal}
+      />
       }
-      <Typography>
-        {addr.firstName}{addr.lastName}
-      </Typography>
-      <Typography>
-        {addr.streetAddress1}
-        {addr.streetAddress2?<><br></br>{addr.streetAddress2}</>:null}<br></br>
-        {addr.city}, {addr.countryArea} {addr.postalCode}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        {!isDefaultBilling?
-        <IconButton aria-label="make-default-billing" onClick={()=>setDefaultBilling(addr.id)}>
-          <ReceiptIcon/>
-        </IconButton>
-        :
-        null}
-        {!isDefaultShipping?
-        <IconButton aria-label="make-default-shipping" onClick={()=>setDefaultShipping(addr.id)}>
-          <LocalShippingIcon/>
-        </IconButton>
-        :
-        null
-        }
-
-        <IconButton aria-label="edit-address" onClick={()=>setModal(true)}>
-          <EditIcon/>
-        </IconButton>
-
-      </CardActions>
     </Card>
     <AddressDialog
       address={addr}
-      title={`Update Address ${num}`}
+      title={`Update ${addressTitle}`}
       open={open}
       onClose={()=>setModal(false)}
       disabled={false}
+      onSubmit={submitWrapper}
     />
     </>
   )

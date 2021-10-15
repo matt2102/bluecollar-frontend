@@ -128,17 +128,18 @@ export const AccountSideBar = () => {
         {btns.map(btnInfo => {
           const [path, text, _type] = btnInfo
           const isSelected = selected === _type
-          console.log( _type, isSelected)
           return(
             <>
             {isSelected ?
             <Button
+              key={`Account-Navigation-Btn-Selected-${text}`}
               className={classes.selected}
               onClick={()=>navigate(path)}
               ><Typography variant="body2" className={classes.btnText}>{text}</Typography>
                 </Button>
             :
             <Button
+              key={`Account-Navigation-Btn-${text}`}
               className={classes.button}
               onClick={()=>navigate(path)}
               ><Typography variant="body2" className={classes.btnText}>{text}</Typography></Button>

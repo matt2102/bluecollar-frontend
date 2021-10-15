@@ -5,6 +5,7 @@ import React from "react"
 import AccountButton from "../AccountButton/AccountButton"
 import StateSelector from "../StateSelector/StateSelector"
 import AddressEditForm from "./form"
+import useCheckout, {enums} from "../../hooks/useCheckout"
 
 
 const UPDATE = "UPDATE"
@@ -53,7 +54,8 @@ const useStyles = makeStyles(theme => ({
 export const AddressForm = (props) => {
   const {
     address,
-    disabled
+    disabled,
+    onSubmit
   } = props
   const initialData = {
     id: maybe(()=>address.id, ""),
@@ -66,16 +68,10 @@ export const AddressForm = (props) => {
     postalCode: maybe(()=>address.postalCode, ""),
   }
   const mode = getMode(initialData)
-  const {addAccountAddress, update} = useAddress()
-  const createAddress = (submitData) => {
-    addAccountAddress(submitData)
-  }
-  const updateAddress = (submitData) => {
-    update(submitData.id, submitData)
-  }
+
   const classes = useStyles()
   return(
-    <AddressEditForm onSubmit={mode === UPDATE?updateAddress:createAddress} initialData={initialData}>
+    <AddressEditForm onSubmit={onSubmit} initialData={initialData}>
       {({data, change, submit, hasChanged, handlers}) => {
         return(
           <Grid className={classes.grid}>
@@ -99,7 +95,6 @@ export const AddressForm = (props) => {
             >{mode===UPDATE?"Update Address":"Create New Address"}
             </Button>
           </Grid>
-
         )
       }}
     </AddressEditForm>

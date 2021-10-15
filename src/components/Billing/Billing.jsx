@@ -30,7 +30,6 @@ export const Billing = () => {
   const orders = maybe(() => data.me.orders.edges.map(edge => edge.node), [])
   const defaultBilling = data?.me.defaultBillingAddress
   const defaultShipping = data?.me.defaultBillingAddress
-  console.log("order", defaultBilling, defaultShipping)
   return(
     <Grid>
       <Typography variant="subtitle1">Billing</Typography>

@@ -17,6 +17,7 @@ import {
 
 import Logo from "../../assets/icons/Logo"
 import LogoutIcon from "../../assets/icons/Logout_300x300.webp"
+import CartIcon from "../../assets/icons/cart.png"
 
 import { SignInModal } from "../Auth/SignInModal"
 
@@ -25,6 +26,8 @@ import { accountPath } from "../../views/Account/urls"
 import { homePath } from "../../views/Home/urls"
 import { resourcesPath } from "../../views/Resources/urls"
 import { consultingPath } from "../../views/Consulting/urls"
+import { cartPath } from "../../views/Cart/urls"
+import { coursesPath } from "../../views/Courses/urls"
 
 const useStyles = makeStyles(
   theme => ({
@@ -72,7 +75,7 @@ const useStyles = makeStyles(
       }
     },
     accountContainer: {
-      maxWidth: 260
+      maxWidth: 320
     },
     accountBtn: {
       height: '50px',
@@ -91,6 +94,14 @@ const useStyles = makeStyles(
     },
     logoutIcon: {
       width: 40,
+    },
+    cartCard: {
+      width: 40,
+      margin: 'auto',
+      marginLeft: 20,
+    },
+    cartIcon: {
+      width: 40,
     }
   })
 )
@@ -104,13 +115,17 @@ export const Navigation = () => {
     <>
     <AppBar position="static" elevation={0} className={classes.root}>
       <Toolbar className={classes.toolbar}>
-        <IconButton onClick={()=>navigate(homePath) }className={classes.logoContainer}>
+        <IconButton onClick={()=>navigate(homePath) } className={classes.logoContainer}>
           <Logo/>
         </IconButton>
         <Grid className={classes.btnContainer}>
         <Button className={classes.navButton} fullWidth={true}
           onClick={()=>navigate(resourcesPath)}>
           Resources
+        </Button>
+        <Button className={classes.navButton} fullWidth={true}
+          onClick={()=>navigate(coursesPath)}>
+          Courses
         </Button>
         <Button className={classes.navButton} fullWidth={true}
           onClick={()=>navigate(consultingPath)}>
@@ -123,16 +138,34 @@ export const Navigation = () => {
         </Grid>
 
         {user.isGuest?
+        <Grid container className={classes.accountContainer}>
         <Button className={classes.accountBtn}
           onClick={()=>setModal(true)}>
           Login / Create Account
         </Button>
+          <Card elevation={0} className={classes.cartCard}>
+            <CardActionArea onClick = {()=>navigate(cartPath)}>
+              <CardMedia
+              component={"img"}
+              className={classes.cartIcon}
+              src={CartIcon}/>
+            </CardActionArea>
+          </Card>
+        </Grid>
         :
         <Grid container className={classes.accountContainer}>
         <Button className={classes.accountBtn}
           onClick={()=>navigate(accountPath)}>
           My Account
         </Button>
+        <Card elevation={0} className={classes.cartCard}>
+            <CardActionArea onClick = {()=>navigate(cartPath)}>
+              <CardMedia
+              component={"img"}
+              className={classes.cartIcon}
+              src={CartIcon}/>
+            </CardActionArea>
+          </Card>
         <Card elevation={0} className={classes.logoutCard}>
           <CardActionArea onClick = {() => signOut()}>
             <CardMedia

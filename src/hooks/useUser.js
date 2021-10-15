@@ -1,6 +1,9 @@
 import { useMutation } from "@apollo/client"
 import { useDispatch, useSelector } from "react-redux"
-import { createTokenMutation } from "../mutations/auth"
+import { useLocation } from "react-router"
+import urlJoin from "url-join"
+import { accountRegisterRedirectUrl } from "../components/Auth/urls"
+import { createTokenMutation, registerAccountMutation } from "../mutations/auth"
 import { homePath } from "../views/Home/urls"
 import useMessages from "./useMessages"
 import useNavigator from "./useNavigator"
@@ -26,6 +29,22 @@ function useUser(){
       })
     }
   }
+  function handleAccountRegister(data){
+    if(data.accountRegister.errors.length > 0){
+      data.accountRegister.errors.forEach(error => {
+        addMessage({messageType: "error", text: `Unable to Register Account: ${error.code}`})
+      })
+    }
+  }
+
+  function hasErrored(apolloErrors, gqlErrors){
+    if(apolloErrors){
+      return true
+    }
+    if(gqlErrors.errors.length > 0){
+      return true
+    }
+  }
 
   const [createToken, {
     data:createTokenData,
@@ -33,6 +52,15 @@ function useUser(){
     loading:createTokenLoading}] = useMutation(createTokenMutation, {
       onCompleted: handleTokenCreate,
     })
+
+  const [registerAccount, {
+    data:registerAccountData,
+    errors:registerAccountErrors
+    }] = useMutation(
+      registerAccountMutation, {
+        onCompleted: handleAccountRegister
+      }
+    )
 
   function signOut(){
     dispatch({
@@ -51,7 +79,21 @@ function useUser(){
   function tokenRefresh(){
     console.log("token refresh")
   }
-  return{user, signIn, signOut, tokenRefresh}
+  function createAccount(data){
+    if(data.email && data.password){
+      const redirectUrl = urlJoin(window.location.origin, accountRegisterRedirectUrl)
+      registerAccount({variables: {
+        email: data.email,
+        password: data.password,
+        redirectUrl: redirectUrl
+      }})
+      const requiresConfirmation = registerAccountData?.accountRegister?.requiresConfirmation || false
+      const error = hasErrored(registerAccountErrors, registerAccountData.accountRegister)
+      return{requiresConfirmation, error}
+    }
+  }
+  return{user, signIn, signOut, tokenRefresh, createAccount}
+
 }
 
 export default useUser;

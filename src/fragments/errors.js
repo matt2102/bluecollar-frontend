@@ -14,3 +14,17 @@ export const marketingErrorFragment = gql`
     field
   }
 `;
+
+export const checkoutErrorFragment = gql`
+  fragment CheckoutErrorFragment on CheckoutError {
+    message
+    field
+  }
+`
+
+export const paymentErrorFragment = gql`
+  fragment PaymentErrorFragment on PaymentError {
+    message
+    field
+  }
+`

@@ -30,7 +30,8 @@ export const AddressDialog = (props) => {
     title,
     open,
     onClose,
-    disabled
+    disabled,
+    onSubmit
   } = props
   const classes = useStyles()
   return(
@@ -52,7 +53,8 @@ export const AddressDialog = (props) => {
       <DialogContent>
         <AddressForm
           disabled={disabled}
-          address={address}/>
+          address={address}
+          onSubmit={onSubmit}/>
       </DialogContent>
     </Dialog>
   )

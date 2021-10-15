@@ -18,16 +18,22 @@ export function useAddress(){
   const {addMessage} = useMessages()
   const {user} = useUser()
   const [defaults, setDefaults] = useState({})
-  function handleComplete(){
-    addMessage({messageType: "success", text: "Address Updated"})
+  function handleCreated(){
+    addMessage({text: "Address Created"})
   }
-  const [createAccountAddress] = useMutation(accountAddAddress, {onCompleted:handleComplete})
+  function handleUpdated(){
+    addMessage({text: "Address Updated"})
+  }
+  function handleDeleted(){
+    addMessage({text: "Address Deleted"})
+  }
+  const [createAccountAddress] = useMutation(accountAddAddress, {onCompleted:handleCreated})
 
-    const [deleteAccountAddress] = useMutation(accountAddressDelete, {onCompleted:handleComplete})
+    const [deleteAccountAddress] = useMutation(accountAddressDelete, {onCompleted:handleDeleted})
 
-    const [setDefaultAddress] = useMutation(accountSetDefault, {onCompleted:handleComplete})
+    const [setDefaultAddress] = useMutation(accountSetDefault, {onCompleted:handleUpdated})
 
-    const [updateAddress] = useMutation(updateAddressMutation, {onCompleted:handleComplete})
+    const [updateAddress] = useMutation(updateAddressMutation, {onCompleted:handleUpdated})
 
   function verifyAddress(addr){
     // use SmartyStreets API to verify address exists
@@ -49,12 +55,13 @@ export function useAddress(){
   }
   function addAccountAddress(addr){
     if(verifyAddress(addr)){
-    createAccountAddress({
-      variables: {
-        input: cleanAddress(addr),
-        id: user.id
-      }
-    })
+      createAccountAddress({
+        variables: {
+          input: cleanAddress(addr),
+          id: user.id
+        }
+      })
+      refetch()
     }
   }
   function update(id, addr){
@@ -65,12 +72,15 @@ export function useAddress(){
           id: id
         }
       })
+      refetch()
     }
+
   }
   function deleteAddress(id){
     deleteAccountAddress({
       variables: {id: id}
     })
+    refetch()
   }
   function setDefault(addressId, type){
     setDefaultAddress({variables: {
@@ -82,9 +92,11 @@ export function useAddress(){
   }
   function setDefaultShipping(id){
     setDefault(id, SHIPPING)
+    refetch()
   }
   function setDefaultBilling(id){
     setDefault(id, BILLING)
+    refetch()
   }
   useEffect(() => {
     if(data?.me?.addresses?.length >= 0){

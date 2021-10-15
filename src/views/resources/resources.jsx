@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import Resources from "../../components/Resources"
+import GridItems from "../../components/GridItems"
 import usePaginator, { createPaginationState } from "../../hooks/usePaginator"
 import { isEmpty, maybe } from "../../misc"
 import { usePublishersQuery, useResourcesQuery, useSubjectsQuery } from "./queries"
@@ -14,6 +14,7 @@ import SearchFilter from "../../components/SearchFilter/SearchFilter"
 import { useLocation } from "react-router"
 import PaginateBy from "../../components/PaginateBy"
 import SortResources from "../../components/SortResources"
+import { resourceUrl } from "../Resource/urls"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 export const ResourcesView = () => {
   const location = useLocation()
-  const qs = parseQs(location.search.substr(10));
+  const qs = parseQs(location.search.substr(1));
   const paginate = usePaginator()
   const classes = useStyles()
   const {sortVariables, handleSortChange, currentValue} = useSort(qs, ['GRADE'])
@@ -108,11 +109,12 @@ export const ResourcesView = () => {
 
       </div>
       <div className={classes.resources}>
-        <Resources
+        <GridItems
+        itemUrl={resourceUrl}
         pageInfo={pageInfo}
         loadPreviousPage={loadPreviousPage}
         loadNextPage={loadNextPage}
-        resources={resources}/>
+        items={resources}/>
       </div>
       <div className={classes.filter}>
         <GenericFilter

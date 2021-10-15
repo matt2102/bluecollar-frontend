@@ -10,14 +10,14 @@ import resourceIcon from "../../assets/media/resources_icon.webp"
 import consultingIcon from "../../assets/media/consulting_icon.webp"
 import coursesIcon from "../../assets/media/courses_icon.webp"
 
-import image from "../../assets/media/home_2000x1151px.webp"
+import image from "../../assets/media/home.webp"
 
-import HomeCard from "../HomeCard/homecard"
 import useNavigator from "../../hooks/useNavigator"
 import { resourcesPath } from "../../views/Resources/urls"
 import { coursesPath } from "../../views/Courses/urls"
 import { consultingPath } from "../../views/Consulting/urls"
 import FullPageInfoCard from "../FullPageInfoCard/FullPageInfoCard"
+import IconCard from "../IconCard"
 
 const useStyles = makeStyles({
   grid: {
@@ -50,32 +50,36 @@ const Home = () => {
         text: "test"
       })}>add message</button>
       <Grid className={classes.grid}>
-        <HomeCard
+        <IconCard
           gridColumn={2}
           image={resourceIcon}
           subtitleText={'Resources'}
           bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
           onClick={()=>navigator(resourcesPath)}
+          displayButton={true}
         />
-        <HomeCard
+        <IconCard
           gridColumn={3}
           image={coursesIcon}
           subtitleText={'Courses and Curricula'}
           bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
           onClick={()=>navigator(coursesPath)}
+          displayButton={true}
         />
-        <HomeCard
+        <IconCard
           gridColumn={4}
           image={consultingIcon}
           subtitleText={'Consulting'}
           bodyText={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
           onClick={()=>navigator(consultingPath)}
+          displayButton={true}
         />
         <FullPageInfoCard
           image={image}
           subtitleText="Are you a homeschooling parent who is frustrated as you search for curriculum?"
           bodyText="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed."
           onClick={()=>navigator(consultingPath)}
+          displayButton={true}
         />
       </Grid>
     </div>

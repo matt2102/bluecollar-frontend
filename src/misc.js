@@ -14,3 +14,13 @@ export function isEmpty(obj) {
   }
   return true;
 }
+
+export function getImage(item){
+  if(item.image){
+    return maybe(()=>item.image.url, "")
+  }
+  if(item.images){
+    return maybe(()=>item.images[0].url, "")
+  }
+  return ""
+}
