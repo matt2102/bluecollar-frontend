@@ -3,6 +3,8 @@ import gql from "graphql-tag"
 export const orderDetailsFragment = gql`
   fragment OrderDetailFragment on Order{
     id
+    number
+    created
     paymentStatus
     total{
       net{
@@ -16,6 +18,14 @@ export const orderDetailsFragment = gql`
       }
     }
     lines{
+      thumbnail{
+        url
+      }
+      digitalContentUrl{
+        url
+        # content
+        created
+      }
       productName
       variantName
       quantity

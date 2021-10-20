@@ -11,3 +11,7 @@
        url('../fonts/lobster-v23-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/lobster-v23-latin-regular.svg#Lobster') format('svg'); /* Legacy iOS */
 }
+
+a {
+  color: #f3cc17
+}

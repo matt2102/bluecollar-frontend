@@ -9,7 +9,9 @@ const buildFilters = (qs, fields) => {
     if(qs.hasOwnProperty(field)){
       const key = field.toLocaleLowerCase()
       const value = qs[field]
-      if((typeof value === "string") && (key !== "search")){
+      if((typeof value === "string") && (
+        (key !== "search") && (key !== "gradelevel"))
+        ){
         filters[key] = [value]
       }else{
         // value is already array
@@ -88,6 +90,12 @@ export function useFilter(qs, filterFields){
     setFilters(newFilters)
     refreshFilterState()
   }
+  function updateGradeFilter(grade){
+    let newFilters = filters
+    newFilters["gradelevel"] = grade
+    setFilters(newFilters)
+    refreshFilterState()
+  }
 
   function reset(){
     setFilters({})
@@ -100,7 +108,8 @@ export function useFilter(qs, filterFields){
     filters,
     updateFilters,
     updateSearchFilter,
-    reset
+    updateGradeFilter,
+    reset,
   }
 }
 

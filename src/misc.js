@@ -16,11 +16,32 @@ export function isEmpty(obj) {
 }
 
 export function getImage(item){
+  if(!item){
+    return ""
+  }
   if(item.image){
     return maybe(()=>item.image.url, "")
   }
   if(item.images){
     return maybe(()=>item.images[0].url, "")
   }
+  if(item.thumbnail){
+    return maybe(()=>item.thumbnail.url, "")
+  }
   return ""
+}
+
+
+export function getDate(timestamp){
+  const d = new Date(timestamp)
+  const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  const i = d.getMonth() + 1
+  const dd = d.getDate()
+  const y = d.getFullYear()
+  const m = months[i]
+  return `${m} ${dd}, ${y}`
+}
+
+export function formatMoney(float){
+  return float.toFixed(2)
 }

@@ -1,21 +1,35 @@
 import {
   Grid,
   makeStyles,
-  Container
+  Container,
+  Typography
 } from "@material-ui/core"
+import useNavigator from "../../hooks/useNavigator"
+import { resourcesPath } from "../../views/Resources/urls"
 import GridCard from "../GridCard/GridCard"
+import NotFound from "../NotFound/NotFound"
 import Paginate from "../Paginate"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: 50,
+    margin: "auto",
+    marginBottom: theme.spacing(10),
     display: "grid",
     width: "100%",
-    maxWidth: "1200px",
-    gridTemplateColumns: "repeat(2, 1fr)",
+    maxWidth: "1250px",
+    gridTemplateColumns: "repeat(3, 1fr)",
     gridTemplateRows: "auto",
     columnGap: "10px",
     rowGap: "10px"
+  },
+  featured: {
+    gridColumn: "1/-1",
+    gridRow: '1',
+    background: theme.palette.secondary.main
+  },
+  notFound: {
+    gridColumn: "1/-1",
+    margin: 'auto'
   },
   page: {
     gridColumn: "1/-1",
@@ -25,18 +39,35 @@ const useStyles = makeStyles({
     justifyContent: "center",
     marginBottom: 50
   }
-})
+}))
 
 export const GridItems = ({
+  featured,
   items,
   itemUrl,
   loadPreviousPage,
   loadNextPage,
   pageInfo}) => {
+  const navigator = useNavigator()
   const classes = useStyles()
-  if(items.length === 0)return<p>Nothing Found</p>
+  const empty = items.length === 0
   return(
     <Grid className={classes.root}>
+      {empty?
+      <Container className={classes.notFound}>
+          <NotFound
+          title="Nothing Here"
+          subtitle="Try Widening Your Search"
+          onClick={()=>navigator(resourcesPath)}
+          buttonText = {"reset search"}
+          />
+      </Container>
+        :
+      <>
+      {featured?
+      <Container className={classes.featured}>
+        <Typography variant="subtitle2" color="textSecondary" align="center">Featured Resources</Typography>
+      </Container>:null}
       {items.map(item => {
         return(
         <GridCard
@@ -51,6 +82,8 @@ export const GridItems = ({
         loadPreviousPage={loadPreviousPage}
         loadNextPage={loadNextPage}/>
       </Container>
+      </>
+      }
     </Grid>
   )
 }

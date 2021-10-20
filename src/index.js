@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as Sentry from "@sentry/react"
+import { Integrations } from "@sentry/tracing";
 import { Provider } from 'react-redux';
 import reducer from "./reducers"
 import {createStore} from "redux"
@@ -71,6 +73,16 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache()
   }
 )
+
+Sentry.init({
+  dsn: "https://15d1f64c0efc497caeb0203db9d4eb35@o1042385.ingest.sentry.io/6011380",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 const history = createBrowserHistory()
 

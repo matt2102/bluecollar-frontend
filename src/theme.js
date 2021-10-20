@@ -1,20 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-// import Lobster from "./assets/typefaces/lobster-v23-latin-regular.woff2"
 
-
-// const lobster = {
-//   fontFamily: "Lobster",
-//   fontStyle: "normal",
-//   fontDisplay: "swap",
-//   fontWeight: 400,
-//   src: `
-//     local('Lobster'),
-//     local('Lobster-Regular'),
-//     url(${Lobster}) format('truetype')
-//   `,
-//   unicodeRange:
-//   "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF UTF-8",
-// };
 
 export const mainBlue = "#3bb7c7"
 export const mainPurple = "#5a519c"
@@ -24,7 +9,11 @@ export const accentYellow = "#f3cc17"
 export const accentRed = "#d23939"
 export const text = "#707070"
 export const background = "#fafafa"
-
+// xs, extra-small: 0px
+// sm, small: 600px
+// md, medium: 900px
+// lg, large: 1200px
+// xl, extra-large: 1536px
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -57,15 +46,49 @@ const theme = createMuiTheme({
       // 'Lobster',
       'Roboto'
     ].join(','),
+
+    // 10px = 0.625rem
+    // 12px = 0.75rem
+    // 14px = 0.875rem
+    // 16px = 1rem (base)
+    // 18px = 1.125rem
+    // 20px = 1.25rem
+    // 24px = 1.5rem
+    // 30px = 1.875rem
+    // 32px = 2rem
+    // 34px = 2.125rem
+    // 36px = 2.25rem
+    // 38px = 2.375rem
+    // 40px = 2.5rem
+
     h1: {
+      // 6rem
+      fontSize: '6rem',
       fontFamily: 'Lobster',
+      '@media (max-width:900px)': {
+        fontSize: '5rem',
+      },
+      '@media (max-width:600px)': {
+        fontSize: '4rem',
+      },
+      '@media (max-width:450px)': {
+        fontSize: '3rem',
+      },
     },
     h2: {
       fontFamily: 'Roboto'
     },
     h3: {
+      // 3rem
+      fontSize: "3rem",
       fontFamily: 'Roboto',
-      fontWeight: 'light'
+      fontWeight: 'light',
+      '@media (max-width:900px)': {
+        fontSize: '2.5rem',
+      },
+      '@media (max-width:600px)': {
+        fontSize: '2rem',
+      },
     },
     h5: {
       fontFamily: 'Roboto',
@@ -121,19 +144,35 @@ const theme = createMuiTheme({
       // These work but the console yells at for for using them
       containedPrimary: {
         height: 50,
-        borderRadius: '50px',
-        width: '200px',
+        borderRadius: 50,
+        width: 200,
         fontWeight: 300,
-        fontSize: 18,
+        fontSize: '1.125rem',
         background: mainBlue,
         color: "#fafafa",
         textTransform: "none",
         boxShadow: 'none',
+        margin: 10,
         '&&:hover': {
           background: mainGreen,
           boxShadow: 'none',
         },
-        margin: 10,
+
+        '&&:disabled': {
+          background: text
+        },
+        '@media (max-width:900px)': {
+          height: 40,
+          borderRadius: 40,
+          width: 180,
+          fontSize: '1rem',
+        },
+        '@media (max-width:600px)': {
+          height: 35,
+          borderRadius: 35,
+          width: 170,
+          fontSize: '0.875rem',
+        },
       },
       containedSecondary: {
         background: mainBlue,
@@ -153,6 +192,16 @@ const theme = createMuiTheme({
         '&:disabled':{
           background: "#311980",
           // cursor: 'not-allowed'
+        }
+      },
+      textPrimary: {
+        height: '50px',
+        borderRadius: '50px',
+        width: '200px',
+        background: mainBlue,
+        color: background,
+        '&:hover': {
+          background: mainGreen
         }
       }
     },

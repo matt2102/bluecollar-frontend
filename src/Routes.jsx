@@ -31,6 +31,8 @@ import { coursesPath } from "./views/Courses/urls"
 import { coursePath } from "./views/Course/urls"
 import CheckoutView from "./views/Checkout"
 import { checkoutPath } from "./views/Checkout/urls"
+import CertificateView from "./views/Certificate"
+import { certificatePath } from "./views/Certificate/urls"
 
 
 
@@ -51,6 +53,7 @@ export const Routes = () => {
       <CoursesView path={coursesPath}/>
       <CartView path={cartPath}/>
       <CheckoutView path={checkoutPath}/>
+      <CertificateView path={certificatePath}/>
     </Switch>
     <Footer/>
     </>

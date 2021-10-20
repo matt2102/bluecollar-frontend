@@ -1,33 +1,18 @@
-import { pageInfoFragment } from "../../fragments/pageinfo"
+import gql from "graphql-tag"
 import { fragmentResource } from "../../fragments/resource"
+import makeQuery from "../../hooks/makeQuery"
+
 
 export const resources = gql`
   ${fragmentResource}
-  ${pageInfoFragment}
   query Resource(
-    $first: Int
-    $last: Int
-    $before: String
-    $after: String
-    $filter: ResourceFilterInput
-    $sort: ResourceSortingInput
+    $id: ID!
   ){
-    resources(
-      first: $first
-      after: $after
-      last: $last
-      before: $before
-      filter: $filter
-      sortBy: $sort
-      ){
-    edges{
-      node{
-        ...Resource
-      }
-    }
-    pageInfo{
-      ...PageInfoFragment
+  resource(
+    id: $id
+    ){
+    ...Resource
     }
   }
-}
 `
+export const useResourceQuery = makeQuery(resources)

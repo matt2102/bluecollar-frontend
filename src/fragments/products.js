@@ -21,6 +21,8 @@ export const ProductDetailsFragment = gql`
     id
     name
     descriptionJson
+    externalPurchase
+    externalPurchaseUrl
     variants{
       id
       name

@@ -41,7 +41,7 @@ const Home = () => {
   return(
     <div>
       <InfoCard
-        heading1='Homeschooling Experience'
+        heading1='Homeschooling Excellence'
         heading3='A Different Kind of'
       />
       <SignIn/>

@@ -58,7 +58,7 @@ export const CoursesView = () => {
   const classes = useStyles()
   const {sortVariables, handleSortChange, currentValue} = useSort(qs)
   const {filters, updateFilters, reset, updateSearchFilter} = useFilter(qs, ["category","search"])
-  const [numProducts, setNumProducts] = useState(1)
+  const [numProducts, setNumProducts] = useState(25)
   const paginationState = createPaginationState(numProducts, qs)
   const queryVariables = useMemo(() => ({
     ...paginationState,
@@ -85,6 +85,7 @@ export const CoursesView = () => {
       paginationState,
       qs
     )
+  const filtered = products.filter(p => p.name.indexOf("Consulting") === -1)
   return(
     <>
       <InfoCard
@@ -114,7 +115,7 @@ export const CoursesView = () => {
         pageInfo={pageInfo}
         loadPreviousPage={loadPreviousPage}
         loadNextPage={loadNextPage}
-        items={products}/>
+        items={filtered}/>
       </div>
       <div className={classes.filter}>
 

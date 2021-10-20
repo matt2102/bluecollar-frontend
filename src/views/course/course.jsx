@@ -64,15 +64,14 @@ const useStyles = makeStyles(theme => ({
     marginTop: 40,
     marginBottom: 40,
     color: theme.palette.text.secondary,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
   }
 
 }))
 
 export const CourseView = () => {
   const location = useLocation()
-  const {addItem, removeItem, checkout, clear} = useCheckout()
-  console.log(checkout)
+  const {addItem, checkout} = useCheckout()
   const [variantId, setSelected] = useState()
   const qs = parseQs(location.search.substr(1));
   const {addMessage} = useMessages()
@@ -91,7 +90,7 @@ export const CourseView = () => {
   if(loading)return(<Loading/>)
   const image = maybe(() => data.product.images[0].url, "")
   const product = data.product
-
+  const hasVariants = data.product.variants.length > 0
   return(
     <div className={classes.root}>
     <Grid className={classes.grid}>
@@ -117,22 +116,38 @@ export const CourseView = () => {
       </Container>
       <Grid className={classes.detailsGrid}>
         <Typography variant="h1" color="textSecondary" className={classes.title}>{product.name}</Typography>
+        <Container>
+        {hasVariants && !product.externalPurchase?
         <VariantSelector
         variants = {product.variants}
         setSelected = {setSelected}
         selected = {variantId}
-        />
-        <Grid className={classes.btnContainer} container direction="column">
-          <Button variant="containedPrimary" onClick={()=>addItem(variantId, 1)}>Add to Cart</Button>
-          <Button variant="containedPrimary" onClick={()=>removeItem(variantId)}>Remove Item</Button>
-          <Button variant="containedPrimary" onClick={()=>clear()}>Clear</Button>
-          {/* <Button variant="containedPrimary"
-          onClick={()=>navigator(coursesPath)}
-          >Keep Shopping</Button> */}
-        </Grid>
+        />:null
+        }
+        {product.descriptionJson?
         <div className={classes.text}>
           <DescriptionJson descriptionJson={product.descriptionJson}/>
         </div>
+        :null}
+        </Container>
+        <Grid className={classes.btnContainer} container direction="column">
+          {product.externalPurchase?
+            <Container>
+            <Button variant="containedPrimary" onClick={()=>window.open(product.externalPurchaseUrl)}>Purchase</Button>
+            <Typography variant="body2" color="textSecondary">This course is not hosted on Blue Collar Homeschool.  Clicking this button will take you to a different site</Typography>
+            <Button variant="containedPrimary"
+            onClick={()=>navigator(coursesPath)}
+            >Keep Shopping</Button>
+            </Container>
+            :
+            <Container>
+            <Button variant="containedPrimary" onClick={()=>addItem(variantId, 1)}>Add to Cart</Button>
+            <Button variant="containedPrimary"
+            onClick={()=>navigator(coursesPath)}
+            >Keep Shopping</Button>
+          </Container>
+          }
+        </Grid>
       </Grid>
     </Grid>
     </div>
