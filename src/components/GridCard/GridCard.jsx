@@ -8,20 +8,31 @@ import {
   makeStyles
 } from "@material-ui/core"
 import useNavigator from "../../hooks/useNavigator"
-import { getImage, maybe } from "../../misc"
+import { getImage } from "../../misc"
 import DefaultImage from "../DefaultImage"
-import { ResourceDefaultImage } from "../DefaultImage/DefaultImage"
 
 const useStyles = makeStyles(theme => ({
   root: {
     margin: "auto",
     display: 'grid',
-    width: 300,
     gridTemplateColumns: '1fr',
-    gridTemplateRows: "300 50 50"
+    [theme.breakpoints.down("lg")]: {
+      width: 250,
+      gridTemplateRows: "250px 50px 50px",
+
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: 300,
+      gridTemplateRows: "300px 50px 50px",
+    }
   },
   cardMedia: {
-    height: 300
+    [theme.breakpoints.down("lg")]: {
+      height: 250,
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: 300,
+    }
   }
 }))
 
@@ -46,12 +57,6 @@ export const GridCard = ({
       }
       <CardContent>
       <Typography variant="body1">{item.name}</Typography>
-      {item.descriptionJson !== "{}"
-      ?
-        <Typography>{item.descriptionJson}</Typography>
-        :
-        null
-      }
       </CardContent>
       <CardActions>
         <Button variant="contained" color="primary" onClick={()=>handleClick()}>

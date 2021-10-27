@@ -4,21 +4,35 @@ import { Typography } from "@material-ui/core"
 const useStyles = makeStyles(theme => ({
   infoCard: {
     background: theme.palette.secondary.main,
-    height: '100%',
-    minHeight: 500,
-    maxHeight: 900,
-    display: "flex"
+    height: '85vh',
+    display: "flex",
+    [theme.breakpoints.down('xs')]:{
+      minHeight: 500,
+      maxHeight: 900,
+    },
   },
   heading: {
     color: theme.palette.secondary.light,
+    [theme.breakpoints.down('xs')]:{
+      margin: 0,
+      padding: 0,
+    },
   },
   heading3: {
     color: theme.palette.secondary.light,
+    [theme.breakpoints.down('xs')]:{
+      margin: 0,
+      padding: 0,
+    },
   },
   textCard: {
     width: '70vw',
     minWidth: '400',
     margin: 'auto',
+    [theme.breakpoints.down('xs')]:{
+      minWidth: 'none',
+      marginLeft: 8,
+    },
   }
 }))
 

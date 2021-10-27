@@ -35,7 +35,7 @@ export const SortProducts = ({currentValue, handleSortChange, refetch}) => {
       <InputLabel id={"sortLabel"}
       className={classes.label}
       ><Typography variant="h5">
-        Sort By:
+        Sort:
         </Typography>
         </InputLabel>
       <Select

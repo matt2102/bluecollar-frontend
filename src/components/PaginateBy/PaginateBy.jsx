@@ -28,7 +28,7 @@ export function PaginateBy({
     <FormControl className={classes.formControl}>
       <InputLabel className={classes.label}>
         <Typography variant="h5">
-          Display Amount:
+          No. Items:
         </Typography>
       </InputLabel>
       <Select

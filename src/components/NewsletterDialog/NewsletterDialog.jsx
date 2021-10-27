@@ -1,4 +1,4 @@
-import { Dialog,DialogContent,DialogTitle,makeStyles, Typography,IconButton } from "@material-ui/core"
+import { Dialog,DialogContent,DialogTitle,makeStyles, Typography,IconButton, Container } from "@material-ui/core"
 // import { IconButton } from "material-ui"
 import { Close } from "@material-ui/icons"
 import NewsletterForm from "../NewsletterForm/NewsletterForm"
@@ -9,12 +9,6 @@ const useStyles = makeStyles(theme => ({
   },
   dialogTitle: {
     height: 100,
-  },
-  title: {
-    fontSize: 30,
-    color: theme.palette.text.main,
-    margin: 'auto',
-    marginBottom: 0
   },
   closeBtn: {
     width: '50px',
@@ -46,7 +40,10 @@ export const NewsletterDialog = (props) => {
     maxWidth={"sm"}
     >
       <DialogTitle id="newsletter-modal-title" className={classes.dialogTitle}>
-        <Typography className={classes.title}>{title?title:"Newsletter Sign Up"}</Typography>
+        <Container>
+          <Typography variant="subtitle1" color="secondary">{title?title:"Newsletter Sign Up"}</Typography>
+          <Typography variant="body2" color="text">to our newsletter</Typography>
+        </Container>
         <IconButton onClick={onClose} className={classes.closeBtn}>
           <Close/>
         </IconButton>

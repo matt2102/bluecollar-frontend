@@ -1,10 +1,15 @@
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core"
 import { homePath } from "../../views/Home/urls"
 import IconCard from "../IconCard"
-
+import { resourcesPath } from "../../views/Resources/urls"
+import { coursesPath } from "../../views/Courses/urls"
+import { consultingPath } from "../../views/Consulting/urls"
 import resourceIcon from "../../assets/media/resources_icon.webp"
 import consultingIcon from "../../assets/media/consulting_icon.webp"
 import coursesIcon from "../../assets/media/courses_icon.webp"
+import useNavigator from "../../hooks/useNavigator"
+
+
 
 const useStyles = makeStyles(theme => ({
   grid: {
@@ -68,47 +73,50 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export const ConsultingDetails = (props) => {
+export const ThreeCardDisplay = (props) => {
   const {
     subtitleText,
     bodyText
   } = props
+  const navigator = useNavigator()
   const classes = useStyles()
   return(
     <Grid className={classes.grid}>
+      {subtitleText && bodyText?
       <Container className={classes.container}>
         <Typography variant="subtitle2" color="secondary" align="center">{subtitleText}</Typography>
         <Typography variant="body1" align="center">{bodyText}</Typography>
-      </Container>
+      </Container>:null}
       <Container className={classes.card1}>
-        <IconCard
-            image={consultingIcon}
-            subtitleText={'Consulting'}
-            bodyText={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-            onClick={()=>navigator(homePath)}
-            displayButton={false}
-          />
+      <IconCard
+              image={resourceIcon}
+              subtitleText={'Resources'}
+              bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
+              onClick={()=>navigator(resourcesPath)}
+              displayButton={true}
+            />
       </Container>
       <Container  className={classes.card2}>
       <IconCard
-          image={resourceIcon}
-          subtitleText={'Resources'}
-          bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-          onClick={()=>navigator(homePath)}
-          displayButton={false}
-        />
-        </Container>
-        <Container  className={classes.card3}>
-          <IconCard
             image={coursesIcon}
             subtitleText={'Courses and Curricula'}
             bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-            onClick={()=>navigator(homePath)}
-            displayButton={false}
-          />
+            onClick={()=>navigator(coursesPath)}
+            displayButton={true}
+            />
+        </Container>
+        <Container  className={classes.card3}>
+        <IconCard
+              gridColumn={4}
+              image={consultingIcon}
+              subtitleText={'Consulting'}
+              bodyText={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
+              onClick={()=>navigator(consultingPath)}
+              displayButton={true}
+            />
         </Container>
     </Grid>
   )
 }
 
-export default ConsultingDetails
+export default ThreeCardDisplay

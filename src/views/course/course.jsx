@@ -30,33 +30,72 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     maxWidth: 1600,
     display: "grid",
-    gridTemplateColumns: '1fr 1fr',
     margin: 'auto',
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: '200px 1fr',
+      columnGap: theme.spacing(4)
+    },
+    [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: '200px 1fr',
+    },
+    [theme.breakpoints.down("xs")]: {
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: '200px 1fr',
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridTemplateColumns: '1fr 1fr',
+    },
   },
   imgContainer: {
     marginTop: 40,
     marginBottom: 40,
   },
   imgCard:{
+    background: 'none',
     display: "flex",
     margin: "auto",
-    width: '80%',
-    background: 'none',
+    [theme.breakpoints.down("md")]: {
+      height: 200,
+      width: 200
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: '80%',
+    },
   },
   detailsGrid: {
     display: "grid",
     gridTemplateColumns: "1fr minmax(200px, 300px)",
-    gridTemplateRows: "auto"
+    gridTemplateRows: "auto",
+    [theme.breakpoints.down("xs")]: {
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: 'repeat(4, auto)'
+    },
   },
   title: {
     gridColumn: "1 / -1",
     gridRow: 1,
-    marginTop: 60,
-    marginBottom: 60,
+    marginTop: theme.spacing(7),
+    marginBottom: theme.spacing(7),
+    [theme.breakpoints.down("md")]: {
+      marginLeft: theme.spacing(2),
+      marginTop: theme.spacing(7),
+      marginBottom: theme.spacing(7),
+    },
+    [theme.breakpoints.down("xs")]: {
+      gridColumn: 1,
+      margin: 'auto',
+      marginTop: theme.spacing(7),
+      marginBottom: theme.spacing(7),
+    },
   },
   btnContainer: {
     gridColumn: 2,
-    gridRow: 2
+    gridRow: 2,
+    [theme.breakpoints.down("xs")]: {
+      gridColumn: 1,
+      gridRow: 3
+    },
   },
   text: {
     gridRow: 3,
@@ -65,7 +104,26 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 40,
     color: theme.palette.text.secondary,
     fontFamily: "Roboto",
-  }
+    [theme.breakpoints.down("sm")]: {
+      gridRow: 3,
+      gridColumn: '1/ -1',
+    },
+    [theme.breakpoints.down("xs")]: {
+      gridColumn: 1,
+      gridRow: 4
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridRow: 3,
+      gridColumn: 1,
+    },
+  },
+  variantSelector: {
+    [theme.breakpoints.down("xs")]: {
+      gridColumn: 1,
+      gridRow: 2
+    },
+  },
+
 
 }))
 
@@ -116,20 +174,22 @@ export const CourseView = () => {
       </Container>
       <Grid className={classes.detailsGrid}>
         <Typography variant="h1" color="textSecondary" className={classes.title}>{product.name}</Typography>
-        <Container>
+
         {hasVariants && !product.externalPurchase?
+        <Container className={classes.variantSelector}>
         <VariantSelector
         variants = {product.variants}
         setSelected = {setSelected}
         selected = {variantId}
-        />:null
+        />
+        </Container>:null
         }
         {product.descriptionJson?
-        <div className={classes.text}>
+        <Container className={classes.text}>
           <DescriptionJson descriptionJson={product.descriptionJson}/>
-        </div>
-        :null}
         </Container>
+        :null}
+
         <Grid className={classes.btnContainer} container direction="column">
           {product.externalPurchase?
             <Container>

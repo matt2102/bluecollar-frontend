@@ -1,16 +1,12 @@
 import { useMemo, useState } from "react"
 import GridItems from "../GridItems"
 import usePaginator, { createPaginationState } from "../../hooks/usePaginator"
-import { isEmpty, maybe } from "../../misc"
+import { maybe } from "../../misc"
 import { usePublishersQuery, useResourcesQuery, useSubjectsQuery } from "../../views/Resources/queries"
-import { parse as parseQs } from "qs";
-import useSort from "../../hooks/useSort"
-import useFilter from "../../hooks/useFilter"
 import GenericFilter from "../GenericFilter/GenericFilter"
-import {Grid, Button, makeStyles, Container} from "@material-ui/core"
+import {Grid, Button, makeStyles, Container, useMediaQuery} from "@material-ui/core"
 import Loading from "../Loading"
 import SearchFilter from "../SearchFilter/SearchFilter"
-import { useLocation } from "react-router"
 import PaginateBy from "../PaginateBy"
 import SortResources from "../SortResources/SortResources"
 import { resourceUrl } from "../../views/Resource/urls"
@@ -19,25 +15,96 @@ import GradeFilter from "../GradeFilter/GradeFilter"
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'grid',
-    gridTemplateColumns: "300px 1fr",
-    gridTemplateRows: '250px  minmax(750px, auto)'
+    gridTemplateColumns: "350px 1fr",
+    gridTemplateRows: 'minmax(200px, 300px) minmax(750px, auto)',
+    [theme.breakpoints.down("lg")]: {
+      gridTemplateColumns: "250px 1fr",
+    },
+    [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: "1fr",
+      gridTemplateRows: '275px minmax(750px, auto)',
+      rowGap: theme.spacing(8)
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridTemplateColumns: "300px 1fr",
+    }
   },
   resources: {
-    gridColumn: 2,
-    gridRow: 2
+    gridRow: 2,
+    [theme.breakpoints.down("md")]: {
+      gridColumn: 1,
+    },
+    [theme.breakpoints.up("md")]: {
+      gridColumn: 2,
+    },
   },
   filter: {
     gridColumn: 1,
     gridRow: "1  span 2",
   },
   toolbar: {
-    gridColumn: 2,
     gridRow: 1,
     display: "grid",
-    gridTemplateColumns: "1fr 170px 250px",
-    rowGap: theme.spacing(2),
-    marginLeft: 200,
-    maxHeight: 180
+    [theme.breakpoints.down("lg")]: {
+      gridTemplateColumns: "1fr 150px 250px"
+    },
+    [theme.breakpoints.down("md")]: {
+      gridColumn: 1,
+      gridTemplateColumns: "1fr 1fr",
+      gridTemplateRows: '100px 50px 175px',
+      maxWidth: 700,
+      margin: 'auto'
+    },
+    [theme.breakpoints.up("md")]: {
+      gridColumn: 2,
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridTemplateColumns: "1fr 170px 250px"
+    }
+  },
+  search: {
+    [theme.breakpoints.down("md")]: {
+      gridColumn: '1 / -1',
+      gridRow: 1
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridColumn: 1,
+    },
+  },
+  sort: {
+    [theme.breakpoints.down("md")]: {
+      gridColumn: 1,
+      gridRow: 2,
+      display: "flex",
+      flexFlow: 'row nowrap',
+      justifyContent: "center"
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridColumn: 2,
+    },
+  },
+  pageAmount: {
+    [theme.breakpoints.down("xs")]: {
+      display: 'none'
+    },
+    [theme.breakpoints.down("md")]: {
+      gridColumn: 2,
+      gridRow: 2,
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridColumn: 3,
+    },
+  },
+  grade: {
+    [theme.breakpoints.down("md")]: {
+      gridColumn: '1 / -1',
+      gridRow: 3,
+      marginTop: 25
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridColumn: '1 / -1',
+      gridRow: 0
+    },
   },
   resetBtn: {
     height: 50,
@@ -45,6 +112,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: 0
   }
 }))
+
 
 
 export const ResourcesPage = (props) => {
@@ -63,6 +131,7 @@ export const ResourcesPage = (props) => {
   const [numProducts, setNumProducts] = useState(25)
   const paginate = usePaginator()
   const classes = useStyles()
+  const isTablet = useMediaQuery((theme) => theme.breakpoints.up('md'))
   const paginationState = createPaginationState(numProducts, qs)
   const queryVariables = useMemo(() => ({
         ...paginationState,
@@ -90,7 +159,6 @@ export const ResourcesPage = (props) => {
     publishersData.publishers.edges.map(edge => edge.node), [])
   const subjects = maybe(()=>
     subjectData.subjects.edges.map(edge => edge.node), [])
-  const renderInfoCard = isEmpty(qs)
   const {loadNextPage, loadPreviousPage, pageInfo} = paginate(
     maybe(() => data.resources.pageInfo),
     paginationState,
@@ -100,29 +168,38 @@ export const ResourcesPage = (props) => {
   return(
     <Grid className={classes.root}>
       <div className={classes.toolbar}>
-        <Container>
+        <Container className={classes.search}>
         <SearchFilter
         prevSearchString={maybe(()=>filters.search, "")}
         updateSearchFilter={updateSearchFilter}
         refetch={refetch}
         />
         </Container>
+        <Container className={classes.sort}>
         <SortResources
           handleSortChange ={handleSortChange}
           currentValue={currentValue}
           refetch={refetch}
         />
+        </Container>
+        <Container
+        className={classes.pageAmount}>
         <PaginateBy
           paginateBy={numProducts}
           setPaginateBy={setNumProducts}
         />
+        </Container>
+        <Container
+        className={classes.grade}
+        >
         <GradeFilter
           filters={filters}
           updateGradeFilter={updateGradeFilter}
           refetch={refetch}
         />
+        </Container>
       </div>
-      <div className={classes.resources}>
+      <Container className={classes.resources}>
         <GridItems
         featured={featured}
         itemUrl={resourceUrl}
@@ -131,8 +208,9 @@ export const ResourcesPage = (props) => {
         loadNextPage={loadNextPage}
         items={resources}/>
 
-      </div>
-      <div className={classes.filter}>
+      </Container>
+      {isTablet?
+      <Container className={classes.filter}>
         <GenericFilter
           filterItems={publishers}
           filters={filters}
@@ -157,7 +235,7 @@ export const ResourcesPage = (props) => {
         className={classes.resetBtn}
         >Reset</Button>
         </Grid>
-      </div>
+      </Container>:null}
     </Grid>
   )
 }

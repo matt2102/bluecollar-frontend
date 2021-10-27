@@ -13,12 +13,9 @@ const useStyles = makeStyles(theme => ({
   submitBtn: {
     gridColumn: 2,
     background: theme.palette.primary.main,
-    height: 50,
     color: theme.palette.background.default,
     fontWeight: 400,
-    fontSize: 20,
     textTransform: "none",
-    borderRadius: 25,
     maxWidth: '50%',
     marginLeft: '25%',
     '&:hover':{
@@ -26,6 +23,20 @@ const useStyles = makeStyles(theme => ({
     },
     '&:disabled':{
       background: theme.palette.background.main,
+    },
+    [theme.breakpoints.down("md")]: {
+      height: 40,
+      borderRadius: 20,
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: 32,
+      fontSize: 18,
+      borderRadius: 16,
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: 50,
+      borderRadius: 25,
+      fontSize: 20,
     }
   }
 }))

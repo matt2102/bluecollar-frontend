@@ -135,7 +135,7 @@ export default function Footer(){
     <NewsletterDialog
         className={classes.newsletter}
         data = {data}
-        title= "Newsletter Sign Up"
+        title= "Subscribe"
         open={open}
         onClose = {()=>setModal(false)}
         disabled={false}

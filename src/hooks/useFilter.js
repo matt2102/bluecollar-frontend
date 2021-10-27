@@ -10,12 +10,17 @@ const buildFilters = (qs, fields) => {
       const key = field.toLocaleLowerCase()
       const value = qs[field]
       if((typeof value === "string") && (
-        (key !== "search") && (key !== "gradelevel"))
+        (key !== "search") && (key.toLocaleLowerCase() !== "gradelevel"))
         ){
         filters[key] = [value]
       }else{
+        if(key.toLocaleLowerCase() === "gradelevel"){
+          filters['gradeLevel'] = value
+        }
+        else{
         // value is already array
         filters[key] = value
+      }
       }
 
     }
@@ -92,7 +97,7 @@ export function useFilter(qs, filterFields){
   }
   function updateGradeFilter(grade){
     let newFilters = filters
-    newFilters["gradelevel"] = grade
+    newFilters["gradeLevel"] = grade
     setFilters(newFilters)
     refreshFilterState()
   }

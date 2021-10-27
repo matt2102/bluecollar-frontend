@@ -12,9 +12,21 @@ const useStyles = makeStyles(theme => ({
     gridColumn: 2,
     display: "grid",
     gridTemplateColumns: "1fr 100px",
-    maxWidth: 600,
-    margin: "auto",
+
+    margin: 0,
+    padding: 0,
     marginTop: 20,
+    [theme.breakpoints.down('xs')]: {
+      minWidth: 'none',
+      width: '100%',
+      gridTemplateColumns: "1fr 50px",
+      maxWidth: 250
+    },
+    [theme.breakpoints.up("md")]: {
+      gridTemplateColumns: "1fr 100px",
+      maxWidth: 600,
+      minWidth: 400,
+    }
   },
   formInputLabel: {
     fontSize: 28,
@@ -23,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     textIndent: '5ch',
     paddingLeft: '20px',
-    // background: theme.palette.secondary.light,
     height: '50px',
     position: 'relative',
     background: theme.palette.secondary.light,

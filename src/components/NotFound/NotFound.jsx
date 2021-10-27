@@ -4,7 +4,18 @@ const useStyles = makeStyles( theme => ({
   root: {
     height: "80vh",
     background: theme.palette.secondary.main
+  },
+  title: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: '2rem'
+    }
+  },
+  subtitle: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: '1rem'
+    }
   }
+
 }))
 
 export const NotFound = (props) => {
@@ -17,8 +28,8 @@ export const NotFound = (props) => {
   const classes = useStyles()
   return(
     <Grid container justify="center" direction="column" alignItems="center" className={classes.root}>
-      <Typography variant="h1" color="textSecondary">{title}</Typography>
-      <Typography variant="subtitle1" color="textSecondary">{subtitle}</Typography>
+      <Typography variant="subtitle1" color="textSecondary" className={classes.subtitle}>{subtitle}</Typography>
+      <Typography variant="h1" color="textSecondary" className={classes.title}>{title}</Typography>
       <Button onClick={onClick}
       variant="containedPrimary"
       >{buttonText}</Button>

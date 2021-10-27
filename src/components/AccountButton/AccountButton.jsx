@@ -6,22 +6,48 @@ const useStyles = makeStyles(theme => ({
   },
   formInputLabel: {
     fontSize: 28,
+    [theme.breakpoints.down("md")]: {
+      fontSize: 20,
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 18,
+    },
+    [theme.breakpoints.up("lg")]: {
+      fontSize: 28,
+    }
   },
   formInput: {
     width: '100%',
-    textIndent: '5ch',
-    paddingLeft: '20px',
     background: theme.palette.secondary.light,
-    height: '50px',
-    borderRadius: 25,
     position: 'relative',
+    textDecoration: 'none',
     'label + &': {
       marginTop: theme.spacing(4),
     },
     '&.Mui-focused': {
       borderColor: theme.palette.primary.main,
-      border: '2px solid',
+      // border: '2px solid',
     },
+    '&.MuiInput-underline:after':{
+      border: 0,
+      borderBottom: 'none'
+    },
+    [theme.breakpoints.down("md")]: {
+      height: 40,
+      borderRadius: 20,
+      paddingLeft: 4,
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: 32,
+      borderRadius: 0,
+      paddingLeft: 4,
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: 50,
+      borderRadius: 25,
+      paddingLeft: 20,
+      textIndent: '5ch',
+    }
   },
 }))
 

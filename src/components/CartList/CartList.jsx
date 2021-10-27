@@ -16,28 +16,34 @@ import UpdateCartQty from "../UpdateCartQty/UpdateCartQty"
 const useStyles = makeStyles(theme => ({
   cardGrid: {
     marginTop: theme.spacing(10),
-    // minHeight: '90vh',
     display: "grid",
     gridTemplateColumns: '1fr',
-    // gridAutoRows: '300'
-    rowGap: theme.spacing(10)
+    rowGap: theme.spacing(10),
+    [theme.breakpoints.down('md')]: {
+      marginTop: theme.spacing(8),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: theme.spacing(3),
+      marginRight: theme.spacing(3),
+      marginTop: theme.spacing(5),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: theme.spacing(3),
+      marginRight: theme.spacing(3),
+      marginTop: theme.spacing(3),
+    }
   },
   card: {
     margin: 0,
     background: theme.palette.secondary.light,
-    height: 340
+    height: 340,
+    [theme.breakpoints.down('sm')]: {
+      height: 'auto'
+    }
   },
   myCart: {
     gridColumn: 1,
     marginLeft:  theme.spacing(5)
-  },
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: theme.palette.secondary.light,
-    margin: 20,
-    height: '60vh'
   },
   cardHeader: {
     background: theme.palette.secondary.main,
@@ -56,16 +62,36 @@ const useStyles = makeStyles(theme => ({
   cardContent: {
     display: "grid",
     gridTemplateColumns: '300px 1fr',
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: '250px 1fr',
+    },
+    [theme.breakpoints.down('xs')]: {
+      gridTemplateColumns: '100px 1fr',
+    },
+    [theme.breakpoints.down(400)]: {
+      gridTemplateColumns: '1fr',
+    }
   },
   imgContainer: {
     width: 300,
-    height: 300
+    height: 300,
+    [theme.breakpoints.down('sm')]: {
+      width: 250,
+      height: 250
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: 100,
+      height: 100
+    }
   },
   productDetails: {
     display: "flex",
     flexFlow: "column",
     justifyContent: "space-between",
-    height: 200
+    height: 200,
+    [theme.breakpoints.down('sm')]: {
+      height: 'auto'
+    },
   },
 }))
 
@@ -111,7 +137,7 @@ export const CartList = (props) => {
              qty={qty}
             />
             <Button variant="containedPrimary" onClick={()=>removeItem(v.id)}>
-              Remove From Cart
+              Remove
             </Button>
           </Container>
         </CardContent>

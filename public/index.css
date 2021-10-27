@@ -15,3 +15,14 @@
 a {
   color: #f3cc17
 }
+
+p {
+  font-size: 20px;
+  /* line-height: 9px; */
+  overflow-wrap: anywhere;
+  height: auto;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+}

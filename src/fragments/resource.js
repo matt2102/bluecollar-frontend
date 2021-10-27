@@ -18,5 +18,9 @@ export const fragmentResource = gql`
     }
     gradeLevel
     descriptionJson
+    amazonAffiliateLink
+    externalLink
+    featured
+    triedAndTrue
   }
 `

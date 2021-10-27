@@ -6,7 +6,12 @@ import {useState} from "react"
 const useStyles = makeStyles(theme => ({
   card: {
     background: theme.palette.secondary.main,
-    width: theme.spacing(60),
+    [theme.breakpoints.down('xs')]: {
+      width: 'auto'
+    },
+    [theme.breakpoints.up('ls')]: {
+      width: theme.spacing(60),
+    }
   },
   vSelectorContainer: {
     margin: 'auto'
@@ -20,7 +25,13 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 0,
     margin: 'auto',
     width: theme.spacing(50),
-    height: theme.spacing(15)
+    height: theme.spacing(15),
+    [theme.breakpoints.down('xs')]: {
+      width: '94%'
+    },
+    [theme.breakpoints.up('ls')]: {
+      width: theme.spacing(50),
+    }
   },
   disclaimer: {
     fontStyle: 'italic',

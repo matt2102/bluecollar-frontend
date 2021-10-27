@@ -21,9 +21,7 @@ import {
 
 import Logo from "../../assets/icons/Logo"
 import LogoSlim from "../../assets/icons/LogoSlim"
-import LogoutIcon from "../../assets/icons/Logout_300x300.webp"
-import CartIcon from "../../assets/icons/cart.png"
-import AccountIcon from "../../assets/icons/account_icon_300x300.webp"
+
 
 import { SignInModal } from "../Auth/SignInModal"
 
@@ -34,7 +32,9 @@ import { resourcesPath } from "../../views/Resources/urls"
 import { consultingPath } from "../../views/Consulting/urls"
 import { cartPath } from "../../views/Cart/urls"
 import { coursesPath } from "../../views/Courses/urls"
-import { MenuRounded, PersonOutlineOutlined } from "@material-ui/icons"
+import { MenuRounded } from "@material-ui/icons"
+import AccountButton from "./AccountButton"
+import { programsPath } from "../../views/Programs/urls"
 
 export const useStyles = makeStyles(
   theme => ({
@@ -95,30 +95,14 @@ export const useStyles = makeStyles(
         gridColumn: 2,
         gridRow: 1,
         margin: 'auto',
+        marginLeft: theme.spacing(5)
       },
-    },
-    navButton: {
-      color: theme.palette.secondary.main,
-      padding: 2,
-      margin: 'auto',
-      height: 40,
-      width: 120,
-      fontFamily: theme.typography.h2,
-      '&:hover': {
-        background: 'none',
-        color: theme.palette.green,
-        'text-decoration': 'underline'
-      }
     },
     accountContainer: {
       gridColumn: 3,
-      // width: 'auto',
       [theme.breakpoints.down('md')]: {
         gridColumn: 2,
       },
-      // [theme.breakpoints.up('lg')]: {
-      //   gridColumn: 3,
-      // },
     },
 
     logoutCard: {
@@ -178,7 +162,7 @@ export const Navigation = () => {
     ['Resources', resourcesPath],
     ['Courses', coursesPath],
     ['Consulting', consultingPath],
-    ['Programs', blogPath],
+    ['Programs', programsPath],
     ['Blog', blogPath],
   ]
   const [navButtons, menuItems] = getButtonsAndMenuItems(data, tabletView, phoneView)
@@ -231,57 +215,15 @@ export const Navigation = () => {
           :null}
         </Grid>
         <Grid container className={classes.accountContainer} direction="row" justify="flex-end" wrap='nowrap'>
-          {user.isGuest?
-        <>
-        {phoneView?
-        <IconButton onClick={()=>setModal(true)}>
-          <PersonOutlineOutlined className={classes.accountIcon}/>
-        </IconButton>
-        :
-        <Button variant="containedPrimary"
-          onClick={()=>setModal(true)}>
-          {user.isGuest?"Create Account":"Login"}
-        </Button>
-        }
-        <Card elevation={0} className={classes.cartCard}>
-            <CardActionArea onClick = {()=>navigate(cartPath)}>
-              <CardMedia
-              component={"img"}
-              className={classes.cartIcon}
-              src={CartIcon}/>
-            </CardActionArea>
-        </Card>
-        </>
-        :
-        <>
-        {phoneView?
-        <IconButton onClick={()=>setModal(true)}>
-          <PersonOutlineOutlined className={classes.accountIcon}/>
-        </IconButton>
-        :
-        <Button variant="containedPrimary"
-          onClick={()=>setModal(true)}>
-          {user.isGuest?"Create Account":"Login"}
-        </Button>
-        }
-          <Card elevation={0} className={classes.cartCard}>
-              <CardActionArea onClick = {()=>navigate(cartPath)}>
-                <CardMedia
-                component={"img"}
-                className={classes.cartIcon}
-                src={CartIcon}/>
-              </CardActionArea>
-            </Card>
-          <Card elevation={0} className={classes.logoutCard}>
-            <CardActionArea onClick = {() => signOut()}>
-              <CardMedia
-              component={"img"}
-              className={classes.logoutIcon}
-              src={LogoutIcon}/>
-            </CardActionArea>
-          </Card>
-          </>
-        }
+            <AccountButton
+              isGuest={user.isGuest}
+              openModal={()=>setModal(true)}
+              signOut={signOut}
+              viewCart={()=>navigate(cartPath)}
+              viewAccount={()=>navigate(accountPath)}
+              classes={classes}
+              onPhone={phoneView}
+            />
         </Grid>
         </Toolbar>
     </AppBar>

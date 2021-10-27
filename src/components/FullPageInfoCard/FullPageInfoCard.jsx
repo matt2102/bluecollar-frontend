@@ -12,12 +12,26 @@ const useStyles = makeStyles(theme =>({
     maxWidth: '1600px',
     gridColumn: '1/-1',
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    columnGap: '50px',
+
+    [theme.breakpoints.down('lg')]:{
+      gridTemplateColumns: '1fr 1fr',
+      rowGap: theme.spacing(10),
+    },
+    [theme.breakpoints.down('sm')]:{
+      gridTemplateColumns: '1fr',
+      rowGap: theme.spacing(10),
+    },
+    [theme.breakpoints.up('lg')]:{
+      gridTemplateColumns: "1fr 1fr",
+      columnGap: 50,
+    }
   },
   img: {
     width: '100%',
-    height: 'auto'
+    height: 'auto',
+    [theme.breakpoints.down('sm')]:{
+      display: 'none'
+    },
   },
   card: {
     display: 'flex',
@@ -58,7 +72,8 @@ export default function FullPageInfoCard(props){
     subtitleText,
     bodyText,
     onClick,
-    imageAlt
+    imageAlt,
+    buttonText
   } = props
   const classes = useStyles()
   return(
@@ -68,7 +83,7 @@ export default function FullPageInfoCard(props){
         <Typography className={classes.subtitle} variant="subtitle2" color="secondary">{subtitleText}</Typography>
         <Typography className={classes.body}  variant="body1">{bodyText}</Typography>
         <Button className={classes.cardElement} onClick={()=>onClick()}>
-          Learn More
+         {buttonText}
         </Button>
       </Card>
     </Grid>

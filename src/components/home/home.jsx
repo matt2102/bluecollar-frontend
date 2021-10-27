@@ -18,21 +18,22 @@ import { coursesPath } from "../../views/Courses/urls"
 import { consultingPath } from "../../views/Consulting/urls"
 import FullPageInfoCard from "../FullPageInfoCard/FullPageInfoCard"
 import IconCard from "../IconCard"
+import ThreeCardDisplay from "../ThreeCardDisplay/ThreeCardDisplay"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   grid: {
     paddingTop: 200,
     paddingBottom: 200,
     display: 'grid',
-    gridTemplateColumns: "0.25fr 1fr 1fr 1fr 0.25fr",
-    rowGap: 150
+    gridTemplateColumns: "1fr",
+    rowGap: 150,
   },
   media: {
     minHeight: 100,
     maxHeight: 400,
     width: 200,
   }
-})
+}))
 
 const Home = () => {
   const {addMessage} = useMessages()
@@ -49,37 +50,15 @@ const Home = () => {
         messageType: "success",
         text: "test"
       })}>add message</button>
-      <Grid className={classes.grid}>
-        <IconCard
-          gridColumn={2}
-          image={resourceIcon}
-          subtitleText={'Resources'}
-          bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-          onClick={()=>navigator(resourcesPath)}
-          displayButton={true}
-        />
-        <IconCard
-          gridColumn={3}
-          image={coursesIcon}
-          subtitleText={'Courses and Curricula'}
-          bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-          onClick={()=>navigator(coursesPath)}
-          displayButton={true}
-        />
-        <IconCard
-          gridColumn={4}
-          image={consultingIcon}
-          subtitleText={'Consulting'}
-          bodyText={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-          onClick={()=>navigator(consultingPath)}
-          displayButton={true}
-        />
+      <Grid container className={classes.grid}>
+        <ThreeCardDisplay/>
         <FullPageInfoCard
           image={image}
           subtitleText="Are you a homeschooling parent who is frustrated as you search for curriculum?"
           bodyText="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed."
           onClick={()=>navigator(consultingPath)}
           displayButton={true}
+          buttonText={"Learn More"}
         />
       </Grid>
     </div>

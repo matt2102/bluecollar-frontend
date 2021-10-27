@@ -20,7 +20,16 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: "repeat(3, 1fr)",
     gridTemplateRows: "auto",
     columnGap: "10px",
-    rowGap: "10px"
+    rowGap: "10px",
+    [theme.breakpoints.down("lg")]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    [theme.breakpoints.down("xs")]: {
+      gridTemplateColumns: "1fr",
+    },
+    [theme.breakpoints.up("lg")]: {
+      gridTemplateColumns: "repeat(3, 1fr)",
+    }
   },
   featured: {
     gridColumn: "1/-1",
@@ -52,7 +61,7 @@ export const GridItems = ({
   const classes = useStyles()
   const empty = items.length === 0
   return(
-    <Grid className={classes.root}>
+    <Grid className={classes.root} container>
       {empty?
       <Container className={classes.notFound}>
           <NotFound

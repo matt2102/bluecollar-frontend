@@ -50,6 +50,12 @@ const useStyles = makeStyles(theme =>({
       background: theme.palette.green,
       boxShadow: 'none',
     },
+    [theme.breakpoints.down('md')]: {
+      width: 'auto',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: 'auto',
+    }
   }
 }))
 

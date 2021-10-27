@@ -65,6 +65,9 @@ const theme = createMuiTheme({
       // 6rem
       fontSize: '6rem',
       fontFamily: 'Lobster',
+      '@media (max-width:1200px)': {
+        fontSize: '5.5rem',
+      },
       '@media (max-width:900px)': {
         fontSize: '5rem',
       },
@@ -76,7 +79,20 @@ const theme = createMuiTheme({
       },
     },
     h2: {
-      fontFamily: 'Roboto'
+      fontFamily: 'Roboto',
+      fontSize: '3.75rem',
+      '@media (max-width:900px)': {
+        fontSize: '3.5rem',
+      },
+      '@media (max-width:600px)': {
+        fontSize: '3rem',
+      },
+      '@media (max-width:400px)': {
+        fontSize: '2.75rem',
+      },
+      '@media (max-width:300px)': {
+        fontSize: '2.5rem',
+      },
     },
     h3: {
       // 3rem
@@ -88,6 +104,21 @@ const theme = createMuiTheme({
       },
       '@media (max-width:600px)': {
         fontSize: '2rem',
+      },
+    },
+    h4: {
+      fontSize: "2.125rem",
+      '@media (max-width:900px)': {
+        fontSize: '1.875rem',
+      },
+      '@media (max-width:600px)': {
+        fontSize: '1.375rem',
+      },
+      '@media (max-width:400px)': {
+        fontSize: '1rem',
+      },
+      '@media (max-width:300px)': {
+        fontSize: '0.875rem',
       },
     },
     h5: {
@@ -175,16 +206,16 @@ const theme = createMuiTheme({
         },
       },
       containedSecondary: {
-        background: mainBlue,
+        background: accountPurple,
         height: 50,
         color: '#FFF',
+        width: 200,
         fontWeight: 300,
-        fontSize: 18,
+        fontSize: '1.125rem',
         textTransform: "none",
         borderRadius: 25,
-        maxWidth: '50%',
-        // margin: 'auto'
-        marginLeft: '25%',
+        boxShadow: 'none',
+
         '&:hover':{
           background: '#A5C854',
           color: text
@@ -192,7 +223,19 @@ const theme = createMuiTheme({
         '&:disabled':{
           background: "#311980",
           // cursor: 'not-allowed'
-        }
+        },
+        '@media (max-width:900px)': {
+          height: 40,
+          borderRadius: 40,
+          width: 180,
+          fontSize: '1rem',
+        },
+        '@media (max-width:600px)': {
+          height: 35,
+          borderRadius: 35,
+          width: 170,
+          fontSize: '0.875rem',
+        },
       },
       textPrimary: {
         height: '50px',
@@ -200,10 +243,25 @@ const theme = createMuiTheme({
         width: '200px',
         background: mainBlue,
         color: background,
+        textTransform: 'none',
         '&:hover': {
           background: mainGreen
         }
+      },
+      textSecondary: {
+        color: mainPurple,
+        padding: 2,
+        margin: 0,
+        fontFamily: 'Roboto',
+        fontSize: '1.2em',
+        textTransform: 'none',
+        '&:hover': {
+          background: 'none',
+          color: mainGreen,
+          'text-decoration': 'underline'
+        }
       }
+
     },
     MuiInput: {
       underline: {

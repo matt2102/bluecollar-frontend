@@ -3,14 +3,26 @@ import {makeStyles, Typography} from "@material-ui/core"
 const useStyles = makeStyles(theme => ({
   root: {
     background: "linear-gradient(135deg, rgba(59,183,199,1) 27%, rgba(165,200,84,1) 75%, rgba(243,204,23,1) 100%)",
-    height: 300,
+    // height: 300,
     display: 'flex',
+    [theme.breakpoints.down("lg")]: {
+      height: 250,
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: 300,
+    }
   },
   yellow: {
     background: theme.palette.accent.yellow,
-    height: 400,
     display: 'flex',
-    minWidth: 400,
+    [theme.breakpoints.down("lg")]: {
+      height: 250,
+      width: 250
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: 400,
+      width: 400
+    },
   },
   yellowTitle: {
     color: theme.palette.background.default,
@@ -21,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.background.default,
     margin: 'auto',
     fontSize: 24
-  }
+  },
 }))
 
 export const DefaultImage = ({
