@@ -13,7 +13,6 @@ export const ResourcesView = () => {
   const renderInfoCard = isEmpty(qs)
   const {sortVariables, handleSortChange, currentValue} = useSort(qs, ['GRADE'])
   const {filters, updateFilters, reset, updateSearchFilter, updateGradeFilter} = useFilter(qs, ["publishers", "gradeLevel","search", "featured", "subject"])
-  console.log(filters)
   if(isEmpty(qs) && !isEmpty(filters)){
     reset()
   }

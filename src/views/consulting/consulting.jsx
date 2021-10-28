@@ -19,7 +19,8 @@ export const ConsultingView = () => {
     <div>
       <InfoCard
         heading3="Need More Help?"
-        heading1="Set Up a Consulting Session!"/>
+        heading1="Set Up a Consulting Session!"
+        />
       <Consulting
         data = {consultingProduct}
       />

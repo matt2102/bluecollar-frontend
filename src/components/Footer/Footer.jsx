@@ -6,7 +6,6 @@ import {
   Grid,
   Container,
   ButtonBase,
-  Button,
   useMediaQuery
 } from "@material-ui/core"
 
@@ -62,7 +61,6 @@ const useStyles = makeStyles(theme => ({
   },
   btn: {
     height: '30px',
-    margin: 'auto',
     color: 'white',
     margin: theme.spacing(3),
     marginLeft: 0,

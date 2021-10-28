@@ -1,5 +1,4 @@
 
-import draftToHtml from 'draftjs-to-html';
 import sanitizeHtml from 'sanitize-html';
 import {stateToHTML} from 'draft-js-export-html';
 import { convertFromRaw } from 'draft-js';

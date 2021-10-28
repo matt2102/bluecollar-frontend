@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client"
 import { useDispatch, useSelector } from "react-redux"
-import { useLocation } from "react-router"
 import urlJoin from "url-join"
 import { accountRegisterRedirectUrl } from "../components/Auth/urls"
 import { createTokenMutation, registerAccountMutation } from "../mutations/auth"
@@ -77,7 +76,7 @@ function useUser(){
 
   }
   function tokenRefresh(){
-    console.log("token refresh")
+    // console.log("token refresh")
   }
   function createAccount(data){
     if(data.email && data.password){

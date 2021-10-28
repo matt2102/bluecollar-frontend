@@ -23,26 +23,15 @@ const useStyles = makeStyles(theme => ({
     gridRow: "1 / -1"
   },
   billing: {
-    // gridColumn: 1,
     margin: 'auto',
-    // marginTop: 0,
-    // width: '100%',
-    // marginTop: theme.spacing(5),
-    // marginBottom: theme.spacing(5)
   },
   payment: {
-    // gridColumn: 1,
     margin: 'auto',
-    // marginLeft: 0,
-    // width: '100%',
-    // marginTop: theme.spacing(5),
-    // marginBottom: theme.spacing(5)
   }
 }))
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
-export const CheckoutPage = (props) => {
-  const {loading, setLoading} = props
+export const CheckoutPage = () => {
   const {
     completeCheckout,
     token,

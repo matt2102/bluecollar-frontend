@@ -39,13 +39,14 @@ function useCheckout(){
   reference the checkout object later
 
   */
-  const {data, loading:lo} = useUserCheckout({})
+  const {data} = useUserCheckout({})
   const dispatch = useDispatch()
   const navigator = useNavigator()
   const {addMessage} = useMessages()
   const {user} = useUser()
   const localCheckout = useSelector(state => state?.checkout?.checkout)
   const [isLoading, setLoading] = useState(false)
+  const [triggerSync, setTriggerSync] = useState(false)
   const [serverCheckout, setServerCheckout] = useState(null)
   const [lastDeleted, setLastDeleted] = useState("")
   const [token, setToken] = useState(localCheckout.displayData?.token || "")
@@ -181,9 +182,7 @@ function useCheckout(){
     }
 
   }
-  const [createCheckout, {
-    loading: l
-  }] = useMutation(checkoutCreateMutation, {
+  const [createCheckout] = useMutation(checkoutCreateMutation, {
     onCompleted: handleCreatedCheckout,
     onError: handleApolloError
   })
@@ -442,10 +441,10 @@ function useCheckout(){
     const r = localCheckout.displayData?.lines || [] //remote
     const ch = maybe(() => data.me.checkout, null)
     const remote = []
-    r.map(l => {remote.push({
+    r.map(l => (remote.push({
       variantId: l.variant.id,
       quantity: l.quantity
-    })})
+    })))
 
     function checkLines(arr1, arr2){
       // checks arr1 against arr2
@@ -461,9 +460,9 @@ function useCheckout(){
         }
       }
       const arr2Ids = new Set()
-      arr2.map(i => {arr2Ids.add(i.variantId)})
+      arr2.map(i => (arr2Ids.add(i.variantId)))
       const arr1Ids = new Set()
-      arr1.map(i => {arr1Ids.add(i.variantId)})
+      arr1.map(i => (arr1Ids.add(i.variantId)))
       arr1.forEach(i => {
         const id = i.variantId
         const qty = i.quantity
@@ -491,7 +490,7 @@ function useCheckout(){
     }
     // console.log('local', local)
     // console.log('remote', remote)
-    console.log('remote -> local', checkLines(remote, local))
+    // console.log('remote -> local', checkLines(remote, local))
     // console.log('local -> remote', checkLines(local, remote))
     function remoteMaster(){
       // change the local state to match the remote (server) state
@@ -514,10 +513,18 @@ function useCheckout(){
           idSet: toDelete
         })
       }
+      if(toUpdate.size > 0){
+        // TODO implement this logic
+        // dispatch({
+        //   type: 'REMOVE_ITEMS',
+        //   idSet: toDelete
+        // })
+      }
     }
     function localMaster(){
       // change the remote (server) state to match the local state
-      const {toCreate, toDelete, toUpdate} = checkLines(local, remote)
+      // const {toCreate, toDelete, toUpdate} = checkLines(local, remote)
+      return null
     }
 
     return{
@@ -527,6 +534,11 @@ function useCheckout(){
   }
   const {remoteMaster} = sync()
   remoteMaster()
+  if(triggerSync){
+    saveCheckoutLocally(data.me.checkout)
+    remoteMaster()
+    setTriggerSync(false)
+  }
   useEffect(()=> {
     if(
       (!!data?.me?.checkout?.id) && // server returns a checkout obj
@@ -536,10 +548,9 @@ function useCheckout(){
         )
       ){
         // add to local state
-        saveCheckoutLocally(data.me.checkout)
-        remoteMaster()
+        setTriggerSync(true)
     }
-  }, [data, lo, token])
+  }, [data, localCheckout, token, triggerSync, setTriggerSync])
 
 
   useEffect(()=> {

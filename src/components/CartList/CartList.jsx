@@ -101,7 +101,7 @@ export const CartList = (props) => {
     items,
     checkout
   } = props
-  const {removeItem, updateItemQty} = useCheckout()
+  const {removeItem} = useCheckout()
   const classes = useStyles()
   return(
   <Grid className={classes.cardGrid}>

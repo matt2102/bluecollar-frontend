@@ -1,4 +1,4 @@
-import { makeStyles, Grid, Card, Typography, CardMedia, Container } from "@material-ui/core"
+import { makeStyles, Grid} from "@material-ui/core"
 import AboutPage from "../../components/AboutPage"
 import InfoCard from "../../components/InfoCard"
 

@@ -1,24 +1,15 @@
-import useMessages from "../../hooks/useMessages"
-import { SignIn } from "../Auth/views/SignIn/SignIn"
 import InfoCard from "../InfoCard"
 import {
   Grid,
   makeStyles,
 } from "@material-ui/core"
 
-import resourceIcon from "../../assets/media/resources_icon.webp"
-import consultingIcon from "../../assets/media/consulting_icon.webp"
-import coursesIcon from "../../assets/media/courses_icon.webp"
-
 import image from "../../assets/media/home.webp"
 
-import useNavigator from "../../hooks/useNavigator"
-import { resourcesPath } from "../../views/Resources/urls"
-import { coursesPath } from "../../views/Courses/urls"
-import { consultingPath } from "../../views/Consulting/urls"
 import FullPageInfoCard from "../FullPageInfoCard/FullPageInfoCard"
-import IconCard from "../IconCard"
 import ThreeCardDisplay from "../ThreeCardDisplay/ThreeCardDisplay"
+import {homeFullPageInfo, homeInfoCard} from "../../content"
+import img from "../../assets/media/home-girl-transparent.webp"
 
 const useStyles = makeStyles(theme => ({
   grid: {
@@ -36,29 +27,24 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Home = () => {
-  const {addMessage} = useMessages()
   const classes = useStyles()
-  const navigator = useNavigator()
   return(
     <div>
       <InfoCard
-        heading1='Homeschooling Excellence'
-        heading3='A Different Kind of'
+        heading1={homeInfoCard.heading1}
+        heading3={homeInfoCard.heading3}
+        body={homeInfoCard.body}
+        img={img}
       />
-      <SignIn/>
-      <button onClick={()=>addMessage({
-        messageType: "success",
-        text: "test"
-      })}>add message</button>
       <Grid container className={classes.grid}>
         <ThreeCardDisplay/>
         <FullPageInfoCard
           image={image}
-          subtitleText="Are you a homeschooling parent who is frustrated as you search for curriculum?"
-          bodyText="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed."
-          onClick={()=>navigator(consultingPath)}
+          subtitleText={homeFullPageInfo.subtitle}
+          bodyText={homeFullPageInfo.body}
+          onClick={()=>window.open("https://www.facebook.com/groups/496763804008415")}
           displayButton={true}
-          buttonText={"Learn More"}
+          buttonText={"Join us on Facebook"}
         />
       </Grid>
     </div>

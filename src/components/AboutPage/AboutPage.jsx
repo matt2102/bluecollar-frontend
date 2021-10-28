@@ -1,4 +1,4 @@
-import {Typography,Grid, Card, CardMedia, makeStyles, useMediaQuery, Container} from "@material-ui/core"
+import {Typography,Grid, Card, CardMedia, makeStyles, useMediaQuery} from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
 
@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
     gridTemplateRows: 'auto',
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(15),
-    display: 'grid',
     gridTemplateColumns: '350px minmax(30ch, 60ch)',
     [theme.breakpoints.down('xs')]:{
       gridTemplateColumns: '1fr',
@@ -22,9 +21,6 @@ const useStyles = makeStyles(theme => ({
     gridColumn: 1,
     gridRow: '1 / 5'
   },
-  // image: {
-  //   gridColumn: 1,
-  // },
   text: {
     textIndent: '4ch',
     gridColumn: 2,
@@ -90,7 +86,7 @@ export const AboutPage = () => {
         <Typography align="center">The LaJoy's</Typography>
       </Card>:null}
       <Typography className={classes.text}>Through working with her own children as well as others, Cindy has developed a breadth of expertise and worked one-on-one with individuals, both as a homeschooler and as a certified job coach.  She has experience working with those with a wide variety of learning challenges including Fetal Alcohol Spectrum Disorder, Autism, Reactive Attachment Disorder, ADHD, Auditory Processing Disorder, short and long term memory issues, Sensory Integration Disorder, Dysgraphia, Dyscalculia, slow processing speed, and unspecified developmental delay.  She is a highly sought-after speaker who has been featured on numerous podcasts and homeschool, special needs, and adoption panels.  Cindy has also been a contributing author to two homeschooling books, and is co-author with Natalie Vecchione of her own
-      book, <a className={classes.link} href={amazonBookLink} target="_blank"> Blazing New Homeschool Trails:  Educating and Launching Teens with Developmental Disabilities.  </a>
+      book, <a className={classes.link} href={amazonBookLink} rel="noreferrer" target="_blank"> Blazing New Homeschool Trails:  Educating and Launching Teens with Developmental Disabilities.  </a>
 
        She is a Special Needs Academic Advisor and educator with True North Homeschool Academy.  Cindy is particularly gifted at researching appropriate and unique resources that are tailor-made for specific learners.  She also delights in brainstorming cross-curricular project-based learning opportunities based on an individual’s particular interests.</Typography>
       <Typography className={classes.text}>In her spare time she enjoys singing in church choir, reading until the wee hours of the morning, and is currently pursuing ordination as an interfaith minister.</Typography>

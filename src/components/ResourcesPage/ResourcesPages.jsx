@@ -140,7 +140,7 @@ export const ResourcesPage = (props) => {
           ...filters},
         sort: sortVariables
       }),
-    [sortVariables, filters, paginationState, qs]
+    [sortVariables, filters, paginationState, featured]
   )
   const {data, loading, refetch} = useResourcesQuery({
     variables: queryVariables

@@ -20,6 +20,7 @@ import DescriptionJson from "../../components/DescriptionJson/DescriptionJson";
 import VariantSelector from "../../components/VariantSelector/VariantSelector";
 import {useState} from "react"
 import useCheckout from "../../hooks/useCheckout";
+import TrueNorthCard from "../../components/TrueNorthCard/TrueNorthCard";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -129,7 +130,7 @@ const useStyles = makeStyles(theme => ({
 
 export const CourseView = () => {
   const location = useLocation()
-  const {addItem, checkout} = useCheckout()
+  const {addItem} = useCheckout()
   const [variantId, setSelected] = useState()
   const qs = parseQs(location.search.substr(1));
   const {addMessage} = useMessages()
@@ -149,6 +150,7 @@ export const CourseView = () => {
   const image = maybe(() => data.product.images[0].url, "")
   const product = data.product
   const hasVariants = data.product.variants.length > 0
+  const isTrueNorth = product.externalPurchaseUrl.indexOf("truenorthhomeschoolacademy") > 0
   return(
     <div className={classes.root}>
     <Grid className={classes.grid}>
@@ -184,6 +186,8 @@ export const CourseView = () => {
         />
         </Container>:null
         }
+        {isTrueNorth?
+        <TrueNorthCard/>:null}
         {product.descriptionJson?
         <Container className={classes.text}>
           <DescriptionJson descriptionJson={product.descriptionJson}/>

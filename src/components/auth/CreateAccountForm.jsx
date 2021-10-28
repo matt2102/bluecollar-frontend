@@ -41,10 +41,12 @@ export const CreateAccountForm = (props) => {
   }
   const onSubmit = () => {
     const {requiresConfirmation, errors} = createAccount(formData)
-    console.log(errors)
     setDisplayCheckEmail(requiresConfirmation)
     if(isModal){
       onClose()
+    }
+    if(errors){
+      // TODO log errors
     }
 
 

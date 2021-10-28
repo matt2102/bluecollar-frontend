@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core"
 
 import {
-  CardElement as StripeCardElement,
   useStripe,
   useElements,
   CardNumberElement,

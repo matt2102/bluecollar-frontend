@@ -62,7 +62,6 @@ export const CartView = () => {
   const classes = useStyles()
   const navigator = useNavigator()
   const {checkout} = useCheckout()
-  console.log(checkout)
   const ids = checkout.lines.map(l => l.variantId || l.variant.id || l.id)
   const {data, loading} = useVariantsDetails({
     variables: {

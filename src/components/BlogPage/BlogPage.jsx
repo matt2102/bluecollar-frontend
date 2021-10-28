@@ -3,7 +3,6 @@ import usePaginator, { createPaginationState } from "../../hooks/usePaginator"
 import useSort from "../../hooks/useSort"
 import { useBlogPostsQuery } from "../../views/Blog/queries"
 import { parse as parseQs } from "qs";
-import { useState } from "react";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 import useFilter from "../../hooks/useFilter";
 import { maybe } from "../../misc";

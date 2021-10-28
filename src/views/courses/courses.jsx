@@ -24,6 +24,8 @@ import GenericFilter from "../../components/GenericFilter/GenericFilter"
 import GridItems from "../../components/GridItems"
 import { courseUrl } from "../Course/urls"
 import SortProducts from "../../components/SortProducts/SortProducts"
+import { coursesInfoCard } from "../../content"
+import img from "../../assets/media/courses_boy_transparent.webp"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -153,7 +155,9 @@ export const CoursesView = () => {
   return(
     <>
       <InfoCard
-        heading1="Our Courses and Curricula"
+        heading1={coursesInfoCard.heading1}
+        body={coursesInfoCard.body}
+        img={img}
       />
    <Grid className={classes.root} container>
       <div className={classes.toolbar}>

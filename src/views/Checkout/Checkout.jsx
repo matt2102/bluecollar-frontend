@@ -3,9 +3,7 @@ import {
   Grid,
   Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
-import { useState } from "react"
 import CheckoutPage from "../../components/CheckoutPage/CheckoutPage"
-import Loading from "../../components/Loading"
 import SignInPage from "../../components/SignInPage/SignInPage"
 import useUser from "../../hooks/useUser"
 
@@ -22,7 +20,6 @@ const useStyles = makeStyles(theme => ({
 export const CheckoutView = () => {
   const {user} = useUser()
   const classes = useStyles()
-  const [loading, setLoading] = useState(false)
   return(
     <Grid className={classes.grid}>
       <Typography variant="h2">Checkout</Typography>
@@ -31,10 +28,7 @@ export const CheckoutView = () => {
           user.isGuest?
           <SignInPage/>
           :
-          <CheckoutPage
-          loading={loading}
-          setLoading={setLoading}
-          />
+          <CheckoutPage/>
         }
       </Container>
     </Grid>

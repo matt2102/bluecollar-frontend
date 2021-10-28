@@ -2,11 +2,10 @@ import { Typography, Grid, Container, Button,CardMedia, makeStyles, Tooltip } fr
 import { getGradeLevel } from "../../utils"
 import { getImage, maybe } from "../../misc"
 import { useResourceQuery } from "../../views/Resource/queries"
-import {CheckCircle, Cancel, Info} from "@material-ui/icons"
+import {CheckCircle, Cancel} from "@material-ui/icons"
 import Loading from "../Loading"
 import DefaultImage from "../DefaultImage"
 import { resourcesPath } from "../../views/Resources/urls"
-import { urlEncode } from "@sentry/utils"
 import useNavigator from '../../hooks/useNavigator'
 import { ResourceAttribute } from "./ResourceAttribute"
 import DescriptionJson from "../DescriptionJson/DescriptionJson"
@@ -108,12 +107,14 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '60ch',
     gridColumn: 2,
     gridRow: '2 / -1',
+    marginLeft: theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
       maxWidth: 'none',
     },
     [theme.breakpoints.down("xs")]: {
       gridColumn: 1,
-      gridRow: 3
+      gridRow: 3,
+      marginLeft: theme.spacing(0),
     },
   },
   affiliates: {
@@ -220,7 +221,7 @@ export const ResourcePage = (props) => {
       />
       <ResourceAttribute
         attribute="Grade"
-        name={g}
+        name={g.name.full}
         id={r.gradeLevel}
         onClick={searchByGrade}
       />
@@ -246,7 +247,7 @@ export const ResourcePage = (props) => {
             }
             </div>
             <Typography variant="body2" color="primary" className={classes.headerItem}>{r.publisher.name}</Typography>
-            <Typography variant="body2" color="primary" className={classes.headerItem}>{g}</Typography>
+            <Typography variant="body2" color="primary" className={classes.headerItem}>{g.name.short}</Typography>
 
         </Grid>
       </Grid>

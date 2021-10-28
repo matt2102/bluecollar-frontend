@@ -1,10 +1,8 @@
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core"
-import { homePath } from "../../views/Home/urls"
 import IconCard from "../IconCard"
 
-import resourceIcon from "../../assets/media/resources_icon.webp"
-import consultingIcon from "../../assets/media/consulting_icon.webp"
-import coursesIcon from "../../assets/media/courses_icon.webp"
+import { ConsultingCard } from "./ConsultingCard"
+import { consulting30Min, consulting60Min, consultingMonthlySupportPlan } from "../../content"
 
 const useStyles = makeStyles(theme => ({
   grid: {
@@ -33,16 +31,57 @@ const useStyles = makeStyles(theme => ({
     gridRow: 1,
     gridColumn: '1 /-1'
   },
+  root1: {
+    background: theme.palette.secondary.light
+  },
+  title1: {
+    color: theme.palette.secondary.main
+  },
+  text1: {
+    color: theme.palette.text.main
+  },
+  btn1: {
+    margin: 'auto',
+    marginBottom: theme.spacing(2)
+  },
+  root2: {
+    background: theme.palette.secondary.main
+  },
+  title2: {
+    color: theme.palette.green
+  },
+  text2: {
+    color: theme.palette.text.secondary
+  },
+
+  root3: {
+    background: theme.palette.primary.main
+  },
+  title3: {
+    color: theme.palette.accent.yellow
+  },
+  text3: {
+    color: theme.palette.text.secondary
+  },
+  btn3: {
+    background: theme.palette.secondary.main,
+    margin: 'auto',
+    marginBottom: theme.spacing(2)
+  },
+
   card1: {
+    maxWidth: 400,
     [theme.breakpoints.down('lg')]:{
       gridColumn: 1
     },
 
     [theme.breakpoints.up('lg')]:{
       gridColumn: 2
-    }
+    },
+
   },
   card2: {
+    maxWidth: 400,
     [theme.breakpoints.down('lg')]:{
       gridColumn: 2
     },
@@ -54,6 +93,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   card3: {
+    maxWidth: 400,
     [theme.breakpoints.down('lg')]:{
       gridColumn: '1 / -1',
       gridRow: 0,
@@ -73,8 +113,59 @@ export const ConsultingDetails = (props) => {
     subtitleText,
     bodyText
   } = props
+  const icons = false
   const classes = useStyles()
   return(
+    <>
+    <Grid className={classes.grid}>
+      <Container className={classes.container}>
+        <Typography variant="subtitle2" color="secondary" align="center">{subtitleText}</Typography>
+        <Typography variant="body1" align="center">{bodyText}</Typography>
+      </Container>
+      <Container className={classes.card1}>
+        <ConsultingCard
+          time={consulting30Min.time}
+          name={consulting30Min.name}
+          benefitsArray={consulting30Min.benefits}
+          onClick={()=>{}}
+          classes={{
+            root: classes.root1,
+            title: classes.title1,
+            text: classes.text1,
+            btn: classes.btn1
+          }}
+        />
+      </Container>
+      <Container  className={classes.card2}>
+      <ConsultingCard
+          time={consulting60Min.time}
+          name={consulting60Min.name}
+          benefitsArray={consulting60Min.benefits}
+          onClick={()=>{}}
+          classes={{
+            root: classes.root2,
+            title: classes.title2,
+            text: classes.text2,
+            btn: classes.btn1
+          }}
+        />
+        </Container>
+        <Container  className={classes.card3}>
+        <ConsultingCard
+          time={consultingMonthlySupportPlan.time}
+          name={consultingMonthlySupportPlan.name}
+          benefitsArray={consultingMonthlySupportPlan.benefits}
+          onClick={()=>{}}
+          classes={{
+            root: classes.root3,
+            title: classes.title3,
+            text: classes.text3,
+            btn: classes.btn3
+          }}
+        />
+        </Container>
+    </Grid>
+    {icons?
     <Grid className={classes.grid}>
       <Container className={classes.container}>
         <Typography variant="subtitle2" color="secondary" align="center">{subtitleText}</Typography>
@@ -82,32 +173,24 @@ export const ConsultingDetails = (props) => {
       </Container>
       <Container className={classes.card1}>
         <IconCard
-            image={consultingIcon}
-            subtitleText={'Consulting'}
-            bodyText={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-            onClick={()=>navigator(homePath)}
-            displayButton={false}
-          />
+            subtitleText={"Collaboration"}
+            bodyText={"Cindy can be your personal homeschool partner so you are no longer alone!"}
+        />
       </Container>
       <Container  className={classes.card2}>
-      <IconCard
-          image={resourceIcon}
-          subtitleText={'Resources'}
-          bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-          onClick={()=>navigator(homePath)}
-          displayButton={false}
-        />
+        <IconCard
+              subtitleText={"Customized Recommendations"}
+              bodyText={"Cindy listens deeply and brings her years of experience to help you choose curriculum, classes, or projects best suited to your child's strengths, weaknesses, and interests."}
+          />
         </Container>
         <Container  className={classes.card3}>
           <IconCard
-            image={coursesIcon}
-            subtitleText={'Courses and Curricula'}
-            bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
-            onClick={()=>navigator(homePath)}
-            displayButton={false}
+              subtitleText={"Coaching"}
+              bodyText={"Cindy is the quintessential parent educator who can guide you to become the teacher your child needs."}
           />
         </Container>
-    </Grid>
+    </Grid>    :null}
+    </>
   )
 }
 

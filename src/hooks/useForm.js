@@ -36,15 +36,15 @@ function merge(
   );
 }
 
-function handleRefresh(
-  data,
-  newData,
-  setChanged
-) {
-  if (isEqual(data, newData)) {
-    setChanged(false);
-  }
-}
+// function handleRefresh(
+//   data,
+//   newData,
+//   setChanged
+// ) {
+//   if (isEqual(data, newData)) {
+//     setChanged(false);
+//   }
+// }
 
 function useForm(
   initial,
@@ -79,7 +79,7 @@ function useForm(
     const { name, value } = event.target;
 
     if (!(name in data)) {
-      console.error(`Unknown form field: ${name}`);
+      // console.error(`Unknown form field: ${name}`);
       return;
     } else {
       if (data[name] !== value) {

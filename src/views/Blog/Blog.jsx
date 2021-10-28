@@ -1,4 +1,3 @@
-import { parse } from "qs"
 import { Route, Switch } from "react-router"
 import BlogPage from "../../components/BlogPage"
 import BlogPostPage from "../../components/BlogPostPage/BlogPostPage"

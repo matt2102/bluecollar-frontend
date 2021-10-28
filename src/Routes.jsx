@@ -33,6 +33,7 @@ import { coursesPath } from "./views/Courses/urls"
 import { coursePath } from "./views/Course/urls"
 import { checkoutPath } from "./views/Checkout/urls"
 import {programsPath} from "./views/Programs/urls"
+import { Banner } from "./components/Banner"
 
 
 
@@ -41,6 +42,7 @@ export const Routes = () => {
     <>
     <Messages/>
     <Navigation/>
+    <Banner/>
     <Switch>
       <HomeView exact path={homePath}/>
       <AccountView path={accountPath}/>

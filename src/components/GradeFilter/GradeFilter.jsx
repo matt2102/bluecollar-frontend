@@ -1,6 +1,5 @@
-import { Grid, Button, Typography, makeStyles, useMediaQuery,Container } from "@material-ui/core"
+import { Grid, Button, Typography, makeStyles, useMediaQuery } from "@material-ui/core"
 import { maybe } from "../../misc"
-// import { useStyles } from "../Navigation/Navigation"
 
 const grades = [
   {
@@ -75,13 +74,13 @@ export const GradeFilter = (props) => {
         }
         if(selected === g.value){
           return(
-            <Button value={g.value} key={g.name} variant="containedPrimary"
+            <Button value={g.value} key={'selected-'+g.name} variant="containedPrimary"
             disabled className={classes.btn}
             >{name}</Button>
           )
         }
         return(
-          <Button value={g.value} key={g.name} variant="containedPrimary"
+          <Button value={g.value} key={'non-selected-'+g.name} variant="containedPrimary"
           onClick={()=>updateGradeFilter(g.value)}  className={classes.btn}
           >{name}</Button>
         )

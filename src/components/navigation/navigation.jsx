@@ -6,9 +6,6 @@ import {
   AppBar,
   Button,
   makeStyles,
-  Card,
-  CardActionArea,
-  CardMedia,
   Grid,
   Toolbar,
   IconButton,
@@ -186,6 +183,7 @@ export const Navigation = () => {
           {navButtons.map(i => {
             return(
             <Button variant="textSecondary"
+              key={i[0]}
               onClick={()=>navigate(i[1])}>
               {i[0]}
             </Button>

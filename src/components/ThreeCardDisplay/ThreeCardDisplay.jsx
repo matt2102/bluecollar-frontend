@@ -1,5 +1,5 @@
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core"
-import { homePath } from "../../views/Home/urls"
+import {homeResourcesCard, homeCoursesCard, homeConsultingCard} from "../../content"
 import IconCard from "../IconCard"
 import { resourcesPath } from "../../views/Resources/urls"
 import { coursesPath } from "../../views/Courses/urls"
@@ -91,7 +91,7 @@ export const ThreeCardDisplay = (props) => {
       <IconCard
               image={resourceIcon}
               subtitleText={'Resources'}
-              bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
+              bodyText={homeResourcesCard}
               onClick={()=>navigator(resourcesPath)}
               displayButton={true}
             />
@@ -100,7 +100,7 @@ export const ThreeCardDisplay = (props) => {
       <IconCard
             image={coursesIcon}
             subtitleText={'Courses and Curricula'}
-            bodyText={' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
+            bodyText={homeCoursesCard}
             onClick={()=>navigator(coursesPath)}
             displayButton={true}
             />
@@ -110,7 +110,7 @@ export const ThreeCardDisplay = (props) => {
               gridColumn={4}
               image={consultingIcon}
               subtitleText={'Consulting'}
-              bodyText={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum veritatis ab, minus esse, quas in, a cumque ratione quasi commodi voluptatibus officia sed.'}
+              bodyText={homeConsultingCard}
               onClick={()=>navigator(consultingPath)}
               displayButton={true}
             />

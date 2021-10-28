@@ -1,11 +1,9 @@
 import {Button, Grid, makeStyles} from "@material-ui/core"
-import useAddress from "../../hooks/useAddress"
 import { maybe } from "../../misc"
 import React from "react"
 import AccountButton from "../AccountButton/AccountButton"
 import StateSelector from "../StateSelector/StateSelector"
 import AddressEditForm from "./form"
-import useCheckout, {enums} from "../../hooks/useCheckout"
 
 
 const UPDATE = "UPDATE"

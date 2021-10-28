@@ -1,4 +1,4 @@
-import { Button, Container, Grid } from "@material-ui/core"
+import { Button, Container } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
 import { useState } from "react"
 import useCheckout from "../../hooks/useCheckout"
@@ -13,7 +13,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex'
   },
   button: {
-    // margin: 0,
     margin: 'auto',
     width: 250
   },
@@ -57,7 +56,6 @@ export const CheckoutAddressCard = (props) => {
           address = {address}
           title = {addressTitle}
           isChildOfCheckout = {true}
-          isChildOfCheckout={true}
           onSubmit={onSubmit}
         />
       </Container>
