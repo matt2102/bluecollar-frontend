@@ -30,7 +30,7 @@ store.subscribe(() => {
 
 const linkConfig = {
   credential: "include",
-  uri: "http://127.0.0.1:8000/graphql/"
+  uri: process.env.REACT_APP_URI
 }
 
 const uploadLink = createUploadLink(linkConfig)
