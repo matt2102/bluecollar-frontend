@@ -1,10 +1,11 @@
 import { Grid, makeStyles } from "@material-ui/core"
-import { Switch } from "react-router"
+import { Route, Switch } from "react-router"
 import { Billing } from "../../components/Billing"
 import AccountInfo from "../../components/AccountInfo"
 import AccountSideBar from "../../components/AccountSidebar"
-import { accountAddressPath, accountBillingPath } from "./urls"
+import { accountAddressPath, accountBillingPath, accountPasswordReset, accountPath } from "./urls"
 import Addresses from "../../components/Addresses"
+import { PasswordReset } from "../../components/PasswordReset"
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -13,7 +14,7 @@ const useStyle = makeStyles(theme => ({
   }
 }),{name: "Account"})
 
-export const AccountView = () => {
+export const Account = () => {
   const classes = useStyle()
   return(
     <Grid className={classes.root}>
@@ -24,6 +25,21 @@ export const AccountView = () => {
       <AccountInfo/>
     </Switch>
     </Grid>
+  )
+}
+
+export const ResetPassword = () => {
+  return(
+    <PasswordReset/>
+  )
+}
+
+export const AccountView = () => {
+  return(
+    <Switch>
+      <Route path={accountPasswordReset} component={ResetPassword}/>
+      <Route path={accountPath} component={Account}/>
+    </Switch>
   )
 }
 

@@ -3,9 +3,12 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  IconButton } from "@material-ui/core"
+  IconButton,
+  Button} from "@material-ui/core"
 import { SignInForm } from "./SignInForm"
 import {Close} from "@material-ui/icons"
+import { useState } from "react"
+import { ForgotPasswordForm } from "./ForgotPasswordForm"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const SIGN_IN = "SIGN_IN"
+const FORGOT_PASSWORD = "FORGOT_PASSWORD"
+const CREATE_ACCOUNT = "CREATE_ACCOUNT"
+
 export const SignInModal = (props) => {
   const {
     open,
@@ -31,6 +38,22 @@ export const SignInModal = (props) => {
     onClose
   } = props
   const classes = useStyles()
+  const [view, setView] = useState(SIGN_IN)
+  const btns = [
+    {
+      view: SIGN_IN,
+      text: "Sign In",
+    },
+    {
+      view: FORGOT_PASSWORD,
+      text: "Forgot Password",
+    },
+    {
+      view: CREATE_ACCOUNT,
+      text: "Create Account",
+    },
+  ]
+  const activeButton = btns.filter(b => (b.view === view))[0]
   return(
     <Dialog
       aria-labelledby="sign-in-modal"
@@ -40,16 +63,31 @@ export const SignInModal = (props) => {
       className={classes.root}
       >
       <DialogTitle id="sign-form-dialog-title" className={classes.title}>
-      Sign In
+      {activeButton.text}
         <IconButton onClick={onClose} className={classes.closeBtn}>
           <Close/>
         </IconButton>
       </DialogTitle>
       <DialogContent>
-      <SignInForm
-        disabled={disabled}
-        onClose={onClose}
+        {view === SIGN_IN?
+        <SignInForm
+          disabled={disabled}
+          onClose={onClose}
+        />:null}
+        {view === FORGOT_PASSWORD?
+        <ForgotPasswordForm
+          disabled={disabled}
+          onClose={onClose}
         />
+        :null}
+        {btns.map(b => {
+          if(b.view === view){
+            return null
+          }
+          return(
+            <Button key={b.view} onClick={()=>setView(b.view)}>{b.text}</Button>
+          )
+        })}
       </DialogContent>
 
     </Dialog>

@@ -41,3 +41,46 @@ export const registerAccountMutation = gql`
   }
 }
 `
+
+export const requestPasswordResetMutation = gql`
+  ${accountErrorFragment}
+  mutation requestPasswordReset(
+    $email: String!
+    $redirectUrl: String!
+  ){
+    requestPasswordReset(
+      email: $email,
+      redirectUrl: $redirectUrl
+    ){
+      errors: accountErrors{
+      ...AccountErrorFragment
+    }
+  }
+}
+`
+
+export const setPasswordMutation = gql`
+ ${accountErrorFragment}
+ ${fragmentUser}
+mutation SetPassword(
+  $email: String!
+  $token: String!
+  $password: String!
+){
+  setPassword(
+    email: $email
+    token: $token
+    password: $password
+  ){
+    user{
+      ...AuthUser
+    }
+    refreshToken
+    token
+    errors: accountErrors{
+      ...AccountErrorFragment
+    }
+  }
+}
+
+`

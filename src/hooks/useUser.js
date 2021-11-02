@@ -2,7 +2,8 @@ import { useMutation } from "@apollo/client"
 import { useDispatch, useSelector } from "react-redux"
 import urlJoin from "url-join"
 import { accountRegisterRedirectUrl } from "../components/Auth/urls"
-import { createTokenMutation, registerAccountMutation } from "../mutations/auth"
+import { createTokenMutation, registerAccountMutation, requestPasswordResetMutation, setPasswordMutation } from "../mutations/auth"
+import { accountPasswordReset } from "../views/Account/urls"
 import { homePath } from "../views/Home/urls"
 import useMessages from "./useMessages"
 import useNavigator from "./useNavigator"
@@ -44,6 +45,28 @@ function useUser(){
       return true
     }
   }
+  function handlePasswordReset(data){
+    if(data.requestPasswordReset.errors.length > 0){
+      data.requestPasswordReset.errors.forEach(error => {
+        addMessage({messageType: "error", text: `Unable to Send Password Reset Email: ${error.code}`})
+      })
+    }
+  }
+  function handlePasswordSet(data){
+    if(data.setPassword.errors.length > 0){
+      data.setPassword.errors.forEach(error => {
+        addMessage({messageType: "error", text: `Password not reset: ${error.code}`})
+      })
+    } else {
+      dispatch({
+        type: "SIGN_IN",
+        data: Object.assign(
+          {},
+          data.setPassword.user,
+          {token: data.setPassword.token, refreshToken: data.setPassword.refreshToken})
+    })
+    }
+  }
 
   const [createToken, {
     data:createTokenData,
@@ -60,7 +83,18 @@ function useUser(){
         onCompleted: handleAccountRegister
       }
     )
-
+  const [
+    setPassword
+  ] = useMutation(
+    setPasswordMutation, {
+      onCompleted: handlePasswordSet
+    }
+  )
+  const [
+    passwordResetRequest
+  ] = useMutation(requestPasswordResetMutation, {
+    onCompleted: handlePasswordReset
+  })
   function signOut(){
     dispatch({
       type: "SIGN_OUT"
@@ -74,6 +108,24 @@ function useUser(){
       return{createTokenData, createTokenError, createTokenLoading}
     }
 
+  }
+  function requestPasswordReset(email){
+    // Step 1 of forgot password flow
+    const redirectUrl = urlJoin(window.location.origin, accountPasswordReset)
+    passwordResetRequest({
+      variables: {
+        email: email,
+        redirectUrl: redirectUrl
+      }
+    })
+  }
+  function passwordSet(data){
+    // Step 2 of forgot password flow
+    setPassword({variables: {
+      email: data.email,
+      token: data.token,
+      password: data.password
+    }})
   }
   function tokenRefresh(){
     // console.log("token refresh")
@@ -91,7 +143,14 @@ function useUser(){
       return{requiresConfirmation, error}
     }
   }
-  return{user, signIn, signOut, tokenRefresh, createAccount}
+  return{
+    user,
+    signIn,
+    signOut,
+    tokenRefresh,
+    createAccount,
+    requestPasswordReset,
+    passwordSet}
 
 }
 
