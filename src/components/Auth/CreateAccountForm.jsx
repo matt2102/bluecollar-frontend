@@ -26,8 +26,6 @@ const useStyles = makeStyles(theme => ({
 export const CreateAccountForm = (props) => {
   const {
     disabled,
-    isModal,
-    onClose
   } = props
   const {createAccount} = useUser()
   const classes = useStyles("")
@@ -39,17 +37,10 @@ export const CreateAccountForm = (props) => {
   const onChange = (prop) => (event) => {
     setFormData({ ...formData, [prop]: event.target.value})
   }
+
   const onSubmit = () => {
-    const {requiresConfirmation, errors} = createAccount(formData)
-    setDisplayCheckEmail(requiresConfirmation)
-    if(isModal){
-      onClose()
-    }
-    if(errors){
-      // TODO log errors
-    }
-
-
+    createAccount(formData)
+    setDisplayCheckEmail(true)
   }
   return(
     <div className={classes.root}>

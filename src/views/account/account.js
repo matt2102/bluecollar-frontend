@@ -3,9 +3,10 @@ import { Route, Switch } from "react-router"
 import { Billing } from "../../components/Billing"
 import AccountInfo from "../../components/AccountInfo"
 import AccountSideBar from "../../components/AccountSidebar"
-import { accountAddressPath, accountBillingPath, accountPasswordReset, accountPath } from "./urls"
+import { accountAddressPath, accountBillingPath, accountPasswordReset, accountPath, confirmAccountPath } from "./urls"
 import Addresses from "../../components/Addresses"
 import { PasswordReset } from "../../components/PasswordReset"
+import AccountConfirm from "../../components/AccountConfirm/AccountConfirm"
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -28,16 +29,12 @@ export const Account = () => {
   )
 }
 
-export const ResetPassword = () => {
-  return(
-    <PasswordReset/>
-  )
-}
 
 export const AccountView = () => {
   return(
     <Switch>
-      <Route path={accountPasswordReset} component={ResetPassword}/>
+      <Route path={confirmAccountPath} component={AccountConfirm}/>
+      <Route path={accountPasswordReset} component={PasswordReset}/>
       <Route path={accountPath} component={Account}/>
     </Switch>
   )

@@ -1,9 +1,8 @@
 import { useMutation } from "@apollo/client"
 import { useDispatch, useSelector } from "react-redux"
 import urlJoin from "url-join"
-import { accountRegisterRedirectUrl } from "../components/Auth/urls"
-import { createTokenMutation, registerAccountMutation, requestPasswordResetMutation, setPasswordMutation } from "../mutations/auth"
-import { accountPasswordReset } from "../views/Account/urls"
+import { confirmAccountMutation, createTokenMutation, registerAccountMutation, requestPasswordResetMutation, setPasswordMutation } from "../mutations/auth"
+import { accountPasswordReset, confirmAccountPath } from "../views/Account/urls"
 import { homePath } from "../views/Home/urls"
 import useMessages from "./useMessages"
 import useNavigator from "./useNavigator"
@@ -36,19 +35,17 @@ function useUser(){
       })
     }
   }
-
-  function hasErrored(apolloErrors, gqlErrors){
-    if(apolloErrors){
-      return true
-    }
-    if(gqlErrors.errors.length > 0){
-      return true
-    }
-  }
   function handlePasswordReset(data){
     if(data.requestPasswordReset.errors.length > 0){
       data.requestPasswordReset.errors.forEach(error => {
         addMessage({messageType: "error", text: `Unable to Send Password Reset Email: ${error.code}`})
+      })
+    }
+  }
+  function handleAccountConfirmation(data){
+    if(data.confirmAccount.errors.length > 0){
+      data.confirmAccount.errors.forEach(error => {
+        addMessage({messageType: "error", text: `Account Confirmation Encountered Errors: ${error.code}`})
       })
     }
   }
@@ -74,10 +71,16 @@ function useUser(){
     loading:createTokenLoading}] = useMutation(createTokenMutation, {
       onCompleted: handleTokenCreate,
     })
-
+  const [
+    confirmAccount,
+    {
+      loading:confirmLoading
+    }
+  ] = useMutation(confirmAccountMutation, {
+    onCompleted: handleAccountConfirmation
+  })
   const [registerAccount, {
     data:registerAccountData,
-    errors:registerAccountErrors
     }] = useMutation(
       registerAccountMutation, {
         onCompleted: handleAccountRegister
@@ -132,16 +135,23 @@ function useUser(){
   }
   function createAccount(data){
     if(data.email && data.password){
-      const redirectUrl = urlJoin(window.location.origin, accountRegisterRedirectUrl)
+      const redirectUrl = urlJoin(window.location.origin, confirmAccountPath)
       registerAccount({variables: {
         email: data.email,
         password: data.password,
         redirectUrl: redirectUrl
       }})
       const requiresConfirmation = registerAccountData?.accountRegister?.requiresConfirmation || false
-      const error = hasErrored(registerAccountErrors, registerAccountData.accountRegister)
-      return{requiresConfirmation, error}
+      // const error = hasErrored(maybe(() => registerAccountErrors, false), registerAccountData?.accountRegister)
+      return{requiresConfirmation}
     }
+  }
+  function confirm(data){
+    confirmAccount({variables: {
+      email: data.email,
+      token: data.token
+    }})
+    return{confirmLoading}
   }
   return{
     user,
@@ -150,7 +160,8 @@ function useUser(){
     tokenRefresh,
     createAccount,
     requestPasswordReset,
-    passwordSet}
+    passwordSet,
+    confirm}
 
 }
 

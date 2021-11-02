@@ -81,6 +81,20 @@ mutation SetPassword(
       ...AccountErrorFragment
     }
   }
-}
+}`
 
-`
+export const confirmAccountMutation = gql`
+ ${accountErrorFragment}
+mutation ConfirmAccount(
+  $email: String!
+  $token: String!
+){
+  confirmAccount(
+    email: $email
+    token: $token
+  ){
+    errors: accountErrors{
+      ...AccountErrorFragment
+    }
+  }
+}`

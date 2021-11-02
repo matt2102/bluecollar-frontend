@@ -9,6 +9,7 @@ import { SignInForm } from "./SignInForm"
 import {Close} from "@material-ui/icons"
 import { useState } from "react"
 import { ForgotPasswordForm } from "./ForgotPasswordForm"
+import { CreateAccountForm } from "./CreateAccountForm"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -78,8 +79,14 @@ export const SignInModal = (props) => {
         <ForgotPasswordForm
           disabled={disabled}
           onClose={onClose}
-        />
-        :null}
+        />:null}
+        {view === CREATE_ACCOUNT?
+          <CreateAccountForm
+          disabled={disabled}
+          />
+          :null
+        }
+
         {btns.map(b => {
           if(b.view === view){
             return null
