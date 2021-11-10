@@ -2,6 +2,7 @@ import { FormControl,Input, InputLabel,makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   formControl: {
+    width: '100%',
     gridColumn: 2,
   },
   formInputLabel: {

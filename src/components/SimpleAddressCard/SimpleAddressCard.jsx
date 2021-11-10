@@ -13,7 +13,7 @@ export const SimpleAddressCard=({address})=>{
   }
   return(
     <div>
-      <Typography>
+      <Typography variant="body1">
         {addr.firstName + " " + addr.lastName}<br></br>
         {addr.streetAddress1}
         {addr.streetAddress2?<><br></br>{addr.streetAddress2}</>:null}<br></br>

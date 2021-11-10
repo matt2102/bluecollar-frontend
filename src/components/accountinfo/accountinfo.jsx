@@ -50,7 +50,8 @@ const useStyles = makeStyles(theme => ({
       gridColumn: 1
     },
     [theme.breakpoints.up('lg')]: {
-      gridColumn: 2
+      gridColumn: 2,
+      width: '100%'
     }
   },
   submit: {

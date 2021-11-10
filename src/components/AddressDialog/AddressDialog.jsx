@@ -8,6 +8,12 @@ const useStyles = makeStyles(theme => ({
   },
   dialogTitle: {
     height: 100,
+  //   [theme.breakpoints.up('lg')]: {
+  //     height: 100
+  //   },
+  //   [theme.breakpoints.down('lg')]: {
+  //     heigh
+  //   }
   },
   title: {
     fontSize: 30,

@@ -17,7 +17,7 @@ import useNavigator from '../../hooks/useNavigator';
 import { accountAddressPath, accountBillingPath, accountInfo, accountPath, accountPurchasedCourses } from '../../views/Account/urls';
 import { useLocation } from 'react-router';
 import {Menu, Close} from "@material-ui/icons"
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,6 +30,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.light
   },
   mobileRoot: {
+    position: 'sticky',
+    top: 0,
     display: "grid",
     width: 40,
     height: "100vh",
@@ -57,8 +59,9 @@ const useStyles = makeStyles(theme => ({
   menuIcon: {
     background: theme.palette.secondary.main,
     display: 'flex',
-    flexFlow: 'row-reverse',
-    justifyContent: "flex-start"
+    flexFlow: 'row nowrap',
+    justifyContent: "space-between",
+    alignItems: 'center'
   },
   accountIconContainer: {
     width: 110,
@@ -198,41 +201,52 @@ export const AccountSideBar = () => {
     [accountAddressPath, 'Addresses', ADDRESS]
   ]
   const fullName = `${user.firstName} ${user.lastName}`
-  const isPhone = useMediaQuery((theme)=>theme.breakpoints.down('xs'))
+  const isMobile = useMediaQuery((theme)=>theme.breakpoints.down('sm'))
   const [menu, showMenu] = useState(false)
   const navigateWrapper = (path) => {
     navigate(path)
     showMenu(false)
   }
-  if(isPhone){
+  const ref = useRef(null)
+  useEffect(() => {
+    function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+            showMenu(false)
+        }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
+  if(isMobile && menu){
     return(
-      <>
-      {!menu?
+    <Grid className = {classes.mobileMenu} ref={ref}>
+    <Container className={classes.menuIcon}>
+      <Typography variant="subtitle2" color="textSecondary">Menu</Typography>
+      <IconButton onClick={()=>showMenu(!menu)}>
+        <Close/>
+      </IconButton>
+    </Container>
+    <SideBar
+      btns={btns}
+      fullName={fullName}
+      selected={selected}
+      navigate={navigateWrapper}
+      classes={classes}
+      />
+    </Grid>
+    )
+  }
+  if(isMobile && !menu){
+    return(
       <Grid className = {classes.mobileRoot}>
         <IconButton onClick={()=>showMenu(!menu)}>
           <Menu color="secondary"/>
         </IconButton>
       </Grid>
-      :
-      <Grid className = {classes.mobileMenu}>
-        <Container className={classes.menuIcon}>
-          <IconButton onClick={()=>showMenu(!menu)}>
-            <Close/>
-          </IconButton>
-        </Container>
-        {menu?
-          <SideBar
-          btns={btns}
-          fullName={fullName}
-          selected={selected}
-          navigate={navigateWrapper}
-          classes={classes}
-          />:null
-          }
-        </Grid>
-      }
-      </>
-
     )
   }
   return(

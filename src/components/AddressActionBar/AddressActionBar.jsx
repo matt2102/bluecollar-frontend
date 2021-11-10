@@ -7,10 +7,18 @@ const useStyles = makeStyles(theme => ({
   root: {
     gridColumn: "1 / -1",
     display: "grid",
-    gridTemplateColumns: "1fr 150px"
+
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: "1fr 150px",
+    },
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: "1fr",
+      gridTemplateRows: "60px 80px"
+    }
   },
   title: {
-    fontSize: 36,
+    // fontSize: 36,
+    marginLeft: theme.spacing(1),
     color: theme.palette.text.main,
     // height: 100
   },
@@ -44,6 +52,8 @@ export const AddressActionBar = () => {
       <Typography variant="subtitle1" className={classes.title}>My Addresses</Typography>
       <Button className={classes.button}
       onClick={()=>setModal(true)}
+      variant="containedPrimary"
+      color="secondary"
       >Add Address</Button>
     </div>
     <AddressDialog

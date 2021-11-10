@@ -1,6 +1,5 @@
 import {
    Grid,
-   Container,
    makeStyles
 } from "@material-ui/core"
 import useAddress from "../../hooks/useAddress"
@@ -8,19 +7,53 @@ import { maybe } from "../../misc"
 import AddressActionBar from "../AddressActionBar/AddressActionBar"
 import AddressCard from "../AddressCard"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    // gridTemplateRows: "auto",
     width: '100%',
     maxWidth: 900,
-    // margin: 'auto',
+    margin: 'auto',
+    marginTop: theme.spacing(4),
     columnGap: 50,
     rowGap: 50,
-    gridTemplateRows: "80px repeat(auto-fill, 300px)"
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "80px auto",
+    [theme.breakpoints.down('xs')]: {
+      margin: 'auto',
+      width: '100%',
+      maxWidth: 350
+    }
+  },
+  grid: {
+    margin: 'auto',
+    display: 'grid',
+    marginBottom: theme.spacing(8),
+    columnGap: theme.spacing(2),
+    rowGap: theme.spacing(2),
+
+    [theme.breakpoints.up('xl')]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    [theme.breakpoints.up("lg")]: {
+      marginTop: theme.spacing(8),
+      gridTemplateColumns: "repeat(2, 250px)",
+      gridAutoRows: "300px",
+
+    },
+    [theme.breakpoints.up("sm")]: {
+      marginTop: theme.spacing(8),
+      gridTemplateColumns: "repeat(2, 250px)",
+      gridAutoRows: "300px",
+      rowGap: theme.spacing(4)
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginTop: theme.spacing(8),
+      gridTemplateColumns: "250px",
+      gridAutoRows: "300px",
+      rowGap: theme.spacing(4)
+    },
   }
-})
+}))
 
 export const Addresses = () => {
   const{data, loading, deleteAddress, update} = useAddress()
@@ -34,24 +67,26 @@ export const Addresses = () => {
   return(
     <Grid className={classes.root} container>
       <AddressActionBar/>
+      <Grid className={classes.grid}>
       {addresses.map(
         address => {
           addressCount += 1
           return(
-            <Container>
-            <AddressCard
-              address={address}
-              num={addressCount}
-              key={address.id}
-              onDelete={deleteAddress}
-              isChildOfCheckout={false}
-              onSubmit={onSubmit}
-              // checkoutAddressEnum={}
-              />
-              </Container>
+
+              <AddressCard
+                address={address}
+                num={addressCount}
+                key={address.id}
+                onDelete={deleteAddress}
+                isChildOfCheckout={false}
+                onSubmit={onSubmit}
+                // checkoutAddressEnum={}
+                />
+
           )
         }
       )}
+      </Grid>
     </Grid>
   )
 }

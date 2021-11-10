@@ -8,6 +8,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("lg")]: {
       height: 250,
     },
+    [theme.breakpoints.down("sm")]: {
+      height: 150,
+    },
     [theme.breakpoints.up("lg")]: {
       height: 300,
     }
@@ -32,7 +35,10 @@ const useStyles = makeStyles(theme => ({
   title: {
     color: theme.palette.background.default,
     margin: 'auto',
-    fontSize: 24
+    fontSize: 24,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 18,
+    },
   },
 }))
 

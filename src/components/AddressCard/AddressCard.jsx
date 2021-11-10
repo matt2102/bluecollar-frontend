@@ -10,6 +10,9 @@ import { CardDetails } from "./CardDetails";
 const useStyles = makeStyles(theme => ({
   card: {
     background: theme.palette.secondary.light,
+    width: '100%',
+    height: '100%',
+    maxHeight: 300,
     maxWidth: 400,
     margin: 'auto'
   },
