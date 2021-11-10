@@ -5,7 +5,8 @@ import useUser from "../../hooks/useUser"
 import {
   Button,
   makeStyles,
-  Typography
+  Typography,
+  Container
 } from "@material-ui/core"
 
 import { maybe } from "../../misc"
@@ -20,25 +21,47 @@ const useStyles = makeStyles(theme => ({
   root: {
     margin: 40,
     display: 'grid',
-    gridTemplateColumns: '0.5fr minmax(400px, 600px) 1fr',
-    gridTemplateRows: 'repeat(3, 125px)'
+    [theme.breakpoints.down('md')]: {
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: '100px repeat(3, 90px) 150px',
+      // width: '100%',
+      minWidth: 300,
+      margin: 0
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: '0.5fr minmax(400px, 600px) 1fr',
+      gridTemplateRows: 'repeat(3, 125px)',
+    }
   },
   title: {
-    gridColumn: "1 / span 3",
     fontWeight: 600,
     marginLeft: 0,
     color: theme.palette.text.main,
-    fontSize: 28
+    fontSize: 28,
+    [theme.breakpoints.down('md')]: {
+      gridColumn: 1,
+    },
+    [theme.breakpoints.up('md')]: {
+      gridColumn: "1 / span 3",
+    }
+  },
+  input: {
+    [theme.breakpoints.down('md')]: {
+      gridColumn: 1
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridColumn: 2
+    }
   },
   submit: {
-    gridColumn: "2",
+    // gridColumn: "2",
     background: theme.palette.green,
     color: theme.palette.background.default,
     fontSize: 20,
     height: 50,
     borderRadius: 25,
     width: '100%',
-    maxWidth: 200,
+    // maxWidth: 200,
     textTransform: 'none',
     margin: 'auto',
     marginRight: 0,
@@ -46,6 +69,15 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     '&:hover': {
       background: theme.palette.primary.main
+    },
+    [theme.breakpoints.down('md')]: {
+      gridColumn: 1,
+      maxWidth: 250,
+      margin: 'auto'
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridColumn: 2,
+      maxWidth: 200,
     }
   }
 
@@ -85,9 +117,15 @@ export const AccountInfo = () => {
         return(
           <>
           <Typography variant="body1" className={classes.title}>Account Info</Typography>
-          <AccountButton label="Email" data={data} name={'email'} onChange={change} disabled={true}/>
-          <AccountButton label="First Name" data={data} name={'firstName'} onChange={change}/>
-          <AccountButton label="Last Name" data={data} name={'lastName'} onChange={change}/>
+          <Container className={classes.input}>
+            <AccountButton label="Email" data={data} name={'email'} onChange={change} disabled={true}/>
+          </Container>
+          <Container className={classes.input}>
+            <AccountButton label="First Name" data={data} name={'firstName'} onChange={change}/>
+          </Container>
+          <Container className={classes.input}>
+            <AccountButton label="Last Name" data={data} name={'lastName'} onChange={change}/>
+          </Container>
           <Button
           variant="contained"
           disabled={!hasChanged}

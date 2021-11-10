@@ -6,13 +6,18 @@ import {
   CardMedia,
   CardHeader,
   CardActionArea,
-  Typography
+  Typography,
+  useMediaQuery,
+  IconButton,
+  Container
 } from '@material-ui/core';
 import useUser from "../../hooks/useUser"
 import AccountIcon from "../../assets/icons/account_icon_300x300.webp"
 import useNavigator from '../../hooks/useNavigator';
 import { accountAddressPath, accountBillingPath, accountInfo, accountPath, accountPurchasedCourses } from '../../views/Account/urls';
 import { useLocation } from 'react-router';
+import {Menu, Close} from "@material-ui/icons"
+import { useState } from 'react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +28,37 @@ const useStyles = makeStyles(theme => ({
     maxWidth: "300px",
     height: "100vh",
     backgroundColor: theme.palette.secondary.light
+  },
+  mobileRoot: {
+    display: "grid",
+    width: 40,
+    height: "100vh",
+    gridTemplateRows: "40px auto",
+    // backgroundColor: theme.palette.secondary.light,
+    border: 0,
+    borderLeft: 4,
+    borderStyle: 'solid',
+    borderColor: theme.palette.secondary.main
+  },
+  mobileMenu: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    display: "grid",
+    gridTemplateColumns: "300px",
+    gridTemplateRows: "60px 220px auto",
+    width: 300,
+    maxWidth: "300px",
+    height: "100vh",
+    backgroundColor: theme.palette.secondary.light,
+    zIndex: 50,
+    // margin: 0,
+  },
+  menuIcon: {
+    background: theme.palette.secondary.main,
+    display: 'flex',
+    flexFlow: 'row-reverse',
+    justifyContent: "flex-start"
   },
   accountIconContainer: {
     width: 110,
@@ -96,6 +132,58 @@ const getSelected = (location) => {
   }
 }
 
+const SideBar = (props) => {
+  const {
+    btns,
+    fullName,
+    selected,
+    navigate,
+    classes
+  } = props
+  return(
+    <>
+    <Card elevation={0}>
+    <CardHeader title={fullName} titleTypographyProps={{variant: "subtitle2", align: "center"}}/>
+    <CardActionArea
+    className={classes.accountIconContainer}
+    onClick = {()=>navigate(accountPath)}
+    >
+      <CardMedia
+        component="img"
+        className={classes.accountIcon}
+        image={AccountIcon}/>
+    </CardActionArea>
+  </Card>
+  <Grid className={classes.buttonGrid}>
+  {btns.map(btnInfo => {
+    const [path, text, _type] = btnInfo
+    const isSelected = selected === _type
+    return(
+      <>
+      {isSelected ?
+      <Button
+        key={`Account-Navigation-Btn-Selected-${text}`}
+        className={classes.selected}
+        onClick={()=>navigate(path)}
+        ><Typography variant="body2" className={classes.btnText}>{text}</Typography>
+          </Button>
+      :
+      <Button
+        key={`Account-Navigation-Btn-${text}`}
+        className={classes.button}
+        onClick={()=>navigate(path)}
+        ><Typography variant="body2" className={classes.btnText}>{text}</Typography></Button>
+      }
+      </>
+    )
+  }
+
+  )}
+  </Grid>
+  </>
+  )
+}
+
 
 export const AccountSideBar = () => {
   const {user} = useUser()
@@ -110,46 +198,51 @@ export const AccountSideBar = () => {
     [accountAddressPath, 'Addresses', ADDRESS]
   ]
   const fullName = `${user.firstName} ${user.lastName}`
+  const isPhone = useMediaQuery((theme)=>theme.breakpoints.down('xs'))
+  const [menu, showMenu] = useState(false)
+  const navigateWrapper = (path) => {
+    navigate(path)
+    showMenu(false)
+  }
+  if(isPhone){
+    return(
+      <>
+      {!menu?
+      <Grid className = {classes.mobileRoot}>
+        <IconButton onClick={()=>showMenu(!menu)}>
+          <Menu color="secondary"/>
+        </IconButton>
+      </Grid>
+      :
+      <Grid className = {classes.mobileMenu}>
+        <Container className={classes.menuIcon}>
+          <IconButton onClick={()=>showMenu(!menu)}>
+            <Close/>
+          </IconButton>
+        </Container>
+        {menu?
+          <SideBar
+          btns={btns}
+          fullName={fullName}
+          selected={selected}
+          navigate={navigateWrapper}
+          classes={classes}
+          />:null
+          }
+        </Grid>
+      }
+      </>
+
+    )
+  }
   return(
     <Grid className = {classes.root}>
-        <Card elevation={0}>
-          <CardHeader title={fullName} titleTypographyProps={{variant: "subtitle2", align: "center"}}/>
-          <CardActionArea
-          className={classes.accountIconContainer}
-          onClick = {()=>navigate(accountPath)}
-          >
-            <CardMedia
-              component="img"
-              className={classes.accountIcon}
-              image={AccountIcon}/>
-          </CardActionArea>
-        </Card>
-      <Grid className={classes.buttonGrid}>
-        {btns.map(btnInfo => {
-          const [path, text, _type] = btnInfo
-          const isSelected = selected === _type
-          return(
-            <>
-            {isSelected ?
-            <Button
-              key={`Account-Navigation-Btn-Selected-${text}`}
-              className={classes.selected}
-              onClick={()=>navigate(path)}
-              ><Typography variant="body2" className={classes.btnText}>{text}</Typography>
-                </Button>
-            :
-            <Button
-              key={`Account-Navigation-Btn-${text}`}
-              className={classes.button}
-              onClick={()=>navigate(path)}
-              ><Typography variant="body2" className={classes.btnText}>{text}</Typography></Button>
-            }
-            </>
-          )
-        }
-
-        )}
-      </Grid>
+        <SideBar
+        btns={btns}
+        fullName={fullName}
+        selected={selected}
+        navigate={navigate}
+        classes={classes}/>
     </Grid>
   )
 }

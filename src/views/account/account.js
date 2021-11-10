@@ -11,7 +11,7 @@ import AccountConfirm from "../../components/AccountConfirm/AccountConfirm"
 const useStyle = makeStyles(theme => ({
   root: {
     display: "grid",
-    gridTemplateColumns: "300px 1fr"
+    gridTemplateColumns: "minmax(auto, 300px) 1fr"
   }
 }),{name: "Account"})
 

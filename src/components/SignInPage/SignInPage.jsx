@@ -1,8 +1,10 @@
-import { Container, Grid,Typography, makeStyles } from "@material-ui/core"
+import { Container, Grid,Typography, makeStyles, Button } from "@material-ui/core"
 import useNavigator from "../../hooks/useNavigator"
-import { homePath } from "../../views/Home/urls"
 import { SignInForm } from "../Auth/SignInForm"
 import {CreateAccountForm} from "../Auth/CreateAccountForm"
+import { checkoutPath } from "../../views/Checkout/urls"
+import { ForgotPasswordForm } from "../Auth/ForgotPasswordForm"
+import { useState } from "react"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,22 +27,40 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const SIGN_IN = "SIGN_IN"
+const FORGOT_PASSWORD = 'FORGOT_PASSWORD'
+
 export const SignInPage = () => {
   const navigator = useNavigator()
   const classes = useStyles()
+  const [view, setView] = useState(SIGN_IN)
   return(
     <Container className={classes.root}>
       <Grid className={classes.grid}>
         <Container>
+          {view === SIGN_IN?
+          <>
           <Typography variant="h4" className={classes.subtitle}>Sign In</Typography>
           <SignInForm
-            onClose = {()=>navigator(homePath)}
+            onClose = {()=>navigator(checkoutPath)}
             disabled = {false}/>
+          <Button variant="textSecondary" onClick={()=>setView(FORGOT_PASSWORD)}>Forgot Password</Button>
+          </>
+        :null}
+        {view === FORGOT_PASSWORD?
+        <>
+          <Typography variant="h4" className={classes.subtitle}>Forgot Password</Typography>
+          <ForgotPasswordForm
+            onClose = {()=>navigator(checkoutPath)}
+            disabled = {false}/>
+          <Button variant="textSecondary" onClick={()=>setView(SIGN_IN)}>Login</Button>
+          </>
+        :null}
         </Container>
         <Container className={classes.borderLeft}>
           <Typography variant="h4" className={classes.subtitle}>Create Account</Typography>
           <CreateAccountForm
-            onClose = {()=>navigator(homePath)}
+            onClose = {()=>navigator(checkoutPath)}
             disabled = {false}/>
         </Container>
       </Grid>
