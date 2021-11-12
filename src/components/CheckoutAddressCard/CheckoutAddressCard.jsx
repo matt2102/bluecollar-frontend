@@ -14,7 +14,12 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: 'auto',
-    width: 250
+    [theme.breakpoints.down('sm')]: {
+      width: 150
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: 250
+    }
   },
   card: {
     width: '100%'

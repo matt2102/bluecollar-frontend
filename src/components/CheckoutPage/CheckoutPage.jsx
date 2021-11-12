@@ -12,15 +12,29 @@ import Loading from "../Loading"
 
 const useStyles = makeStyles(theme => ({
   grid: {
-    marginTop: theme.spacing(5),
+    // marginTop: theme.spacing(5),
+    margin: 0,
     display: 'grid',
-    gridTemplateColumns: '1fr 0.5fr',
+    // gridTemplateColumns: '1fr 0.5fr',
     rowGap: theme.spacing(5),
     marginBottom: theme.spacing(15),
+    [theme.breakpoints.down('md')]: {
+       marginTop: theme.spacing(5),
+      gridTemplateColumns: '1fr'
+    },
+    [theme.breakpoints.up('md')]: {
+      marginTop: theme.spacing(5),
+      gridTemplateColumns: '1fr 0.5fr',
+    }
   },
   items: {
-    gridColumn: 2,
-    gridRow: "1 / -1"
+    gridRow: "1 / -1",
+    [theme.breakpoints.down('md')]: {
+       gridColumn: 1,
+    },
+    [theme.breakpoints.up('md')]: {
+       gridColumn: 2,
+    }
   },
   billing: {
     margin: 'auto',
