@@ -262,7 +262,7 @@ export const ResourcePage = (props) => {
           }>
           <Button variant="containedPrimary" onClick={()=>{window.open(r.externalLink)}}
           className={classes.affiliateBtn}
-          >Shop</Button>
+          >Visit</Button>
           </Tooltip>
           <div dangerouslySetInnerHTML={ {__html: r.amazonAffiliateLink} }/>
       </Grid>

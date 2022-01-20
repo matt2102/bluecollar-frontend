@@ -127,6 +127,8 @@ export const ConsultingDetails = (props) => {
           time={consulting30Min.time}
           name={consulting30Min.name}
           benefitsArray={consulting30Min.benefits}
+          price={consulting30Min.price}
+          link={null}
           onClick={()=>{}}
           classes={{
             root: classes.root1,
@@ -141,6 +143,8 @@ export const ConsultingDetails = (props) => {
           time={consulting60Min.time}
           name={consulting60Min.name}
           benefitsArray={consulting60Min.benefits}
+          price={null}
+          link={consulting60Min.link}
           onClick={()=>{}}
           classes={{
             root: classes.root2,
@@ -155,6 +159,8 @@ export const ConsultingDetails = (props) => {
           time={consultingMonthlySupportPlan.time}
           name={consultingMonthlySupportPlan.name}
           benefitsArray={consultingMonthlySupportPlan.benefits}
+          price={consultingMonthlySupportPlan.price}
+          link={null}
           onClick={()=>{}}
           classes={{
             root: classes.root3,

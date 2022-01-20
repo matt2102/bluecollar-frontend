@@ -5,7 +5,7 @@ import { useLocation } from "react-router"
 import ResourcesPage from "../../components/ResourcesPage"
 import useSort from "../../hooks/useSort"
 import useFilter from "../../hooks/useFilter"
-
+import img from "../../assets/media/textbooks.webp"
 
 export const ResourcesView = () => {
   const location = useLocation()
@@ -21,6 +21,8 @@ export const ResourcesView = () => {
     {renderInfoCard?
     <InfoCard
       heading1='Resources for every level'
+      body="Your Blue Collar Homeschool community recommends a wide variety of resources for the average learner who is not college bound.  Find curriculum links for every subject and every age, all suggested by actual members of our group as being appropriate for Blue Collar learners.  Those marked “Tried and True” were personally used by Cindy LaJoy.  Please note that specific career training programs may be listed under High School Electives, so be sure to check that out!"
+      img={img}
       />:null}
     <ResourcesPage
       showFeatured={renderInfoCard}

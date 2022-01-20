@@ -3,6 +3,7 @@ import InfoCard from "../../components/InfoCard"
 import Loading from "../../components/Loading";
 import { maybe } from "../../misc";
 import { useConsultingProductQuery } from "./queries"
+import img from "../../assets/media/cindy_consulting.webp"
 
 export const ConsultingView = () => {
   const {data, loading} = useConsultingProductQuery({
@@ -20,6 +21,7 @@ export const ConsultingView = () => {
       <InfoCard
         heading3="Need More Help?"
         heading1="Set Up a Consulting Session!"
+        img={img}
         />
       <Consulting
         data = {consultingProduct}

@@ -5,6 +5,8 @@ export const ConsultingCard = (props) => {
     time,
     name,
     benefitsArray,
+    price,
+    link,
     onClick,
     classes
   } = props
@@ -24,11 +26,20 @@ export const ConsultingCard = (props) => {
       })}
       </List>
       <Grid container>
+      {price ?
       <Button
       variant="containedPrimary"
       className={classes.btn}
       onClick={onClick}
+      >Book {price}</Button>
+      :
+      <Button
+      variant="containedPrimary"
+      className={classes.btn}
+      onClick={()=>window.open(link)}
       >Book</Button>
+      }
+
       </Grid>
     </Card>
   )

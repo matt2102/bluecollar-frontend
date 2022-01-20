@@ -32,6 +32,7 @@ import { coursesPath } from "../../views/Courses/urls"
 import { MenuRounded } from "@material-ui/icons"
 import AccountButton from "./AccountButton"
 import { programsPath } from "../../views/Programs/urls"
+import { aboutPath } from "../../views/About/urls"
 
 export const useStyles = makeStyles(
   theme => ({
@@ -157,10 +158,11 @@ export const Navigation = () => {
   const phoneView = useMediaQuery((theme) => theme.breakpoints.down('450'))
   const data = [
     ['Resources', resourcesPath],
-    ['Courses', coursesPath],
+    // ['Courses', coursesPath],
     ['Consulting', consultingPath],
     ['Programs', programsPath],
-    ['Blog', blogPath],
+    ['About Us', aboutPath]
+    // ['Blog', blogPath],
   ]
   const [navButtons, menuItems] = getButtonsAndMenuItems(data, tabletView, phoneView)
   const handleMenuClick = (path) => {

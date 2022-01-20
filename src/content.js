@@ -23,10 +23,10 @@ export const consultingDetails = {
 }
 
 export const consulting30Min = {
-  time: "30m",
+  // time: "30m",
   name: "30 Minute General Consultation",
   benefits: [
-    "In partnership with True North Homeschool Academy",
+    "Exclusively Blue Collar Homeschool:",
     "Finding the perfect curriculum that meets your specifications as well as your learner’s needs",
     "Generating ideas collaboratively to create effective and engaging unit studies or project-based-learning activities (This is Cindy’s passion and expertise!)",
     "Exploring challenges in a specific area of study and offering concrete solutions",
@@ -34,14 +34,15 @@ export const consulting30Min = {
     "Helping you discover and capitalize on your individual strengths as an educator",
     "Shifting you from doubts and sleepless nights to confidence and hopeful days",
     "Assisting you with any other homeschooling matters (no concern is too small!)",
-  ]
+  ],
+  price: "$30"
 }
 
 export const consulting60Min = {
-  time: "60m",
+  // time: "60m",
   name: "1 Hour Special Education Consultation",
   benefits: [
-  "In partnership with True North Homeschool Academy",
+  "In partnership with True North Homeschool Academy:",
   "Reviewing any and all academic, medical, and psychological testing reports and results prior to consultation",
   "Listening to all shared observations from parents, prior educators, therapists, etc.",
   "Brainstorming appropriate courses, grade levels, specialized curriculum, and academic adaptations",
@@ -49,17 +50,21 @@ export const consulting60Min = {
   "Suggesting high school to career transition ideas, training, and job possibilities",
   "Discussing life skills acquisition and learning models",
   "Assisting you with any other special needs matters (Autism, Fetal Alcohol Spectrum Disorder, Reactive Attachment Disorder, Processing Speed Issues, Sensory Issues, Dysgraphia, Dyscalculia, Dyslexia, Dysmaturity, Auditory Processing Disorder, ADD/ADHD, Developmental and Cognitive Delay, Adoption-related issues, Unspecified Language Delays, no clear diagnosis, etc.)",
-]
+  ],
+  link: "https://truenorthhomeschoolacademy.com/product/academic-advising/"
+
 }
 
 export const consultingMonthlySupportPlan = {
-  time: "5Hrs",
+  // time: "5Hrs",
   name: "Monthly Academic Year Support Plan",
   benefits: [
-  "Exclusively through Blue Collar Homeschool",
+  "Exclusively Blue Collar Homeschool:",
+  "5 Hours of total consulting",
   "1 hour consultation for academic planning at beginning of school year, followed by eight monthly 30 minute sessions to discuss any item related to homeschool as mentioned above in general consultation description",
   "Do you need more help or support? Does this all sound great, but you wish you could have ongoing conversations specific to you and your needs, and to your children and their progress or challenges? Do you need a place to bounce ideas around, or are you possibly having one of “those” years and may need to reconsider your direction, focus, or curricula? Cindy can be your homeschooling partner!"
-  ]
+  ],
+  price: "$299"
 }
 
 export const coursesInfoCard = {

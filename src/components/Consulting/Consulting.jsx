@@ -40,14 +40,11 @@ export const Consulting = (props) => {
       imageAlt = {"Video Conference"}
       buttonText= {"Purchase a Session"}
       />
+      <div ref = {ref}>
       <ConsultingDetails
       key="details"
       />
-      <Container className={classes.container} ref = {ref}>
-        <BookSessionCard
-          data = {data}
-        />
-      </Container>
+      </div>
    </Grid>
  )
 }
