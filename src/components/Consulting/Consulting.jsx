@@ -1,8 +1,7 @@
-import {Container, Grid, makeStyles } from "@material-ui/core"
+import {Grid, makeStyles } from "@material-ui/core"
 import { useRef } from "react"
 import Image from "../../assets/media/consulting.webp"
 import { consultingDetails } from "../../content"
-import BookSessionCard from "../BookSessionCard/BookSessionCard"
 import ConsultingDetails from "../ConsultingDetails"
 import FullPageInfoCard from "../FullPageInfoCard/FullPageInfoCard"
 
@@ -23,10 +22,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export const Consulting = (props) => {
-  const {
-    data
-  } = props
+export const Consulting = () => {
   const ref = useRef(null)
   const classes = useStyles()
   const scrollToRef = () => ref.current.scrollIntoView()

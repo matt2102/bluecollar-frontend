@@ -22,13 +22,13 @@ import LogoSlim from "../../assets/icons/LogoSlim"
 
 import { SignInModal } from "../Auth/SignInModal"
 
-import { blogPath } from "../../views/Blog/urls";
+// import { blogPath } from "../../views/Blog/urls";
 import { accountPath } from "../../views/Account/urls"
 import { homePath } from "../../views/Home/urls"
 import { resourcesPath } from "../../views/Resources/urls"
 import { consultingPath } from "../../views/Consulting/urls"
 import { cartPath } from "../../views/Cart/urls"
-import { coursesPath } from "../../views/Courses/urls"
+// import { coursesPath } from "../../views/Courses/urls"
 import { MenuRounded } from "@material-ui/icons"
 import AccountButton from "./AccountButton"
 import { programsPath } from "../../views/Programs/urls"
@@ -161,7 +161,8 @@ export const Navigation = () => {
     // ['Courses', coursesPath],
     ['Consulting', consultingPath],
     ['Programs', programsPath],
-    ['About Us', aboutPath]
+    ['About Us', aboutPath],
+    // ["Join our Facebook Group!", "https://www.facebook.com/groups/496763804008415"]
     // ['Blog', blogPath],
   ]
   const [navButtons, menuItems] = getButtonsAndMenuItems(data, tabletView, phoneView)

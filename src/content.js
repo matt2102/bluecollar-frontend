@@ -72,3 +72,161 @@ export const coursesInfoCard = {
   body: "Cindy LaJoy teaches courses for upper middle and high school learners who have learning challenges and developmental delay through True North Homeschool Academy. Courses are taught in small group settings of 5-6 learners and are one-half hour in length three times a week. Textbooks used that offer high school level content at a 4 th -5 th grade reading level. For more details on each particular course, please click on the links below:"
 
 }
+
+export const AboutPageContent = [
+  {
+    title: "Co-Author with Natalie Vechionne",
+    link: "https://www.amazon.com/Blazing-New-Homeschool-Trails-Developmental/dp/B096LYJCJW/ref=sr_1_1?crid=31D0MJPUT1J8P&amp;keywords=blazing+new+homeschool+trails&amp;qid=1642119642&amp;sprefix=blazing+new%2Caps%2C82&amp;sr=8-1",
+    imgName: "bnht.webp"
+  },
+  {
+    title: "Contributing author, Homeschooling for College Credit, by Jennifer Cook DeRosa",
+    link: "https://www.amazon.com/Homeschooling-College-Credit-Resourceful-Planning/dp/1724337610/ref=sr_1_1?crid=1NQ2SDEMW1HAE&amp;keywords=homeschooling+for+college+credit+2nd+edition&amp;qid=1642119678&amp;sprefix=Homeschooling+for+co%2Caps%2C87&amp;sr=8-1",
+    imgName: "college.webp"
+  },
+  {
+    title: "Contributing author, Train Up, by Zee Obi",
+    link: "https://www.amazon.com.au/TRAIN-UP-Intentional-Children-Disciplined-ebook/dp/B087Y95QXN/ref=sr_1_2?qid=1642119835&amp&refinements=p_27%3AZee+Obi&amp&s=digital-text&amp&sr=1-2&amp&text=Zee+Obi",
+    imgName: "trainup.webp"
+  },
+  {
+    title: "Guest contributor to Learning Tangent Homeschool Magazine (now defunct)",
+    link: "https://issuu.com/gailnelson/stacks/16d189714e2d450c8f41d474b8fbde8e",
+    imgName: "learningtangent.webp"
+  },
+  // Podcasts
+  {
+    title: "The Homeschool Sanity Show",
+    link: "https://www.listennotes.com/podcasts/the-homeschool/when-your-teen-isnt-on-the-bHdkJj7B4eZ/",
+    imgName: "sanityshow.webp",
+  },
+  {
+    title: "Orphans No More",
+    link: "https://www.listennotes.com/podcasts/orphans-no-more/episode-287-blazing-new-tZPKuMmGy58/",
+    imgName: "orphans.webp",
+  },
+  {
+    title: "High School Hamster Wheel",
+    link: "https://www.audible.com/pd/A-Different-Kind-of-Homeschooling-Excellence-with-Cindy-LaJoy-Podcast/B08ZD2KD4Q",
+    imgName: "hamster.webp",
+  },
+  {
+    title: "FASD Success with Jeff Noble: How to Homeschool",
+    link: "https://www.fasdsuccess.com/blog/podcast-episode-081",
+    imgName: "fasdsuccess.webp",
+  },
+  {
+    title: "FASD Informed",
+    link: "https://www.listennotes.com/podcasts/fasd-informed/fasd-skilled-trades-and-work-WuHKlgMYZ_O/",
+    imgName: "fasdinformed.webp",
+  },
+  {
+    title: "FASD Hope - Episode 59",
+    link: "https://www.fasdhope.com/podcast/e59/",
+    imgName: "fasdhope.webp",
+  },
+  {
+    title: "FASD Hope - Episode 25",
+    link: "https://www.fasdhope.com/podcast/e25/",
+    imgName: "fasdhope.webp",
+  },
+  {
+    title: "Two Adoptive Mamas - Blazing New Trails",
+    link: "https://open.spotify.com/episode/3HDoqiBwTKGKnORj7lKZ1g",
+    imgName: "2adpotivemommas.webp",
+  },
+  {
+    title: "Two Adoptive Mamas - A Closer Look: Reactive Attachment Disorder",
+    link: "https://open.spotify.com/episode/68PmlrbitHuY7L85oNWbso",
+    imgName: "2adpotivemommas.webp",
+  },
+  {
+    title: "Empowering Homeschool Conversations",
+    link: "https://play.anghami.com/episode/1027134697",
+    imgName: "empowering.webp",
+  },
+  {
+    title: "The Homeschool Solutions Show with Janice Campbell",
+    link: "https://homeschooling.mom/homeschool-solutions-show/hs-257-college-isnt-the-only-path-to-a-successful-future-with-janice-campbell-and-cindy-lajoy",
+    imgName: "solutions.webp",
+  },
+  {
+    title: "True North Homeschool Academy Soft Skills 101 Podcast - Episode 1",
+    link: "https://podbay.fm/p/soft-skills-101/e/1624622459",
+    imgName: "lifeskills.webp",
+  },
+  {
+    title: "True North Homeschool Academy Soft Skills 101 Podcast - Episode 2",
+    link: "https://podbay.fm/p/soft-skills-101/e/1625572827",
+    imgName: "lifeskills.webp",
+  },
+  {
+    title: "True North Homeschool Academy Soft Skills 101 Podcast - Work Ethic",
+    link: "https://podbay.fm/p/soft-skills-101/e/1567255287",
+    imgName: "lifeskills.webp",
+  },
+  {
+    title: "Schoolhouse Rocked",
+    link: "https://www.iheart.com/podcast/269-schoolhouse-rocked-the-hom-70625068/episode/blazing-new-homeschool-trails-cindy-90007257/",
+    imgName: "schoolhouserocked.webp",
+  },
+  {
+    title: "The Smiling Homeschooler",
+    link: "https://podcasts.apple.com/il/podcast/episode-34-interview-cindy-lajoy-blue-collar-homeschool/id1433176954?i=1000434592144",
+    imgName: "similinghomeschooler.webp",
+  },
+  {
+    title: "FASD Family Life",
+    link: "https://podcasts.apple.com/us/podcast/summer-series-talk-to-the-expert-cyndi-lajoy/id1561078669?i=1000530315386",
+    imgName: "fasd.webp",
+  },
+  // Other
+  {
+    title: "Guest Presenter - Heritage Camps for Adoptive Families",
+    link: "https://www.heritagecamps.org/",
+  },
+  {
+    title: "Guest Presenter - Unboxed Homeschool Summit Virtual Convention",
+    link: "https://unboxedsummit.com/",
+  },
+  {
+    title: "Guest Presenter - Homeschool Africa Convention 2020 – Relaxed Homeschooling Presentation",
+    link: null,
+  },
+  {
+    title: "Guest Presenter - North Carolina Special Education Virtual Conference 2020",
+    link: null,
+  },
+  {
+    title: "Business - Buckaroos Slices and Scoops",
+    link: "https://www.buckaroosmontrose.com/",
+  },
+
+  // Misc
+  {
+    title: "Ministry Intern: Athol Congregational Church, Athol, MA",
+    link: "https://atholcongregationalchurch.org/",
+  },
+  {
+    title: "Co-Chaplain, Chautauqua Institution, NY – Scheduled for August 2022",
+    link: "https://chq.org/",
+  },
+  {
+    title: "Board Member and Public Education Coordinator: North Quabbin Citizen Advocacy",
+    link: "https://www.nqcitizenadvocacy.org/",
+  },
+  {
+    title: "Special Needs Educator and Academic Consultant: True North Homeschool Academy",
+    link: "https://truenorthhomeschoolacademy.com/",
+  },
+  {
+    title: "Homeschool Market Consultant: Education Associates",
+    link: "https://educationassociates.com/",
+  },
+  {
+    title: "Family Adoption Blog (Over 10 years of weekly posts about adoption and learning disabilities)",
+    link: "https://www.lajoyfamily.blogspot.com/",
+  }
+
+
+]

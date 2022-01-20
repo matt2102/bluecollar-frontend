@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'grid',
     gridTemplateColumns: 'minmax(450px, 1fr) 1fr 1fr',
-    gridTemplateRows: '150px 300px auto',
+    gridTemplateRows: 'minmax(150px, auto) 300px auto',
     width: '100%',
     maxWidth: 1600,
     margin: 'auto',
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       gridTemplateColumns: 'minmax(450px, 500px) 1fr 160px',
-      gridTemplateRows: '150px 300px auto',
+      gridTemplateRows: 'minmax(150px, auto) 300px auto',
     }
   },
   img: {
@@ -230,7 +230,9 @@ export const ResourcePage = (props) => {
 
 
       <Grid className={classes.header}>
-      <Typography variant="h1" color="secondary">{r.name}</Typography>
+      {/* <Typography variant="h1" color="secondary">{r.name}</Typography> */}
+      <Typography variant="h1" color="secondary">Your Business Math (Charlotte Mason Style)</Typography>
+
         <Grid container className={classes.headerDetails}>
           <div className={classes.tnT} >
             <Typography variant="body2" color="primary">Tried & True?:</Typography>

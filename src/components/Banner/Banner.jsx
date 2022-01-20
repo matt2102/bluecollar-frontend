@@ -4,6 +4,7 @@ import useBanner from "../../hooks/useBanner"
 import NewsletterDialog from "../NewsletterDialog/NewsletterDialog"
 import {Close} from "@material-ui/icons"
 import { useSelector } from "react-redux"
+import { useEffect } from "react"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,12 +38,21 @@ export const Banner= () => {
   const classes = useStyles()
   const {markSeen} = useBanner()
   const banner = useSelector(state => state.banner.banner)
+  const seconds = 7
+  const [timeLeft, setTimeLeft] = useState(seconds);
   const [open, setModal] = useState(false)
-  const item = {
+  const items = [
+    {
     name: 'newsletterSubscribe',
     text: 'Subscribe to our Newsletter!',
     onClick: ()=>setModal(true)
-  }
+    },
+    {
+      name: "facebookJoin",
+      text: "Join our Facebook Group!",
+      onClick: ()=>window.open("https://www.facebook.com/groups/496763804008415")
+    }
+  ]
   const handleClose = () => {
     setModal(false)
     // markSeen(item.name)
@@ -50,31 +60,51 @@ export const Banner= () => {
   const data = {
     emailOptIn: true
   }
-  const items = [item]
+  // const items = [item]
   const bannerSet = new Set(banner)
   const toRender = items.filter(i => (
     !bannerSet.has(i.name)
   ))
+  const [visible, setVisible] = useState({...toRender[0], index: 0})
+  useEffect(() => {
+    if (!timeLeft){
+
+
+      if(visible.index + 1 >= toRender.length){
+        // restart loop
+        setVisible({...toRender[0], index: 0})
+      } else {
+        const nextIndex = visible.index + 1
+        setVisible({...toRender[nextIndex], index: nextIndex})
+      }
+      setTimeLeft(seconds)
+    };
+
+    // save intervalId to clear the interval when the
+    // component re-renders
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+
+    // clear interval on re-render to avoid memory leaks
+    return () => clearInterval(intervalId);
+
+  }, [timeLeft, toRender, visible]);
+
   if(toRender.length === 0){
     return null
   }
   return(
     <>
     <Grid className={classes.root} justify="center" direction="row" wrap="nowrap" container>
-      {toRender.map(i => {
-        return(
           <div>
-            <Button variant="text" onClick={i.onClick} className={classes.btn}>{i.text}</Button>
+            <Button variant="text" onClick={visible.onClick} className={classes.btn}>{visible.text}</Button>
             <Tooltip title={"close"}>
-              <IconButton onClick={()=>markSeen(i)}>
+              <IconButton onClick={()=>markSeen(visible)}>
                 <Close className={classes.icon}/>
               </IconButton>
             </Tooltip>
           </div>
-        )
-      })}
-
-
     </Grid>
     <NewsletterDialog
       data = {data}

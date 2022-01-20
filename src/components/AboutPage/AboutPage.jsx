@@ -1,4 +1,5 @@
 import {Typography,Grid, Card, CardMedia, makeStyles, useMediaQuery} from "@material-ui/core"
+import { AboutCardContainer } from "../AboutCardContainer/AboutCardContainer"
 
 const useStyles = makeStyles(theme => ({
 
@@ -37,6 +38,9 @@ const useStyles = makeStyles(theme => ({
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2),
     },
+  },
+  div: {
+    gridColumn: "1 / -1"
   }
 }))
 
@@ -90,6 +94,9 @@ export const AboutPage = () => {
 
        She is a Special Needs Academic Advisor and educator with True North Homeschool Academy.  Cindy is particularly gifted at researching appropriate and unique resources that are tailor-made for specific learners.  She also delights in brainstorming cross-curricular project-based learning opportunities based on an individual’s particular interests.</Typography>
       <Typography className={classes.text}>In her spare time she enjoys singing in church choir, reading until the wee hours of the morning, and is currently pursuing ordination as an interfaith minister.</Typography>
+      <div className={classes.div}>
+        <AboutCardContainer/>
+      </div>
     </Grid>
   )
 }
