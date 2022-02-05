@@ -1,2 +1,2 @@
-export {default} from "./ContactInfoCard"
-export * from "./ContactInfoCard"
+export {default} from "./ContactInfo"
+export * from "./ContactInfo"

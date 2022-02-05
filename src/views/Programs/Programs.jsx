@@ -1,15 +1,17 @@
-import InfoCard from "../../components/InfoCard"
+import { Route } from "react-router"
+
 import ProgramsPage from "../../components/ProgramsPage"
+import CertificateView from "../Certificate/Certificate"
+import { certificatePath, programsPath } from "./urls"
+
+
 
 export const ProgramsView = () => {
   return(
-    <div>
-    <InfoCard
-      heading3="Curious what we do?"
-      heading1="Our Programs"
-    />
-    <ProgramsPage/>
-    </div>
+    <>
+      <Route exact path={programsPath} component={ProgramsPage}/>
+      <Route path={certificatePath} component={CertificateView}/>
+    </>
   )
 }
 

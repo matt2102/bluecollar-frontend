@@ -37,7 +37,8 @@ const useStyles = makeStyles(theme =>({
     display: 'flex',
     flexDirection: "column",
     justifyContent: "flex-start",
-    paddingLeft: 14
+    paddingLeft: 14,
+    paddingBottom: theme.spacing(4)
   },
   subtitle: {
     fontSize: 40,

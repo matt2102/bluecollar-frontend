@@ -58,13 +58,15 @@ export const AccountButton = (props) => {
     data,
     name,
     onChange,
-    disabled
+    disabled,
+    placeholder
   } = props
   const classes = useStyles()
   return(
     <FormControl className={classes.formControl} key={name}>
     <InputLabel shrink className={classes.formInputLabel}>{label}</InputLabel>
     <Input
+      placeholder={placeholder?placeholder:""}
       name={name}
       className={classes.formInput}
       value={data[name] || ""}
