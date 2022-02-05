@@ -159,7 +159,9 @@ const useStyles = makeStyles(theme => ({
   },
   affiliateBtn: {
     width: 120,
-    borderRadius: 0
+    borderRadius: 0,
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
   }
 }))
 
@@ -264,9 +266,9 @@ export const ResourcePage = (props) => {
           }>
           <Button variant="containedPrimary" onClick={()=>{window.open(r.externalLink)}}
           className={classes.affiliateBtn}
-          >Visit</Button>
+          >Visit Website</Button>
           </Tooltip>
-          <div dangerouslySetInnerHTML={ {__html: r.amazonAffiliateLink} }/>
+          {/* <div dangerouslySetInnerHTML={ {__html: r.amazonAffiliateLink} }/> */}
       </Grid>
     </Grid>
   )

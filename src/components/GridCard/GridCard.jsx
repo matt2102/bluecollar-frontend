@@ -5,7 +5,8 @@ import {
   Typography,
   CardActions,
   CardMedia,
-  makeStyles
+  makeStyles,
+  Tooltip
 } from "@material-ui/core"
 import useNavigator from "../../hooks/useNavigator"
 import { getImage } from "../../misc"
@@ -33,8 +34,52 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("lg")]: {
       height: 300,
     }
+  },
+  tooltip: {
+    "&:hover": {
+      cursor: 'pointer',
+    }
   }
 }))
+
+const CardTitle = (props) => {
+  const {
+    name,
+    classes
+  } = props
+  console.log(name, name.length)
+  let title = ""
+  const makeTitle = (arr, result) => {
+    if(result.length >= 27 || arr.length === 0){
+      return result + ' ...'
+    }
+    const nextWord = arr.shift()
+    if(result.length + nextWord.length + 1 <= 27){
+      const newResult = result + " " + nextWord
+      return makeTitle(arr, newResult)
+    } else {
+      return result + ' ...'
+    }
+
+  }
+
+  if(name.length >= 27){
+    const arr = name.split(" ")
+    title = makeTitle(arr, "")
+    return (
+      <Tooltip placement="top" title={
+        <Typography key={'title-' + name} color="textSecondary">{name}</Typography>
+      } className={classes.tooltip}>
+        <Typography key={'title-' + name}>{title}</Typography>
+      </Tooltip>
+
+    )
+  } else {
+    return(
+      <Typography key={'title-' + name}>{name}</Typography>
+    )
+  }
+}
 
 export const GridCard = ({
   item,
@@ -56,7 +101,7 @@ export const GridCard = ({
       <DefaultImage item={item}/>
       }
       <CardContent>
-      <Typography variant="body1">{item.name}</Typography>
+        <CardTitle name={item.name} classes={classes}/>
       </CardContent>
       <CardActions>
         <Button variant="contained" color="primary" onClick={()=>handleClick()}>
