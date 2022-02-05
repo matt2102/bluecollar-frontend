@@ -16,7 +16,7 @@ import NewsletterDialog from "../NewsletterDialog/NewsletterDialog"
 
 import { aboutPath } from "../../views/About/urls"
 import { consultingPath } from "../../views/Consulting/urls"
-import { coursesPath } from "../../views/Courses/urls"
+import { programsPath } from "../../views/Programs/urls"
 import { resourcesPath } from "../../views/Resources/urls"
 
 
@@ -28,15 +28,15 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 20,
     [theme.breakpoints.down('lg')]:{
       gridTemplateColumns: 'minmax(300px, 400px) 0.4fr 1fr',
-      gridTemplateRows: '100px 60px',
+      gridTemplateRows: '100px 60px 60px',
     },
     [theme.breakpoints.down('sm')]:{
       gridTemplateColumns: '150px 1px 1fr',
-      gridTemplateRows: 'auto 60px',
+      gridTemplateRows: 'auto 60px 60px',
     },
     [theme.breakpoints.up('lg')]:{
       gridTemplateColumns: 'minmax(300px, 400px) 0.5fr 1fr',
-      gridTemplateRows: '60px 60px',
+      gridTemplateRows: '60px 60px 60px',
     }
   },
   logoContainer: {
@@ -77,6 +77,10 @@ const useStyles = makeStyles(theme => ({
       cursor: "pointer",
       textDecoration: 'underline'
     }
+  },
+  contact: {
+    gridColumn: '3 / -1',
+    gridRow: 3,
   },
   buttonContainer: {
     flexFlow: "row wrap",
@@ -119,7 +123,7 @@ export default function Footer(){
         <Typography onClick={()=>navigator(resourcesPath)} variant="body1" color="textSecondary">Resources</Typography>
       </ButtonBase>
       <ButtonBase className={classes.btn}>
-        <Typography onClick={()=>navigator(coursesPath)} variant="body1" color="textSecondary">{slimIcon?"Courses":"Courses and Curricula"}</Typography>
+        <Typography onClick={()=>navigator(programsPath)} variant="body1" color="textSecondary">{slimIcon?"Certificate":"Request a Certificate"}</Typography>
       </ButtonBase>
       <ButtonBase className={classes.btn}>
         <Typography onClick={()=>navigator(aboutPath)} variant="body1" color="textSecondary">About</Typography>
@@ -128,6 +132,8 @@ export default function Footer(){
       <Typography className={classes.newsletter} variant="body1" color="secondary"
       onClick={()=>setModal(true)}
       >Subscribe to our Quarterly Newsletter</Typography>
+      <Typography className={classes.contact} variant="body1" color="textSecondary"
+      >cindy@bluecollarhomeschool.com</Typography>
 
     </Grid>
     <NewsletterDialog

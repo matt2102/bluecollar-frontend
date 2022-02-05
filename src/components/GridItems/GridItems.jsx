@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: "repeat(3, 1fr)",
     gridTemplateRows: "auto",
     columnGap: "10px",
-    rowGap: "10px",
+    rowGap: theme.spacing(3),
     [theme.breakpoints.down("lg")]: {
       gridTemplateColumns: "repeat(2, 1fr)",
     },

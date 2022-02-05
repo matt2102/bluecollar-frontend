@@ -3,13 +3,14 @@ import { useRef } from "react"
 import Image from "../../assets/media/consulting.webp"
 import { consultingDetails } from "../../content"
 import ConsultingDetails from "../ConsultingDetails"
+import ContactInfoCard from "../ContactInfo/ContactInfo"
 import FullPageInfoCard from "../FullPageInfoCard/FullPageInfoCard"
 
 const useStyles = makeStyles(theme => ({
   grid: {
     display: 'grid',
     marginTop: theme.spacing(15),
-    marginBottom: theme.spacing(15),
+    // marginBottom: theme.spacing(15),
     rowGap: theme.spacing(15)
   },
   container: {
@@ -41,6 +42,7 @@ export const Consulting = () => {
       key="details"
       />
       </div>
+      <ContactInfoCard/>
    </Grid>
  )
 }
