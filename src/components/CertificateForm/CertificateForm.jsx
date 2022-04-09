@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     formControl: {
         width: '100%',
         gridColumn: 2,
-        gridRow: 2
+        // gridRow: 2
     },
     formInputLabel: {
         fontSize: 28,
@@ -114,6 +114,15 @@ export const CertificateForm = (props) => {
                             placeholder="Started a small business"/>
                         }
                         <AccountButton label="Presented To (Student's Name)" data={data} name={'presentedTo'} onChange={change} disabled={disabled}/>
+
+                        <FormControl className={classes.formControl} key="pronouns">
+                            <InputLabel shrink className={classes.formInputLabel}>Student Gender</InputLabel>
+                            <Select className={classes.formSelect} value={data.pronouns} onChange={handlers.togglePronouns}>
+                                <MenuItem value={'MALE'}>Male</MenuItem>
+                                <MenuItem value={'FEMALE'}>Female</MenuItem>
+                            </Select>
+                        </FormControl>
+
                         <AccountButton label="Parent's Name(s)" data={data} name={'presentedBy'} onChange={change} disabled={disabled}/>
                         <AccountButton label="Presented On" data={data} name={'presentedOn'} onChange={change} disabled={disabled}
                         placeholder="YYYY-MM-DD"
@@ -132,6 +141,14 @@ export const CertificateForm = (props) => {
                         <AccountButton label="Email" data={data} name={'email'} onChange={change} disabled={disabled}
                         placeholder="email@example.com"
                         />
+
+                        <FormControl className={classes.formControl} key="digitalOnly">
+                            <InputLabel shrink className={classes.formInputLabel}>Certificate Method of Delivery</InputLabel>
+                            <Select className={classes.formSelect} value={data.digitalOnly} onChange={handlers.toggleDigitalOnly}>
+                                <MenuItem value={false}>Mail (USPS)</MenuItem>
+                                <MenuItem value={true}>Email</MenuItem>
+                            </Select>
+                        </FormControl>
                         <Button
                             className={classes.submitBtn}
                             onClick={submit}

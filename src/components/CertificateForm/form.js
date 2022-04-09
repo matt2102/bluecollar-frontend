@@ -1,5 +1,6 @@
 import React from "react"
 import useForm from "../../hooks/useForm";
+import { PronounToIntStr } from "../../utils";
 
 const getInitialData = (certificate) => {
     return({
@@ -16,7 +17,11 @@ const getInitialData = (certificate) => {
         country: certificate?.country || "",
 
         email:  certificate?.email || "",
-        generated: certificate?.generated || false
+        generated: certificate?.generated || false,
+
+        digitalOnly: certificate?.digitalOnly || false,
+        pronouns: certificate?.pronouns || "MALE",
+
     })
 }
 
@@ -26,6 +31,8 @@ function useCertificateCreateForm(
 ){
     const [changed, setChanged] = React.useState(false)
     const [generated, setGenerated] = React.useState(certificate.generated || false)
+    const [digitalOnly, setDigitalOnly] = React.useState(certificate.digitalOnly)
+    const [pronouns, setPronouns] = React.useState(certificate.pronouns)
     const GRADUATION = "GRADUATION"
     // const ACCOMPLISHMENT = "ACCOMPLISHMENT"
     const [cType, setCType] = React.useState(GRADUATION)
@@ -47,6 +54,17 @@ function useCertificateCreateForm(
         setGenerated(!generated)
         handleChange(e)
     }
+
+    const togglePronouns = (e) => {
+        setPronouns(e.target.value)
+        handleChange(e)
+    }
+
+    const toggleDigitalOnly = (e) => {
+        setDigitalOnly(!digitalOnly)
+        handleChange(e)
+    }
+
     const changeCertificateType = (e) => {
         setCType(e.target.value)
         handleChange(e)
@@ -56,11 +74,15 @@ function useCertificateCreateForm(
 
     const data = {
         ...form.data,
-        generated: generated
+        generated: generated,
+        digitalOnly: digitalOnly,
+        pronouns: pronouns
     };
     const submitData = {
         ...data,
         generated: generated,
+        digitalOnly: digitalOnly,
+        pronouns: PronounToIntStr(pronouns)
     }
 
     const submit = () => {
@@ -79,7 +101,9 @@ function useCertificateCreateForm(
         data,
         handlers: {
             toggleGenerated,
-            changeCertificateType
+            changeCertificateType,
+            toggleDigitalOnly,
+            togglePronouns
         },
         hasChanged: changed,
         submit,

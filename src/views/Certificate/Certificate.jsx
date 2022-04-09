@@ -63,7 +63,9 @@ export const CertificateView = () => {
           state: formData.state,
           country: formData.country,
           generated: formData.generated,
-          email: formData.email
+          email: formData.email,
+          digitalOnly: formData.digitalOnly,
+          pronouns: formData.pronouns
       }
       }
     })
@@ -82,7 +84,9 @@ export const CertificateView = () => {
     state: "",
     country: "",
     email: user.isGuest ? "" : user.email,
-    generated: false
+    generated: false,
+    digitalOnly: true,
+    pronouns: "MALE"
   }
   // const testData = {
   //   presentedFor: "HomeSchool Highschool",

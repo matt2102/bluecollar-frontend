@@ -24,5 +24,7 @@ export const certificateDetailsFragment = gql`
         country
         postalCode
         email
+        digitalOnly
+        pronouns
     }
 `

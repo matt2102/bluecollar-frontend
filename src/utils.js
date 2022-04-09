@@ -43,3 +43,14 @@ export const getGradeLevel = (string) => {
 export const isEmpty = obj => {
   return Object.keys(obj).length === 0
 }
+
+export function PronounToIntStr(input) {
+  const pro = input.toUpperCase()
+  if(pro === "MALE"){
+      return "0"
+  }
+  if(pro === "FEMALE"){
+      return "1"
+  }
+  return "1"
+}
