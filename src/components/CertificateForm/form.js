@@ -1,5 +1,8 @@
 import React from "react"
+import dayjs from "dayjs"
+import customParseFormat  from "dayjs/plugin/customParseFormat"
 import useForm from "../../hooks/useForm";
+import useMessages from "../../hooks/useMessages"
 import { PronounToIntStr } from "../../utils";
 
 const getInitialData = (certificate) => {
@@ -29,6 +32,7 @@ function useCertificateCreateForm(
     certificate,
     onSubmit
 ){
+    const {addMessage} = useMessages()
     const [changed, setChanged] = React.useState(false)
     const [generated, setGenerated] = React.useState(certificate.generated || false)
     const [digitalOnly, setDigitalOnly] = React.useState(certificate.digitalOnly)
@@ -70,6 +74,27 @@ function useCertificateCreateForm(
         handleChange(e)
     }
 
+    const validate = (data) => {
+        const re = /[0-9]{4}-[0-9]{2}-[0-9]{2}/
+        const regex = new RegExp(re)
+        if(regex.test(data.presentedOn)){
+            dayjs.extend(customParseFormat)
+            if(dayjs(data.presentedOn, "YYYY-MM-DD", true).isValid()){
+                return true
+            } else {
+                addMessage({
+                    text: `Correct date format, but invalid date: ${data.presentedOn}`,
+                    messageType: "error"
+                })
+            }
+        } else {
+            addMessage({
+                text: "Presented On date needs to be in format YYYY-MM-DD",
+                messageType: "error"
+            })
+        }
+        return false
+    }
 
 
     const data = {
@@ -86,15 +111,17 @@ function useCertificateCreateForm(
     }
 
     const submit = () => {
-        const pFor = submitData.presentedFor
-        if(cType === GRADUATION){
-            submitData.presentedFor = cType + " " + pFor
-            onSubmit(submitData);
+        if(validate(submitData)){
+            const pFor = submitData.presentedFor
+            if(cType === GRADUATION){
+                submitData.presentedFor = cType + " " + pFor
+                onSubmit(submitData);
+            }
+            else{
+                onSubmit(submitData);
+            }
+            setChanged(false)
         }
-        else{
-            onSubmit(submitData);
-        }
-        setChanged(false)
     }
     return({
         change: handleChange,
